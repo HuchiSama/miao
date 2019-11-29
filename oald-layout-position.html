@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    /* position布局 */
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      width: 100%;
+      height: 2000px;
+      position: relative;
+    }
+
+    .i {
+      position: absolute;
+      top: 0;
+    }
+
+    .ichi {
+      background-color: #00FFFF;
+      width: 20%;
+      height: 100%;
+      left: 0;
+    }
+
+    .ni {
+      position: fixed;
+      background-color: lightcoral;
+      width: 40%;
+      height: 10%;
+      left: 20%;
+      z-index: 99;
+    }
+
+    .sann {
+      width: 40%;
+      height: 100%;
+      background-color: gold;
+      left: 20%;
+    }
+
+    .yonn {
+      width: 20%;
+      height: 100%;
+      background-color: darkkhaki;
+      left: 60%;
+    }
+
+    .go {
+      width: 20%;
+      height: 100%;
+      background-color: cornflowerblue;
+      left: 80%;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="ichi i"></div>
+    <div class="ni i"> title 就在此处不要走动</div>
+    <div class="sann i"></div>
+    <div class="yonn i"></div>
+    <div class="go i"></div>
+
+  </div>
+</body>
+
+</html>
