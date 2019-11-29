@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<STYLE>
+  /* <!-- 绝对定位之 margin:auto --> */
+  .soto {
+    display: inline-block;
+    width: 300px;
+    height: 300px;
+    position: relative;
+    border: 3px yellow solid;
+    padding: 50px;
+  }
+
+  .naka {
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    border: 1px red solid;
+
+  }
+
+  .naka img {
+    width: 60%;
+    height: 60%;
+    border: 1px green solid;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+  }
+
+  /* <!-- 绝对居中之  负外边距 --> */
+  .nb2 {
+    display: inline-block;
+    background-color: red;
+    width: 400px;
+    height: 400px;
+    position: relative;
+  }
+
+  .naka2 {
+    background-color: green;
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    padding: 20px;
+    top: 50%;
+    left: 50%;
+    margin-top: -120px;
+    margin-left: -120px;
+
+  }
+
+  /* <!-- 绝对居中之  变形translate --> */
+  .nb3 {
+    display: inline-block;
+    background-color: pink;
+    width: 400px;
+    height: 400px;
+    position: relative;
+  }
+
+  .naka3 {
+    background-color: yellow;
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    padding: 20px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%)
+  }
+
+  /* <!-- 绝对居中之  行内块元素 --> */
+  .nb4 {
+    display: inline-block;
+    width: 400px;
+    height: 400px;
+    line-height: 400px;
+    font-size: 0px;
+    border: 1px blue solid;
+    overflow: auto;
+  }
+
+  .naka4 {
+    display: inline-block;
+    text-align: center;
+    width: 200px;
+    height: 200px;
+    background-color: blueviolet;
+    vertical-align: middle;
+    margin: 100px;
+    font-size: 16px;
+    line-height: 200px;
+  }
+</STYLE>
+
+<body>
+  <!-- 绝对定位之 margin:auto -->
+  <div class="soto">
+    <div class="naka">
+      <img src="./images/apple.jpg" alt="apple">
+    </div>
+  </div>
+
+  <!-- 绝对居中之  负外边距 -->
+  <div class="nb2">
+    <div class="naka2">负外边距负外边距负外边距负外边距</div>
+  </div>
+  <!-- 绝对居中之  变形translate -->
+  <div class="nb3">
+    <div class="naka3">translate translate translate translate</div>
+  </div>
+  <!-- 绝对居中之  行内块元素 -->
+  <div class="nb4">
+    inline-block
+    <div class="naka4">inline-block</div>
+  </div>
+</body>
+
+</html>
