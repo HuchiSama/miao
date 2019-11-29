@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    /* inline-block 布局 */
+    * {
+      margin: 0;
+      padding: 0;
+
+    }
+
+    .container {
+      height: 2000px;
+      font-size: 0px;
+    }
+
+    .nav {
+      font-size: 16px;
+      height: 68px;
+      background-color: red;
+    }
+
+    .menu {
+      display: inline-block;
+      width: 190px;
+      height: 100%;
+      background-color: cadetblue;
+    }
+
+    .main {
+      width: calc(100% - 190px);
+      height: 100%;
+      font-size: 16px;
+      display: inline-block;
+      background-color: coral;
+      vertical-align: top;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 内联块布局 -->
+  <div class="container">
+    <nav class="nav">
+      <img src="./images/qq-mail.gif" alt="">
+      <span>QQ mail 布局 -- 使用 Inline 元素布局</span>
+    </nav>
+    <div class="menu">
+      这是侧边栏
+    </div>
+    <div class="main">
+      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Suscipit eos earum, molestiae, alias, itaque officiis
+      doloremque recusandae eveniet maxime dolorem soluta. Excepturi beatae vero autem soluta repellat quidem qui
+      labore. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Suscipit eos earum, molestiae, alias, itaque
+      officiis doloremque recusandae eveniet maxime dolorem soluta. Excepturi beatae vero autem soluta repellat quidem
+      qui labore.
+    </div class="main">
+  </div>
+
+</body>
+
+</html>

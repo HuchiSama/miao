@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    /* qq-mail [position布局] */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    .container {
+      position: relative;
+      height: 5000px;
+      min-width: 960px;
+    }
+
+    nav {
+      width: 100%;
+      height: 68px;
+      background-image: url("../miao/images/qq-mail.gif");
+      background-color: #6089D4;
+      background-repeat: no-repeat;
+      position: fixed;
+      top: 0;
+      padding-left: 240px;
+      z-index: 999;
+    }
+
+    .menu {
+      width: 190px;
+      height: 100%;
+      background-color: #FAF8F5;
+      border-right: 1px #D3D5D5 solid;
+      position: fixed;
+      left: 0;
+      top: 68px;
+    }
+
+    .body {
+      height: 100%;
+      margin: 8px;
+      position: absolute;
+      left: 190px;
+      top: 68px;
+      background-color: #B6CAED;
+      border-radius: 8px;
+    }
+  </style>
+
+</head>
+
+<body>
+  <div class="container">
+    <nav>
+      <span>看我，我是导航</span>
+    </nav>
+    <div class="menu">
+      <span>我是侧边栏</span>
+    </div>
+    <div class="body">
+      <h2>我是主体.min-width:960px</h2>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem rem quos saepe cumque, omnis veniam provident
+        assumenda ducimus, earum voluptate nihil illum deleniti, consequatur blanditiis exercitationem? Voluptatibus
+        aliquid eaque cumque.</p>
+    </div>
+  </div>
+</body>
+
+</html>
