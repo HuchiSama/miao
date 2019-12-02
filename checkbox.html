@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    input+label {
+      position: relative;
+      margin: 100px auto;
+      width: 150px;
+      height: 50px;
+      border-radius: 40px;
+      border: 1px gray solid;
+      padding: 3px 4px 5px;
+      transition-duration: .5s;
+    }
+
+    input:checked+label::before {
+      content: "";
+      display: block;
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      border: 1px rgba(0, 0, 0, .1) solid;
+      border-radius: 50%;
+      box-shadow: 0 0 4px rgba(0, 0, 0, .4);
+      background-color: white;
+      right: 100px;
+      transition: 1s ease;
+
+    }
+
+    /* div.button {
+      position: relative;
+      margin: 100px auto;
+      width: 150px;
+      height: 50px;
+      border-radius: 40px;
+      border: 1px gray solid;
+      padding: 3px 4px 5px;
+      transition-duration: .5s;
+    } */
+
+    label {
+      display: block;
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      border: 1px rgba(0, 0, 0, .1) solid;
+      border-radius: 50%;
+      box-shadow: 0 0 4px rgba(0, 0, 0, .4);
+      background-color: white;
+      right: 100px;
+      transition: 1s ease;
+
+    }
+
+    .label:active span {
+      transition: 1s ease;
+      position: absolute;
+      right: 5px;
+    }
+
+    .label:active {
+      background: #30F34D;
+      border: #30F34D;
+    }
+  </style>
+</head>
+
+<body>
+  <input type="checkbox" id=up>
+  <label for="up"></label>
+  <div class="button">
+    <span></span>
+  </div>
+</body>
+
+</html>

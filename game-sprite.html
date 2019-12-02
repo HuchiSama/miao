@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<style>
+  /* transition动画效果实现 */
+  div {
+    position: relative;
+
+  }
+
+  .transition {
+    /* border: 1px solid gray; */
+    display: inline-block;
+    position: absolute;
+    margin: 0 auto;
+    width: 170px;
+    height: 200px;
+    background: url("../miao/images/game-sprites.png") no-repeat fixed;
+    transition: 0.8s linear;
+    transition-timing-function: steps(9, end)
+  }
+
+  span:hover {
+    position: absolute;
+    background-position: -1530px 0;
+
+  }
+</style>
+
+<body>
+  <div>
+    <span class="transition"></span>
+  </div>
+</body>
+
+</html>

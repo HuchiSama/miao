@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    div.demo {
+      border-radius: 6px;
+      width: 100px;
+      height: 50px;
+      background-color: brown;
+
+      transition: height 3s ease, width 1s 3s ease;
+    }
+
+    div.demo:hover {
+      width: 200px;
+      height: 300px;
+      transition: width 1s ease-in-out, height 3s 1s ease-in-out;
+    }
+  </style>
+</head>
+
+<body>
+  <div>
+    <div class="demo"></div>
+  </div>
+</body>
+
+</html>

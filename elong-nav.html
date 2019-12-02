@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    nav {
+      margin-top: 100px;
+      width: 100%;
+      height: 40px;
+      background-color: #2064C8;
+      font-size: 0;
+    }
+
+    ul {
+      margin-left: 75px;
+
+    }
+
+    ul li {
+      position: relative;
+      color: white;
+      font-size: 12px;
+      display: inline-block;
+      line-height: 40px;
+      padding: 0 10px;
+      border-left: 1px solid #3774ce;
+      border-right: 1px solid #3774ce;
+    }
+
+    ul a:first-child li {
+      background-color: #003679;
+    }
+
+    li[data-tip]::after {
+      content: attr(data-tip);
+      position: absolute;
+      background-color: #FF8E00;
+      padding: 0 2px;
+      font-size: 8px;
+      bottom: 35px;
+      height: 15px;
+      white-space: nowrap;
+      line-height: 15px;
+      border-radius: 2px;
+      z-index: 9;
+      left: 60px;
+    }
+
+    li[data-tip]::before {
+      content: "";
+      display: block;
+      position: absolute;
+      border: #FF8E00 5px solid;
+      border-color: #FF8E00 transparent transparent #FF8E00;
+      left: 65px;
+    }
+
+    li:hover {
+      background-color: #0053AC;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <nav>
+      <ul>
+        <a href="#">
+          <li>首页</li>
+        </a>
+        <a href="#">
+          <li>国内酒店</li>
+        </a>
+        <a href="#">
+          <li data-tip="低价促">海外酒店</li>
+        </a>
+        <a href="#">
+          <li data-tip="新升级">国内·国际机票</li>
+        </a>
+        <a href="#">
+          <li>火车票</li>
+        </a>
+        <a href="#">
+          <li>汽车票</li>
+        </a>
+        <a href="#">
+          <li>商旅</li>
+        </a>
+      </ul>
+    </nav>
+  </div>
+</body>
+
+</html>
