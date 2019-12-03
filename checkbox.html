@@ -7,18 +7,32 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
   <style>
-    input+label {
+    html {
+      box-sizing: border-box;
+    }
+
+    input {
+      display: none
+    }
+
+    input#up+label {
+      box-shadow: 0 0 0 0px white inset;
+      display: inline-block;
       position: relative;
-      margin: 100px auto;
-      width: 150px;
+      width: 100px;
       height: 50px;
       border-radius: 40px;
       border: 1px gray solid;
       padding: 3px 4px 5px;
-      transition-duration: .5s;
+      transition-duration: .7s;
     }
 
-    input:checked+label::before {
+    input#up:checked+label {
+      box-shadow: 0 0 1px 30px #30F34D inset;
+      border: #30F34D;
+    }
+
+    input#up+label::before {
       content: "";
       display: block;
       position: absolute;
@@ -28,55 +42,218 @@
       border-radius: 50%;
       box-shadow: 0 0 4px rgba(0, 0, 0, .4);
       background-color: white;
-      right: 100px;
-      transition: 1s ease;
-
+      right: 52px;
+      transition: .7s ease;
     }
 
-    /* div.button {
-      position: relative;
-      margin: 100px auto;
-      width: 150px;
-      height: 50px;
-      border-radius: 40px;
-      border: 1px gray solid;
-      padding: 3px 4px 5px;
-      transition-duration: .5s;
-    } */
-
-    label {
-      display: block;
-      position: absolute;
-      width: 50px;
-      height: 50px;
-      border: 1px rgba(0, 0, 0, .1) solid;
-      border-radius: 50%;
-      box-shadow: 0 0 4px rgba(0, 0, 0, .4);
-      background-color: white;
-      right: 100px;
-      transition: 1s ease;
-
-    }
-
-    .label:active span {
-      transition: 1s ease;
+    input#up:checked+label::before {
       position: absolute;
       right: 5px;
     }
 
-    .label:active {
-      background: #30F34D;
-      border: #30F34D;
+    /* --------------------------------------------------------- */
+    input#maru+label {
+      position: relative;
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 5px black solid;
+      transition: 0.4s;
+    }
+
+    input#maru+label::before {
+      content: "";
+      display: inline-block;
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      border-radius: 50%;
+      left: 19px;
+      top: 19px;
+      transition: 0.4s;
+      box-shadow: 0 0 0 0 white;
+    }
+
+    input#maru+label::after {
+      content: "";
+      display: inline-block;
+      position: absolute;
+      left: 20px;
+      top: 20px;
+      width: 1px;
+      height: 1px;
+      border-radius: 50%;
+      transition: 0.4s;
+    }
+
+    span {
+      position: absolute;
+      white-space: nowrap;
+      left: 80px;
+      font-size: 30px;
+      top: 0px;
+    }
+
+    input#maru:checked+label::before {
+      box-shadow: 0 0 0 10px #05BD62;
+      background-color: #05BD62;
+    }
+
+    input#maru:checked+label {
+      border-color: #05BD62;
+    }
+
+    input#maru:active+label::after {
+      transition: .2s;
+      box-shadow: 0 0 0px 50px rgba(10, 147, 79, .2);
+    }
+
+    /* ------------------------------------------------------------- */
+    input#maru2+label {
+      position: relative;
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 5px black solid;
+      transition: 0.2s;
+    }
+
+    input#maru2+label::before {
+      content: "";
+      display: inline-block;
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      border-radius: 50%;
+      left: 19px;
+      top: 19px;
+      transition: 0.4s;
+      box-shadow: 0 0 0 0 white;
+    }
+
+    input#maru2+label::after {
+      content: "";
+      display: inline-block;
+      position: absolute;
+      left: 20px;
+      top: 20px;
+      width: 1px;
+      height: 1px;
+      border-radius: 50%;
+      transition: 0.1s;
+      /* box-shadow: 0 0 0 50px rgba(10, 147, 79, 0) */
+    }
+
+    span {
+      position: absolute;
+      white-space: nowrap;
+      left: 80px;
+      font-size: 30px;
+      top: 0px;
+    }
+
+    input#maru2:active+label::before {
+      box-shadow: 0 0 0 10px #05BD62;
+      background-color: #05BD62;
+    }
+
+    input#maru2:checked+label::before {
+      box-shadow: 0 0 0 10px #05BD62;
+      background-color: #05BD62;
+    }
+
+    input#maru2:checked+label {
+      border-color: #05BD62;
+    }
+
+    input#maru2:active+label::after {
+      transition: 0.3s;
+      box-shadow: 0 0 0 50px rgba(10, 147, 79, .4);
+    }
+
+    /* ----------------------------------------- */
+    input#maru3+label {
+      position: relative;
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 5px black solid;
+      transition: 0.4s;
+    }
+
+    input#maru3+label::before {
+      content: "";
+      display: inline-block;
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      border-radius: 50%;
+      left: 19px;
+      top: 19px;
+      transition: 0.4s;
+      box-shadow: 0 0 0 0 white;
+    }
+
+    input#maru3+label::after {
+      content: "";
+      display: inline-block;
+      position: absolute;
+      left: 20px;
+      top: 20px;
+      width: 1px;
+      height: 1px;
+      border-radius: 50%;
+      transition: 0.4s;
+    }
+
+    span {
+      position: absolute;
+      white-space: nowrap;
+      left: 80px;
+      font-size: 30px;
+      top: 0px;
+    }
+
+    input#maru3:checked+label::before {
+      box-shadow: 0 0 0 10px #05BD62;
+      background-color: #05BD62;
+    }
+
+    input#maru3:checked+label {
+      border-color: #05BD62;
+    }
+
+    input#maru3:active+label::after {
+      transition: .4s;
+      box-shadow: 0 0 0 50px rgba(10, 147, 79, .2);
     }
   </style>
 </head>
 
 <body>
-  <input type="checkbox" id=up>
-  <label for="up"></label>
-  <div class="button">
-    <span></span>
+  <div style="margin:100px">
+    <input type="checkbox" id=up>
+    <label for="up"></label>
   </div>
+
+  <div style="margin:100px">
+    <input id=maru type="radio" name="maru">
+    <label for="maru"><span>Radio Button</span></label>
+  </div>
+  <div style="margin:100px">
+    <input id=maru2 type="radio" name="maru">
+    <label for="maru2"><span>Radio Button</span></label>
+  </div>
+
+  <div style="margin:100px">
+    <input id=maru3 type="radio" name="maru">
+    <label for="maru3"><span>Radio Button</span></label>
+  </div>
+
+
 </body>
 
 </html>
