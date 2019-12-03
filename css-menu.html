@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      background-color: rgba(0, 0, 0, 0.4);
+    }
+
+    ul {
+      list-style: none;
+
+    }
+
+    .container {
+      min-width: 800px;
+    }
+
+    nav {
+      width: 100%;
+      height: 30px;
+      background-color: #3C3C3C;
+    }
+
+    img {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      margin: 7px 8px;
+    }
+
+    ul.menu {
+      display: inline-block;
+      font-size: 0px;
+      color: #b5b5b5;
+      position: relative;
+      line-height: 30px;
+      height: 30px;
+      top: -15px;
+    }
+
+    .menu>li {
+      padding: 0 7px;
+      font-size: 12px;
+      width: 56px;
+      height: 30px;
+      display: inline-block;
+      overflow: hidden;
+      vertical-align: top;
+    }
+
+
+    .menu>li:hover {
+      background-color: #505050;
+      overflow: visible;
+    }
+
+    ul.menu ul {
+      background-color: #252526;
+    }
+
+    .list,
+    .list-fu,
+    .list-tow {
+      margin-left: -8px;
+      width: 258px;
+      box-shadow: 0 1px 2px 1px rgba(0, 0, 0, .4);
+      padding: 14px 26px;
+      overflow: hidden;
+    }
+
+    .list-fu {
+      position: absolute;
+      padding: 14px 26px;
+      margin-left: 232px;
+      display: none;
+    }
+
+    ul.list li:hover,
+    .list-tow li:hover {
+      background-color: #094771;
+    }
+
+    .list>li:nth-child(3):hover .list-fu {
+      display: block;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <nav>
+      <img src="./images/icon.png" alt="">
+      <ul class="menu">
+        <li>文件(F)
+          <ul class="list">
+            <li>新建文件</li>
+            <li>新建窗口</li>
+            <li>打开最近的文件
+              <ul class="list-fu">
+                <li>重新打开已关闭的编辑器</li>
+                <li>文件文件文件.html</li>
+                <li>文件文件文件.html</li>
+                <li>清除最近打开记录</li>
+              </ul>
+            </li>
+            <li>将工作区另存为…</li>
+            <li>自动保存</li>
+            <li>首选项</li>
+            <li>退出</li>
+          </ul>
+        </li>
+        <li>编辑(E)
+          <ul class="list-tow">
+            <li>撤销</li>
+            <li>恢复</li>
+            <li>剪切</li>
+            <li>复制</li>
+            <li>粘贴</li>
+            <li>查找</li>
+          </ul>
+        </li>
+        <li>选择(S)</li>
+        <li>查看(V)</li>
+        <li>转到(G)</li>
+        <li>调试(D)</li>
+        <li>终端(T)</li>
+        <li>帮助(F)</li>
+      </ul>
+    </nav>
+  </div>
+</body>
+
+</html>
