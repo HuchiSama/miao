@@ -30,8 +30,9 @@
       width: 1130px;
       height: 286px;
       position: relative;
+      left: 0;
       margin-left: calc(100%/2 - 1130px/2);
-      transition: .8s ease;
+      transition: 999s ease;
     }
 
     ul li {
@@ -40,7 +41,6 @@
       height: 286px;
       position: absolute;
       list-style: none;
-      border: brown 1px solid;
     }
 
     li:nth-child(1) {
@@ -95,7 +95,8 @@
       z-index: 99;
     }
 
-    input:checked+label::before {
+    input:checked+label::before,
+    input:hover+label::before {
       width: 8px;
       height: 8px;
       border-radius: 50%;
@@ -115,20 +116,28 @@
       left: calc(50% + 15px);
     }
 
-    input.a:checked~div>ul {
-      left: 0;
+    input.d:checked~div>ul,
+    input.d:hover~div>ul.list {
+      transition: .8s;
+      left: -3390px;
     }
 
-    input.b:checked~div>ul {
-      left: -1130px;
-    }
-
-    input.c:checked~div>ul {
+    input.c:checked~div>ul,
+    input.c:hover~div>ul.list {
+      transition: .8s;
       left: -2260px;
     }
 
-    input.d:checked~div>ul {
-      left: -3390px;
+    input.a:checked~div>ul,
+    input.a.a:hover~div>ul {
+      transition: .8s;
+      left: 0;
+    }
+
+    input.b:checked~div>ul,
+    input.b:hover~div>ul {
+      transition: .8s;
+      left: -1130px;
     }
   </style>
 </head>
@@ -140,7 +149,7 @@
     <input type="radio" id="up3" class="c" name="banner" class="c"><label for="up3"></label>
     <input type="radio" id="up4" class="d" name="banner"><label for="up4" class="d"></label>
     <div>
-      <ul>
+      <ul class="list">
         <li></li>
         <li></li>
         <li></li>
