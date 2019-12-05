@@ -26,19 +26,19 @@
       display: none;
     }
 
-    ul {
-      width: 1130px;
-      height: 286px;
+    .banner ul.list.list {
+      width: 100%;
+      height: 100%;
       position: relative;
       left: 0;
       margin-left: calc(100%/2 - 1130px/2);
-      transition: 999s ease;
+      /* transition: .8s .5s; */
     }
 
     ul li {
       margin-left: calc(100% - 1130px);
-      width: 1130px;
-      height: 286px;
+      width: 100%;
+      height: 100%;
       position: absolute;
       list-style: none;
     }
@@ -52,19 +52,19 @@
     li:nth-child(2) {
       background-image: url("images/zk-2.jpg");
       background-size: 1130px 286px;
-      left: 1130px;
+      left: 100%;
     }
 
     li:nth-child(3) {
       background-image: url("images/zk-3.jpg");
       background-size: 1130px 286px;
-      left: 2260px;
+      left: 200%;
     }
 
     li:nth-child(4) {
       background-image: url("images/zk-4.jpg");
       background-size: 1130px 286px;
-      left: 3390px;
+      left: 300%;
     }
 
     input+label {
@@ -116,28 +116,94 @@
       left: calc(50% + 15px);
     }
 
-    input.d:checked~div>ul,
-    input.d:hover~div>ul.list {
-      transition: .8s;
-      left: -3390px;
-    }
 
-    input.c:checked~div>ul,
-    input.c:hover~div>ul.list {
+
+
+
+
+
+    input.b:checked~div>ul.list,
+    label.b.b:hover~div>ul.list {
       transition: .8s;
-      left: -2260px;
+      left: -100%;
     }
 
     input.a:checked~div>ul,
-    input.a.a:hover~div>ul {
+    label.a.a.a:hover~div>ul {
       transition: .8s;
       left: 0;
     }
 
-    input.b:checked~div>ul,
-    input.b:hover~div>ul {
+    input.c:checked~div>ul.list,
+    label.c.c:hover~div>ul.list {
       transition: .8s;
-      left: -1130px;
+      left: -200%;
+    }
+
+    input.d:checked~div>ul.list,
+    label.d:hover~div>ul.list {
+      transition: .8s;
+      left: -300%;
+    }
+
+    /* ------左右按钮------- */
+    label.b-b::before,
+    label.c-c::before,
+    label.a-a::before {
+      content: " ";
+      visibility: hidden;
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      left: 170px;
+      top: 150px;
+      background: rgba(0, 0, 0, .1) url("./images/left.png") 0 3px;
+      border: 1px rgba(255, 255, 255, .4) solid;
+      z-index: 10;
+      cursor: pointer
+    }
+
+    label.a-a::after,
+    label.b-b::after,
+    label.c-c::after,
+    label.d-d::after {
+      content: " ";
+      display: block;
+      position: absolute;
+      visibility: hidden;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      left: 1150px;
+      top: 150px;
+      background: rgba(0, 0, 0, .1) url("./images/right.png") 4px 3px;
+      border: 1px rgba(255, 255, 255, .4) solid;
+      z-index: 9;
+      cursor: pointer
+    }
+
+    div:hover label::after,
+    div:hover label::before {
+      visibility: visible;
+    }
+
+    input.b:checked~label.b-b,
+    input.b:checked~label.d-d,
+    input.b:checked~label.c-c::before {
+      display: none;
+    }
+
+
+    input.a:checked~label.a-a::after,
+    input.a:checked~label.b-b::before,
+    input.a:checked~label.c-c,
+    input.a:checked~label.d-d::after {
+      display: none;
+    }
+
+    input.c:checked~label.b-b::before {
+      z-index: 99;
     }
   </style>
 </head>
@@ -148,9 +214,15 @@
     <input type="radio" id="up2" class="b" name="banner"><label for="up2" class="b"></label>
     <input type="radio" id="up3" class="c" name="banner" class="c"><label for="up3"></label>
     <input type="radio" id="up4" class="d" name="banner"><label for="up4" class="d"></label>
+    <label for="up" class="a-a"></label>
+    <label for="up2" class="b-b"></label>
+    <label for="up3" class="c-c"></label>
+    <label for="up4" class="d-d"></label>
     <div>
       <ul class="list">
-        <li></li>
+        <li style>
+
+        </li>
         <li></li>
         <li></li>
         <li></li>
