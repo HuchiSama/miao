@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    table {
+      border-collapse: separate;
+      border-spacing: 0px;
+      position: relative;
+    }
+
+    table tr {
+      position: absolute;
+    }
+
+    table td {
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      border: 5px red solid;
+    }
+
+    td:hover {
+      z-index: 9;
+      border-color: blue;
+    }
+
+    table tr td:nth-child(2) {
+      left: 95px;
+    }
+
+    table tr td:nth-child(3) {
+      left: 190px;
+    }
+
+    table tr:nth-child(2) {
+      top: 95px;
+    }
+
+    table tr:nth-child(3) {
+      top: 190px;
+    }
+
+    /* -----------table------------------------ */
+    .grid {
+      font-size: 0;
+      width: 300px;
+      height: 300px;
+      margin-top: 400px
+    }
+
+    .grid div {
+      position: relative;
+      ;
+      font-size: 16px;
+      display: inline-block;
+      width: 100px;
+      height: 100px;
+      border: 5px red solid;
+    }
+
+    /* .grid div:nth-child(-n+3), */
+    .grid div {
+      margin-top: -5px;
+      margin-right: -5px;
+    }
+
+    div:hover {
+      z-index: 9;
+      border-color: blue;
+    }
+  </style>
+</head>
+
+<body>
+  <table>
+    <tr>
+      <td>1</td>
+      <td>2</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>5</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>8</td>
+      <td>9</td>
+    </tr>
+  </table>
+  <div class="grid">
+    <div>1</div>
+    <div>2</div>
+    <div>3</div>
+    <div>4</div>
+    <div>5</div>
+    <div>6</div>
+    <div>7</div>
+    <div>8</div>
+    <div>9</div>
+  </div>
+</body>
+
+</html>
