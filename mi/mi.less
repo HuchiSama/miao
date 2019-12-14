@@ -1,0 +1,46 @@
+
+    input#slider1:checked { 
+      ~ .button-slider5::after, 
+      ~ .button-slider3::after,  
+      ~ .button-slider3::before,
+      ~ .button-slider4::after, 
+      ~ .button-slider4::before {display: none;}
+      }
+
+    input#slider2:checked~.button-slider5::after,
+    input#slider2:checked~.button-slider5::before,
+    input#slider2:checked~.button-slider1::after,
+    input#slider2:checked~.button-slider2::before,
+    input#slider2:checked~.button-slider4::after,
+    input#slider2:checked~.button-slider4::before,
+    input#slider2:checked~.button-slider3::before {
+      display: none;
+    }
+
+    input#slider3:checked~.button-slider5::after,
+    input#slider3:checked~.button-slider5::before,
+    input#slider3:checked~.button-slider1::after,
+    input#slider3:checked~.button-slider1::before,
+    input#slider3:checked~.button-slider2::after,
+    input#slider3:checked~.button-slider4::before,
+    input#slider3:checked~.button-slider3::before {
+      display: none;
+    }
+
+    input#slider4:checked~.button-slider3::after,
+    input#slider4:checked~.button-slider1::after,
+    input#slider4:checked~.button-slider1::before,
+    input#slider4:checked~.button-slider2::after,
+    input#slider4:checked~.button-slider2::before,
+    input#slider4:checked~.button-slider5::before,
+    input#slider4:checked~.button-slider4::before {
+      display: none;
+    }
+
+    input#slider5:checked~.button-slider3::after,
+    input#slider5:checked~.button-slider5::after,
+    input#slider5:checked~.button-slider4::after,
+    input#slider5:checked~.button-slider2::after,
+    input#slider5:checked~.button-slider5::before {
+      display: none;
+    }
