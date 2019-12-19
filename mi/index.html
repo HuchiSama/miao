@@ -1188,6 +1188,10 @@
       transition: none;
     }
 
+    div.electric>input:hover {
+      transition: none;
+    }
+
     div.electric div[class^="right"] ul[class$="-more"] {
       position: absolute;
       width: 234px;
@@ -1275,6 +1279,9 @@
     }
 
     /* -------------------AI板块-------- */
+    div.ai {
+      margin-bottom: 60px;
+    }
 
     div.ai>.walk {
       right: 0;
@@ -1307,10 +1314,10 @@
       transition: none;
     }
 
-    div.ai>input#ai-walk:hover+span,
-    div.ai>input#ai-walk:hover~.safe,
-    div.ai>input#ai-safe:hover~span,
-    div.ai>input#ai-safe:hover~.walk {
+    div.ai>input.walk:hover~span,
+    div.ai>input.walk:hover~.safe,
+    div.ai>input.safe:hover~span,
+    div.ai>input.safe:hover~.walk {
       color: #424242;
       border-bottom: 2px solid transparent;
       transition: none;
@@ -1433,7 +1440,7 @@
 
     /* ------------bottom------------- */
     .poster-bottom {
-      margin-top: 22px;
+      margin-top: -10px;
       margin-bottom: 22px;
     }
 
@@ -2720,8 +2727,8 @@
         </div>
         <div class="ai">
           <h2>智能</h2>
-          <input type="text" id="ai-safe">
-          <input type="text" id="ai-walk">
+          <input type="text" id="ai-safe" class="safe">
+          <input type="text" id="ai-walk" class="walk">
           <span><a href="#">热门</a></span>
           <label for="ai-safe" class="safe"><a href="#">安防</a></label>
           <label for="ai-walk" class="walk"><a href="#">出行</a></label>
@@ -2798,6 +2805,253 @@
                 <li><a href="#"><img src="./images/ai-hot.webp" alt=""><span>小米 小爱老师
                       C1<br><span>变频节能省电，自清洁</span><br><span>2599元 </span> <del> 2700元</del></span></a></li>
                 <li><a href="#"><img src="./images/ai-hot.webp" alt=""><span>小米 小爱老师
+                      C1<br><span>变频节能省电，自清洁</span><br><span>2599元 </span> <del> 2700元</del></span></a></li>
+              </ul>
+              <ul class="hot-more">
+                <li>
+                  <a href="#"><span>Air 13.3" 2019款</span><br><span>4799元起</span><img src="./images/hot-sml.webp"
+                      alt=""></a>
+                </li>
+                <li>
+                  <a href="#"><span>浏览更多</span><br><span>热门</span><i class="iconfont icon-icon-test"></i></a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="poster-ai">
+          <a href=""><img
+              src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/fbfb71bcabaf295b59c06476c525bb8d.jpg?thumb=1&w=1226&h=120&f=webp&q=90"
+              alt=""></a>
+        </div>
+        <div class="electric">
+          <h2>搭配</h2>
+          <input type="text" id="erji-list">
+          <span><a href="#">热门</a></span>
+          <label for="erji-list"><a href="#">耳机音箱</a></label>
+          <div class="electric-goods">
+            <div class="left-goods">
+              <a href="#"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/6874615b3c50e837ffe532eb6ea4ef1a.jpg?thumb=1&w=234&h=300&f=webp&q=90"
+                  alt=""></a>
+              <a href="#"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/07038b3e5197bc127e621e92b726583c.jpg?thumb=1&w=234&h=300&f=webp&q=90"
+                  alt=""></a>
+            </div>
+            <div class="right-video">
+              <ul class="video">
+                <li><a href="#"><img
+                      src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/df90d51fce8449db25c9a71c715dec1b.jpg?thumb=1&w=200&h=200&f=webp&q=90"
+                      alt=""><span>小米全面屏电视
+                      E65A<br><span>全面屏设计，人工智能语音</span><br><span>3699元起</span></span></a></li>
+                <li><a href="#"><img
+                      src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/df90d51fce8449db25c9a71c715dec1b.jpg?thumb=1&w=200&h=200&f=webp&q=90"
+                      alt=""><span>小米全面屏电视
+                      E65A<br><span>全面屏设计，人工智能语音</span><br><span>3699元起</span></span></a></li>
+                <li><a href="#"><img
+                      src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/df90d51fce8449db25c9a71c715dec1b.jpg?thumb=1&w=200&h=200&f=webp&q=90"
+                      alt=""><span>小米全面屏电视
+                      E65A<br><span>全面屏设计，人工智能语音</span><br><span>3699元起</span></span></a></li>
+                <li><a href="#"><img
+                      src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/df90d51fce8449db25c9a71c715dec1b.jpg?thumb=1&w=200&h=200&f=webp&q=90"
+                      alt=""><span>小米全面屏电视
+                      E65A<br><span>全面屏设计，人工智能语音</span><br><span>3699元起</span></span></a></li>
+                <li><a href="#"><img
+                      src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/df90d51fce8449db25c9a71c715dec1b.jpg?thumb=1&w=200&h=200&f=webp&q=90"
+                      alt=""><span>小米全面屏电视
+                      E65A<br><span>全面屏设计，人工智能语音</span><br><span>3699元起</span></span></a></li>
+                <li><a href="#"><img
+                      src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/df90d51fce8449db25c9a71c715dec1b.jpg?thumb=1&w=200&h=200&f=webp&q=90"
+                      alt=""><span>小米全面屏电视
+                      E65A<br><span>全面屏设计，人工智能语音</span><br><span>3699元起</span></span></a></li>
+                <li><a href="#"><img
+                      src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/df90d51fce8449db25c9a71c715dec1b.jpg?thumb=1&w=200&h=200&f=webp&q=90"
+                      alt=""><span>小米全面屏电视
+                      E65A<br><span>全面屏设计，人工智能语音</span><br><span>3699元起</span></span></a></li>
+              </ul>
+              <ul class="video-more">
+                <li>
+                  <a href="#"><span>小米盒子 4</span><br><span>299元</span><img src="./images/video-sml.jpg" alt=""></a>
+                </li>
+                <li>
+                  <a href="#"><span>浏览更多</span><br><span>电视影音</span><i class="iconfont icon-icon-test"></i></a>
+                </li>
+              </ul>
+            </div>
+            <div class="right-hots">
+              <ul class="hots">
+                <li><a href="#"><img
+                      src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/321610e787393c42e5cb2e5730a7681d.jpg?thumb=1&w=200&h=200"
+                      alt=""><span>米家
+                      互联网空调 C1<br><span>变频节能省电，自清洁</span><br><span>2599元 </span> <del> 2700元</del></span></a></li>
+                <li><a href="#"><img
+                      src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/321610e787393c42e5cb2e5730a7681d.jpg?thumb=1&w=200&h=200"
+                      alt=""><span>米家
+                      互联网空调 C1<br><span>变频节能省电，自清洁</span><br><span>2599元 </span> <del> 2700元</del></span></a></li>
+                <li><a href="#"><img
+                      src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/321610e787393c42e5cb2e5730a7681d.jpg?thumb=1&w=200&h=200"
+                      alt=""><span>米家
+                      互联网空调 C1<br><span>变频节能省电，自清洁</span><br><span>2599元 </span> <del> 2700元</del></span></a></li>
+                <li><a href="#"><img
+                      src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/321610e787393c42e5cb2e5730a7681d.jpg?thumb=1&w=200&h=200"
+                      alt=""><span>米家
+                      互联网空调 C1<br><span>变频节能省电，自清洁</span><br><span>2599元 </span> <del> 2700元</del></span></a></li>
+                <li><a href="#"><img
+                      src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/321610e787393c42e5cb2e5730a7681d.jpg?thumb=1&w=200&h=200"
+                      alt=""><span>米家
+                      互联网空调 C1<br><span>变频节能省电，自清洁</span><br><span>2599元 </span> <del> 2700元</del></span></a></li>
+                <li><a href="#"><img
+                      src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/321610e787393c42e5cb2e5730a7681d.jpg?thumb=1&w=200&h=200"
+                      alt=""><span>米家
+                      互联网空调 C1<br><span>变频节能省电，自清洁</span><br><span>2599元 </span> <del> 2700元</del></span></a></li>
+                <li><a href="#"><img
+                      src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/321610e787393c42e5cb2e5730a7681d.jpg?thumb=1&w=200&h=200"
+                      alt=""><span>米家
+                      互联网空调 C1<br><span>变频节能省电，自清洁</span><br><span>2599元 </span> <del> 2700元</del></span></a></li>
+              </ul>
+              <ul class="hot-more">
+                <li>
+                  <a href="#"><span>Air 13.3" 2019款</span><br><span>4799元起</span><img src="./images/hot-sml.webp"
+                      alt=""></a>
+                </li>
+                <li>
+                  <a href="#"><span>浏览更多</span><br><span>热门</span><i class="iconfont icon-icon-test"></i></a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="poster-ai">
+          <a href=""><img
+              src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/89c2a209b742fce9b10d9d196149d634.jpg?thumb=1&w=1226&h=120&f=webp&q=90"
+              alt=""></a>
+        </div>
+        <div class="ai">
+          <h2>配件</h2>
+          <input type="text" id="baohutao" class="safe">
+          <input type="text" id="chongdian" class="walk">
+          <span><a href="#">热门</a></span>
+          <label for="baohutao" class="safe"><a href="#">保护套</a></label>
+          <label for="chongdian" class="walk"><a href="#">充电器</a></label>
+          <div class="ai-goods">
+            <div class="left-goods">
+              <a href="#"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/739ebd8abfc2b1be8866a2c1ad87e709.jpg?thumb=1&w=234&h=300&f=webp&q=90"
+                  alt=""></a>
+              <a href="#"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/ffe4182f1d9a5befdf2380ec90ae1620.jpg?thumb=1&w=234&h=300&f=webp&q=90"
+                  alt=""></a>
+            </div>
+            <div class="right-walk">
+              <ul class="walk">
+                <li><a href="#"><img
+                      src="https://i8.mifile.cn/b2c-mimall-media/a6ccfda056fc159a43c7b991218004b5!200x200.jpg"
+                      alt=""><span>小米平衡车
+                      E65A<br><span>全面屏设计，人工智能语音</span><br><span>3699元起</span></span></a></li>
+                <li><a href="#"><img
+                      src="https://i8.mifile.cn/b2c-mimall-media/a6ccfda056fc159a43c7b991218004b5!200x200.jpg"
+                      alt=""><span>小米平衡车
+                      E65A<br><span>全面屏设计，人工智能语音</span><br><span>3699元起</span></span></a></li>
+                <li><a href="#"><img
+                      src="https://i8.mifile.cn/b2c-mimall-media/a6ccfda056fc159a43c7b991218004b5!200x200.jpg"
+                      alt=""><span>小米平衡车
+                      E65A<br><span>全面屏设计，人工智能语音</span><br><span>3699元起</span></span></a></li>
+                <li><a href="#"><img
+                      src="https://i8.mifile.cn/b2c-mimall-media/a6ccfda056fc159a43c7b991218004b5!200x200.jpg"
+                      alt=""><span>小米平衡车
+                      E65A<br><span>全面屏设计，人工智能语音</span><br><span>3699元起</span></span></a></li>
+                <li><a href="#"><img
+                      src="https://i8.mifile.cn/b2c-mimall-media/a6ccfda056fc159a43c7b991218004b5!200x200.jpg"
+                      alt=""><span>小米平衡车
+                      E65A<br><span>全面屏设计，人工智能语音</span><br><span>3699元起</span></span></a></li>
+                <li><a href="#"><img
+                      src="https://i8.mifile.cn/b2c-mimall-media/a6ccfda056fc159a43c7b991218004b5!200x200.jpg"
+                      alt=""><span>小米平衡车
+                      E65A<br><span>全面屏设计，人工智能语音</span><br><span>3699元起</span></span></a></li>
+                <li><a href="#"><img
+                      src="https://i8.mifile.cn/b2c-mimall-media/a6ccfda056fc159a43c7b991218004b5!200x200.jpg"
+                      alt=""><span>小米平衡车
+                      E65A<br><span>全面屏设计，人工智能语音</span><br><span>3699元起</span></span></a></li>
+              </ul>
+              <ul class="walk-more">
+                <li>
+                  <a href="#"><span>小米盒子 4</span><br><span>299元</span><img src="./images/video-sml.jpg" alt=""></a>
+                </li>
+                <li>
+                  <a href="#"><span>浏览更多</span><br><span>电视影音</span><i class="iconfont icon-icon-test"></i></a>
+                </li>
+              </ul>
+            </div>
+            <div class="right-safe">
+              <ul class="safe">
+                <li><a href="#"><img
+                      src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/0d8a74ade6b1b5fbd0c88b9679c63832.jpg?thumb=1&w=200&h=200&f=webp&q=90"
+                      alt=""><span>米家 小白摄像头
+                      C1<br><span>变频节能省电，自清洁</span><br><span>2599元 </span> <del> 2700元</del></span></a></li>
+                <li><a href="#"><img
+                      src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/0d8a74ade6b1b5fbd0c88b9679c63832.jpg?thumb=1&w=200&h=200&f=webp&q=90"
+                      alt=""><span>米家 小白摄像头
+                      C1<br><span>变频节能省电，自清洁</span><br><span>2599元 </span> <del> 2700元</del></span></a></li>
+                <li><a href="#"><img
+                      src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/0d8a74ade6b1b5fbd0c88b9679c63832.jpg?thumb=1&w=200&h=200&f=webp&q=90"
+                      alt=""><span>米家 小白摄像头
+                      C1<br><span>变频节能省电，自清洁</span><br><span>2599元 </span> <del> 2700元</del></span></a></li>
+                <li><a href="#"><img
+                      src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/0d8a74ade6b1b5fbd0c88b9679c63832.jpg?thumb=1&w=200&h=200&f=webp&q=90"
+                      alt=""><span>米家 小白摄像头
+                      C1<br><span>变频节能省电，自清洁</span><br><span>2599元 </span> <del> 2700元</del></span></a></li>
+                <li><a href="#"><img
+                      src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/0d8a74ade6b1b5fbd0c88b9679c63832.jpg?thumb=1&w=200&h=200&f=webp&q=90"
+                      alt=""><span>米家 小白摄像头
+                      C1<br><span>变频节能省电，自清洁</span><br><span>2599元 </span> <del> 2700元</del></span></a></li>
+                <li><a href="#"><img
+                      src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/0d8a74ade6b1b5fbd0c88b9679c63832.jpg?thumb=1&w=200&h=200&f=webp&q=90"
+                      alt=""><span>米家 小白摄像头
+                      C1<br><span>变频节能省电，自清洁</span><br><span>2599元 </span> <del> 2700元</del></span></a></li>
+                <li><a href="#"><img
+                      src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/0d8a74ade6b1b5fbd0c88b9679c63832.jpg?thumb=1&w=200&h=200&f=webp&q=90"
+                      alt=""><span>米家 小白摄像头
+                      C1<br><span>变频节能省电，自清洁</span><br><span>2599元 </span> <del> 2700元</del></span></a></li>
+              </ul>
+              <ul class="safe-more">
+                <li>
+                  <a href="#"><span>Air 13.3" 2019款</span><br><span>4799元起</span><img src="./images/hot-sml.webp"
+                      alt=""></a>
+                </li>
+                <li>
+                  <a href="#"><span>浏览更多</span><br><span>热门</span><i class="iconfont icon-icon-test"></i></a>
+                </li>
+              </ul>
+            </div>
+            <div class="right-hots">
+              <ul class="hots">
+                <li><a href="#"><img
+                      src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/9eb0178e3bfeb7d170edd641fb4be4bc.jpg?thumb=1&w=200&h=200&f=webp&q=90"
+                      alt=""><span>小米 小爱老师
+                      C1<br><span>变频节能省电，自清洁</span><br><span>2599元 </span> <del> 2700元</del></span></a></li>
+                <li><a href="#"><img
+                      src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/9eb0178e3bfeb7d170edd641fb4be4bc.jpg?thumb=1&w=200&h=200&f=webp&q=90"
+                      alt=""><span>小米 小爱老师
+                      C1<br><span>变频节能省电，自清洁</span><br><span>2599元 </span> <del> 2700元</del></span></a></li>
+                <li><a href="#"><img
+                      src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/9eb0178e3bfeb7d170edd641fb4be4bc.jpg?thumb=1&w=200&h=200&f=webp&q=90"
+                      alt=""><span>小米 小爱老师
+                      C1<br><span>变频节能省电，自清洁</span><br><span>2599元 </span> <del> 2700元</del></span></a></li>
+                <li><a href="#"><img
+                      src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/9eb0178e3bfeb7d170edd641fb4be4bc.jpg?thumb=1&w=200&h=200&f=webp&q=90"
+                      alt=""><span>小米 小爱老师
+                      C1<br><span>变频节能省电，自清洁</span><br><span>2599元 </span> <del> 2700元</del></span></a></li>
+                <li><a href="#"><img
+                      src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/9eb0178e3bfeb7d170edd641fb4be4bc.jpg?thumb=1&w=200&h=200&f=webp&q=90"
+                      alt=""><span>小米 小爱老师
+                      C1<br><span>变频节能省电，自清洁</span><br><span>2599元 </span> <del> 2700元</del></span></a></li>
+                <li><a href="#"><img
+                      src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/9eb0178e3bfeb7d170edd641fb4be4bc.jpg?thumb=1&w=200&h=200&f=webp&q=90"
+                      alt=""><span>小米 小爱老师
+                      C1<br><span>变频节能省电，自清洁</span><br><span>2599元 </span> <del> 2700元</del></span></a></li>
+                <li><a href="#"><img
+                      src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/9eb0178e3bfeb7d170edd641fb4be4bc.jpg?thumb=1&w=200&h=200&f=webp&q=90"
+                      alt=""><span>小米 小爱老师
                       C1<br><span>变频节能省电，自清洁</span><br><span>2599元 </span> <del> 2700元</del></span></a></li>
               </ul>
               <ul class="hot-more">
