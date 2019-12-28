@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=500">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://at.alicdn.com/t/font_1571159_rhpeo1v9jq.css
+  ">
+  <title>mi-mobile</title>
+  <style class="text/css">
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      /* background: rgba(0, 0, 0, .1); */
+    }
+
+    html {
+      width: 100%;
+      font-size: 16px;
+      font-family: 'Helvetica Neue', Helvetica, 'PingFang SC', 'Microsoft Yahei', 'WenQuanYi Micro Hei', Arial, Verdana, sans-serif;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img {
+      display: block;
+    }
+
+    ul,
+    ol {
+      list-style: none;
+    }
+
+
+    div.top {
+      height: 68px;
+      width: 100%;
+      line-height: 68px;
+      background: #4C4C4C;
+
+    }
+
+    .top .no i {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: white;
+      padding: 3px;
+      margin: 0 7px 0 11px;
+    }
+
+    .icon-cuowu {
+      font-size: 12px;
+    }
+
+    .mi-top {
+      display: inline-block;
+      background: url("../miao/mi/images/logo-footer.png");
+      background-size: cover;
+      width: 37px;
+      height: 37px;
+      margin-right: 2px;
+      vertical-align: middle;
+    }
+
+    .top>span {
+      color: white;
+      font-size: 18px;
+    }
+
+    .top a:last-child {
+      display: block;
+      width: 122px;
+      height: 37px;
+      border-radius: 4px;
+      color: white;
+      background: #FF6B00;
+      text-align: center;
+      line-height: 37px;
+      float: right;
+      margin: 16px 11px 0 0;
+    }
+
+    .top-nav {
+      position: relative;
+      height: 100px;
+      width: 100%;
+      box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .1);
+    }
+
+    .top-nav .search {
+      height: 58px;
+      width: 100%;
+      padding: 8px 24px 8px 18px;
+    }
+
+    .top-nav .search i:first-child {
+      display: block;
+      width: 33px;
+      height: 24px;
+      float: left;
+      background: url("../miao/mi/images/logo-mobile.png") no-repeat;
+      background-size: 32px 23px;
+      margin: 9px 18px 0 0;
+    }
+
+    .top-nav .search form {
+      display: block;
+      float: left;
+      position: relative;
+    }
+
+    .top-nav .search form input {
+      width: 362px;
+      height: 43px;
+      padding-top: 4px;
+      border-radius: 2px;
+      border: 1px solid #E5E5E5;
+    }
+
+    .top-nav .search label {
+      position: absolute;
+      left: 0;
+      margin: 0 12px
+    }
+
+    .top-nav .icon-sousuo1 {
+      font-size: 24px;
+      color: #B7B7B7;
+      line-height: 43px;
+    }
+
+    .top-nav .icon-yonghu {
+      margin-top: 9px;
+      margin-right: -4px;
+      font-size: 30px;
+      float: right;
+      color: #919191;
+    }
+
+    ::placeholder {
+      font-size: 18px;
+      padding-left: 42px;
+      color: #B7B7B7;
+    }
+
+    .nav {
+      display: flex;
+      position: relative;
+      height: 42px;
+      width: 100%;
+      padding: 0 18px;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-list {
+      display: flex;
+      width: 410px;
+      height: 42px;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 16px;
+      color: #747474;
+      margin: auto;
+    }
+
+    .nav-list li a {
+      display: flex;
+      height: 42px;
+      align-items: center;
+      box-sizing: border-box;
+      border-bottom: 2px transparent solid;
+    }
+
+    .nav-list li a:hover {
+      color: #FF6B00;
+      border-bottom: 2px #FF6B00 solid;
+    }
+
+    .top-nav .icon-downArrow {
+      position: absolute;
+      right: 16px;
+      font-size: 20px;
+      color: #747474;
+      z-index: 9;
+      transition: .2s;
+    }
+
+    .nav-tag {
+      width: 100%;
+      height: 0;
+      position: absolute;
+      top: 0px;
+      left: 0;
+      padding: 18px 19px 17px 17px;
+      background: white;
+      visibility: hidden;
+      overflow: hidden;
+    }
+
+    input#tag {
+      display: none;
+    }
+
+    input#tag:checked+.icon-downArrow {
+      transform: rotate(180deg);
+      transition: .2s;
+    }
+
+    input#tag:checked~.nav-tag {
+      visibility: visible;
+      height: 176px;
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, .2);
+      transition: height .2s, box-shadow .1s .1s;
+    }
+
+    .nav-tag span {
+      display: flex;
+      line-height: 24px;
+      font-size: 18px;
+      color: #3C3C3C;
+    }
+
+    .nav-tag ul:first-of-type {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      margin-top: 23px;
+    }
+
+    .nav-tag ul:last-of-type {
+      display: flex;
+      flex-wrap: wrap;
+      margin-top: 16px;
+    }
+
+    .nav-tag ul:last-of-type li {
+      margin-right: 14px;
+    }
+
+    .nav-tag ul li {
+      width: 106px;
+      height: 39px;
+      border: 1px solid #E5E5E5;
+      border-radius: 3px;
+      text-align: center;
+      font-size: 17px;
+      line-height: 39px;
+      color: #3C3C3C;
+    }
+
+    .nav-tag ul li a {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    .nav-tag ul li:hover {
+      color: #FF6B00;
+      border: 1px solid #FF6B00;
+      background: rgba(255, 103, 0, .2);
+    }
+
+    .slides {
+      width: 100%;
+      height: 250px;
+    }
+
+    .slides img {
+      width: 500px;
+      height: 100%;
+      margin: auto;
+    }
+
+    .icon-list {
+      display: flex;
+      width: 500px;
+      height: 212px;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      margin: auto;
+      align-items: center;
+    }
+
+    .icon-list img {
+      width: 100px;
+      height: auto;
+    }
+
+    .hot-list {
+      display: flex;
+      justify-content: space-between;
+      position: relative;
+      width: 500px;
+      height: 582px;
+      margin: auto;
+      background: #F5F5F5;
+      padding: 12px 0;
+      flex-wrap: wrap;
+    }
+
+    .hot-list a.mobile {
+      width: 248px;
+      height: 352px;
+    }
+
+    .hot-list a.mi-band {
+      width: 248px;
+      height: 174px;
+    }
+
+    .hot-list a.video {
+      position: absolute;
+      right: 0;
+      top: 190px;
+      width: 248px;
+      height: 174px;
+    }
+
+    .hot-list a.redmi {
+      margin-top: 10px;
+      width: 500px;
+      height: 194px;
+    }
+
+    .hot-list img {
+      height: 100%;
+      width: 100%;
+    }
+
+    .botttom-nav {
+      display: flex;
+      padding: 0 45px;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      height: 52px;
+      background: white;
+      box-shadow: 0 -2px 2px 0 rgba(0, 0, 0, .1);
+      z-index: 9999;
+    }
+
+    .botttom-nav [class*=" icon-"] {
+      font-size: 28px;
+      color: #808080;
+    }
+
+    .botttom-nav i span {
+      display: block;
+      font-size: 14px;
+      margin-top: -4px;
+    }
+
+    .botttom-nav a:nth-child(3) i span {
+      margin-left: -4px;
+    }
+
+    .botttom-nav a:hover i {
+      color: #FF6B00;
+    }
+  </style>
+</head>
+<div class="container-fluid">
+  <div class="top">
+    <a href="" class="no"> <i class="iconfont icon-cuowu"></i></a>
+    <i class="mi-top"></i>
+    <span>【666元】新人大礼包正在派发</span>
+    <a href="">前往APP领取</a>
+  </div>
+  <div class="botttom-nav">
+    <a href="#"><i class="iconfont icon-index-copy"><br><span>首页</span></i></a>
+    <a href="#"><i class="iconfont icon-category"><br><span>分类</span></i></a>
+    <a href="#"><i class="iconfont icon-cart1"><br><span>购物车</span> </i></a>
+    <a href="#"><i class="iconfont icon-yonghu"><br><span>我的</span></i></a>
+  </div>
+  <div class="top-nav">
+    <div class="search">
+      <i></i>
+      <form action="">
+        <input type="text" id="mi-search" placeholder="搜索商品名称">
+        <label for="mi-search" class="iconfont icon-sousuo1"></label>
+      </form>
+      <i class="iconfont icon-yonghu"></i>
+    </div>
+    <div class="nav">
+      <ul class="nav-list">
+        <li><a href="#">推荐</a></li>
+        <li><a href="#">手机</a></li>
+        <li><a href="#">智能</a></li>
+        <li><a href="#">电视</a></li>
+        <li><a href="#">笔记本</a></li>
+        <li><a href="#">家电</a></li>
+      </ul>
+      <input type="checkbox" id="tag">
+      <label for="tag" class="iconfont icon-downArrow"></label>
+      <div class="nav-tag">
+        <span>全部</span>
+        <ul>
+          <li><a href="#">推荐</a></li>
+          <li><a href="#">手机</a></li>
+          <li><a href="#">智能</a></li>
+          <li><a href="#">电视</a></li>
+        </ul>
+        <ul>
+          <li><a href="#">笔记本</a></li>
+          <li><a href="#">家电</a></li>
+          <li><a href="#">生活周边</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="slides">
+    <a href=""><img
+        src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/d4f8a729b17c195e04479c669f5cac27.jpg?thumb=1&w=720&h=360"
+        alt=""></a>
+  </div>
+  <div class="icon-list">
+    <a href="#"><img
+        src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/cb65daec7ef7b52cc785f88f78efba37.png?thumb=1&w=144&h=152"
+        alt=""></a>
+    <a href="#"><img src="https://i8.mifile.cn/v1/a1/eb5024fe-dfe3-6e53-3e18-675bef5fa06e.webp" alt=""></a>
+    <a href="#"><img
+        src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/780602689f55569ed27edf86cda44d03.jpg?thumb=1&w=144&h=152"
+        alt=""></a>
+    <a href="#"><img src="https://i8.mifile.cn/v1/a1/e8bc849a-0a3b-21a0-6810-7da3a3903dee.webp" alt=""></a>
+    <a href="#"><img src="https://i8.mifile.cn/v1/a1/7dbcbf87-6a58-adb6-2f3f-bb3dae3e9c80.webp" alt=""></a>
+    <a href="#"><img
+        src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/bc1c677a6e10e42d00fb0a063662fbf9.png?thumb=1&w=144&h=152"
+        alt=""></a>
+    <a href="#"><img
+        src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/9ea68dee2bfa0e55a82236b0d968e975.png?thumb=1&w=144&h=152"
+        alt=""></a>
+    <a href="#"><img
+        src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/1b92680601206b48b885d883c23b83e2.png?thumb=1&w=144&h=152"
+        alt=""></a>
+    <a href="#"><img
+        src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/9425031cdd7af22d9a23a5ae16d1f57c.jpg?thumb=1&w=144&h=152"
+        alt=""></a>
+    <a href="#"><img
+        src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/f11f9df6b0b0b428f8c8fc3267131830.png?thumb=1&w=144&h=152"
+        alt=""></a>
+  </div>
+  <div class="hot-list">
+    <a href="#" class="mobile"><img
+        src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/32b5d24417b673008f386592c4d17046.jpg?thumb=1&w=358&h=508"
+        alt=""></a href="#">
+    <a href="#" class="mi-band"><img
+        src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/4aea81c738383c9787b49c3d5e6a7ab0.jpg?thumb=1&w=358&h=252"
+        alt=""></a>
+    <a href="#" class="video"><img
+        src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/267e988a99b5cf4e960747e8aa5fa831.jpg?thumb=1&w=358&h=252"
+        alt=""></a>
+    <a href="#" class="redmi"><img
+        src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3ca39ff880dfbcbc0e45314782c39fff.jpg?thumb=1&w=720&h=280"
+        alt=""></a>
+  </div>
+</div>
+
+<body>
+
+</body>
+
+</html>

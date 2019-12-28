@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    section {
+      width: 320px;
+      height: 320px;
+      border: 1px solid gray;
+      border-radius: 15px;
+      background: #CDCDCD;
+    }
+
+    main {
+      position: relative;
+      width: 280px;
+      height: 280px;
+      padding: 10px;
+      border: 1px solid gray;
+      border-radius: 50%;
+      margin: 10px auto;
+      background: #fff;
+    }
+
+    div.one,
+    div.two,
+    div.three {
+      position: absolute;
+      width: 280px;
+      height: 280px;
+      font-size: 28px;
+      font-weight: 600;
+      line-height: 22px;
+      margin: 0 auto;
+    }
+
+    div.two {
+      transform: rotate(30deg);
+    }
+
+    div.three {
+      transform: rotate(60deg);
+    }
+
+    div.two div:nth-child(n+1) {
+      transform: rotate(-30deg);
+    }
+
+    div.three div:nth-child(n+1) {
+      transform: rotate(-60deg);
+    }
+
+    .one div,
+    .two div,
+    .three div {
+      position: absolute;
+    }
+
+    .one div:nth-child(1),
+    .two div:nth-child(1),
+    .three div:nth-child(1) {
+      left: 50%;
+      transform: translate(-50%, 0);
+    }
+
+    .one div:nth-child(2),
+    .two div:nth-child(2),
+    .three div:nth-child(2) {
+      top: 50%;
+      transform: translate(0, -50%);
+    }
+
+    .one div:nth-child(4),
+    .two div:nth-child(4),
+    .three div:nth-child(4) {
+      bottom: 0;
+      left: 50%;
+      transform: translate(-50%, 0);
+    }
+
+    .one div:nth-child(3),
+    .two div:nth-child(3),
+    .three div:nth-child(3) {
+      right: 0;
+      top: 50%;
+      transform: translatey(-50%);
+    }
+
+    /* --------指针--------- */
+
+    .circle {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: white;
+      border-radius: 50%;
+      border: 3px #FBD700 solid;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 9;
+    }
+
+    .hour,
+    .min,
+    .sec {
+      animation-name: pointer;
+      position: absolute;
+      background: #0C5FA1;
+      animation-timing-function: steps(60);
+      animation-iteration-count: infinite;
+    }
+
+    .hour {
+      width: 7px;
+      height: 65px;
+      top: 100px;
+      left: 147px;
+      transform-origin: 4px 50px;
+      animation-timing-function: steps(12);
+      animation-duration: 216000s;
+    }
+
+    .min {
+      width: 5px;
+      height: 90px;
+      top: 75px;
+      left: 148px;
+      background: #FFD703;
+      transform-origin: 3px 75px;
+      animation-duration: 3600s;
+    }
+
+    .sec {
+      width: 3px;
+      height: 130px;
+      top: 40px;
+      left: 149px;
+      background: #FF4101;
+      transform-origin: 1px 110px;
+      animation-duration: 60s;
+
+    }
+
+    @keyframes pointer {
+      form {
+        transform: rotate(0deg);
+      }
+
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    [class^="shake"] {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 50%;
+      left: 50%;
+      margin-left: -150px;
+      margin-top: -150px;
+      transform-origin: center center;
+    }
+
+    .shake-1 {
+      animation: shake1 216000s infinite;
+    }
+
+    .shake-2 {
+      animation: shake2 60s infinite;
+    }
+
+    .shake {
+      animation: shake 1s infinite;
+    }
+
+    @keyframes shake2 {
+      0% {
+        transform: rotate(2deg);
+      }
+
+      0.2% {
+        transform: rotate(-1deg);
+      }
+
+      0.4% {
+        transform: rotate(1deg);
+      }
+
+      0.6% {
+        transform: rotate(0deg);
+      }
+    }
+
+    @keyframes shake1 {
+      0% {
+        transform: rotate(2deg);
+      }
+
+      0.0001% {
+        transform: rotate(-1deg);
+      }
+
+      0.00018% {
+        transform: rotate(1deg);
+      }
+
+      0.00022% {
+        transform: rotate(0deg);
+      }
+    }
+
+    @keyframes shake {
+      0% {
+        transform: rotate(2deg);
+      }
+
+      10% {
+        transform: rotate(-1deg);
+      }
+
+      20% {
+        transform: rotate(1deg);
+      }
+
+      30% {
+        transform: rotate(0deg);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <section>
+    <main>
+      <div class="one">
+        <div>12</div>
+        <div>9</div>
+        <div>3</div>
+        <div>6</div>
+
+      </div>
+      <div class="two">
+        <div>1</div>
+        <div>10</div>
+        <div>4</div>
+        <div>7</div>
+      </div>
+      <div class="three">
+        <div>2</div>
+        <div>11</div>
+        <div>5</div>
+        <div>8</div>
+      </div>
+      <div class="circle"></div>
+      <div class="shake-1">
+        <div class="hour"></div>
+      </div>
+      <div class="shake-2">
+        <div class="min"></div>
+      </div>
+      <div class="shake">
+        <div class="sec"></div>
+      </div>
+    </main>
+
+  </section>
+</body>
+
+</html>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .soto {
+      width: 300px;
+      height: 300px;
+      border: 1px red solid;
+      xoverflow: hidden;
+    }
+
+
+    .con {
+      animation-name: foo;
+      animation-direction: alternate;
+      animation-duration: 6s;
+      animation-iteration-count: infinite;
+      perspective: 2000px;
+      perspective-origin: top right;
+      transform-style: preserve-3d;
+      transform-origin: center center -50px;
+      transform: translatez(-100px);
+      width: 100%;
+      height: 100%;
+      position: relative;
+      transition: 3s;
+      xborder: 2px solid red;
+      border-radius: 50%;
+    }
+
+    .soto div {
+      width: 100px;
+      height: 100px;
+      text-align: center;
+      line-height: 100px;
+      position: absolute;
+      opacity: 0.9;
+      backface-visibility: hidden;
+    }
+
+    div.shadow,
+    div.shadow-a,
+    div.shadow-b,
+    div.shadow-c {
+      animation-name: foo;
+      animation-timing-function: linear;
+      animation-direction: alternate;
+      animation-duration: 4s;
+      animation-iteration-count: infinite;
+      top: 10px;
+      left: 10px;
+      width: 300px;
+      height: 300px;
+      border: 2px solid lime;
+      transform: translatez(200px);
+      border-radius: 50%;
+      z-index: 2;
+    }
+
+    div.shadow-a {
+      animation-duration: 4.5s;
+      animation-delay: 2s;
+      border: 2px solid #23A8F2;
+    }
+
+    div.shadow-c {
+      animation-duration: 3s;
+      animation-delay: 4s;
+      border: 2px solid #FF4102;
+    }
+
+    div.shadow-b {
+      animation-duration: 3.5s;
+      animation-delay: 3s;
+      border: 2px solid #E6D965;
+    }
+
+    .soto .con div:nth-child(1) {
+      background: red;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .soto .con div:nth-child(2) {
+      background: blue;
+      top: 50%;
+      left: 0;
+      transform: translate(0, -50%) rotatey(-90deg);
+      transform-origin: right;
+    }
+
+    .soto .con div:nth-child(3) {
+      background: yellow;
+      top: 50%;
+      right: 0;
+      transform-origin: left;
+      transform: translate(0, -50%)rotatey(90deg);
+    }
+
+    .soto .con div:nth-child(4) {
+      background: #3DBA4F;
+      top: 0;
+      left: 50%;
+      transform-origin: bottom;
+      transform: translate(-50%, 0) rotatex(90deg);
+    }
+
+    .soto .con div:nth-child(5) {
+      background: #EC417B;
+      bottom: 0;
+      left: 50%;
+      transform-origin: top;
+      transform: translate(-50%, 0) rotatex(-90deg);
+    }
+
+    .soto .con div:nth-child(6) {
+      background: #FF4201;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) translatez(-100px) rotatey(180deg)
+    }
+
+    /* .soto .con,
+.soto .shadow{
+  animation-name:foo;
+  animation-direction:alternate;
+  animation: 1.5s;
+} */
+    @keyframes foo {
+      from {
+        transform: rotatey(0deg) rotatex(0deg);
+      }
+
+      to {
+        transform: rotatey(720deg) rotatex(720deg);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="soto">
+    <div class="shadow"></div>
+    <div class="shadow-a"></div>
+    <div class="shadow-b"></div>
+    <div class="shadow-c"></div>
+    <section class="con">
+      <div>1</div>
+      <div>2</div>
+      <div>3</div>
+      <div>4</div>
+      <div>5</div>
+      <div>6</div>
+    </section>
+
+  </div>
+</body>
+
+</html>

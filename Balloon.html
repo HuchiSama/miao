@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Balloon</title>
+  <style stype="text/css">
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      /* background: rgba(0, 0, 0, .1); */
+    }
+
+    html {
+      background: #FFB641;
+      font-family: 16px -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      padding: 100px;
+    }
+
+    img {
+      display: block;
+      margin: 0 auto;
+    }
+
+    button {
+      display: block;
+      width: 180px;
+      height: 40px;
+      background: #B71212;
+      position: relative;
+      outline: none;
+      font-size: 18px;
+      border: none;
+      border-radius: 5px;
+      color: white;
+      cursor: pointer;
+      margin: 50px auto;
+    }
+
+    button::after {
+      content: attr(aria-label);
+      display: block;
+      width: 90px;
+      position: absolute;
+      font-size: 12px;
+      background: #000;
+      border-radius: 3px;
+      padding: 10px 10px;
+      text-align: center;
+      overflow: hidden;
+      visibility: hidden;
+      opacity: 0;
+      transition: .3s;
+    }
+
+    button::before {
+      content: "";
+      display: block;
+      position: absolute;
+      border-top: 8px solid transparent;
+      border-left: 8px solid transparent;
+      border-right: 8px solid transparent;
+      border-bottom: 8px solid transparent;
+      visibility: hidden;
+      opacity: 0;
+      transition: .3s;
+    }
+
+    button:hover::after,
+    button:hover::before {
+      visibility: visible;
+      opacity: 1;
+      transition: opacity .3s;
+    }
+
+    [data-balloon-pos="up"]::after {
+      bottom: 100%;
+      left: 50%;
+      transform: translate(-50%, -40%);
+    }
+
+    [data-balloon-pos="up"]::before {
+      left: 50%;
+      top: -5px;
+      transform: translate(-50%, -60%);
+      border-top: 8px solid black;
+    }
+
+
+    [data-balloon-pos="left"]::after {
+      bottom: 50%;
+      left: -11px;
+      transform: translate(-100%, 50%);
+    }
+
+    [data-balloon-pos="left"]::before {
+      left: -4px;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      border-left: 8px solid black;
+    }
+
+    [data-balloon-pos="right"]::after {
+      bottom: 50%;
+      right: -11px;
+      transform: translate(100%, 50%);
+    }
+
+    [data-balloon-pos="right"]::before {
+      right: -4px;
+      top: 50%;
+      transform: translate(50%, -60%);
+      border-right: 8px solid black;
+    }
+
+    [data-balloon-pos="down"]::after {
+      top: 100%;
+      left: 50%;
+      transform: translate(-50%, 40%);
+    }
+
+    [data-balloon-pos="down"]::before {
+      left: 50%;
+      bottom: -5px;
+      transform: translate(-50%, 60%);
+      border-bottom: 8px solid black;
+    }
+
+    [data-balloon-pos="up-left"]::after {
+      bottom: 100%;
+      left: 0;
+      transform: translate(0, -40%);
+    }
+
+    [data-balloon-pos="up-left"]::before {
+      left: 0;
+      top: -5px;
+      transform: translate(50%, -60%);
+      border-top: 8px solid black;
+    }
+
+    [data-balloon-pos="up-right"]::after {
+      bottom: 100%;
+      left: 100%;
+      transform: translate(-100%, -40%);
+    }
+
+    [data-balloon-pos="up-right"]::before {
+      right: 0;
+      top: -5px;
+      transform: translate(-50%, -60%);
+      border-top: 8px solid black;
+    }
+
+    [data-balloon-pos="down-left"]::after {
+      top: 100%;
+      left: 0;
+      transform: translate(0, 40%);
+    }
+
+    [data-balloon-pos="down-left"]::before {
+      left: 0;
+      bottom: -5px;
+      transform: translate(50%, 60%);
+      border-bottom: 8px solid black;
+    }
+
+    [data-balloon-pos="down-right"]::after {
+      top: 100%;
+      right: 0;
+      transform: translate(0, 40%);
+    }
+
+    [data-balloon-pos="down-right"]::before {
+      right: 0;
+      bottom: -5px;
+      transform: translate(-50%, 60%);
+      border-bottom: 8px solid black;
+    }
+
+    [data-balloon-length="medium"]::after {
+      width: 130px;
+      line-height: 1.5em;
+      left: 50%;
+      transform: translate(-50%, -20%);
+    }
+
+    [data-balloon-length="medium"]::before {
+      top: -8px;
+      transform: translate(-50%, -70%);
+      border-top: 8px solid black;
+    }
+
+    [data-balloon-length="xlarge"]::after {
+      width: 400px;
+      line-height: 1.5em;
+      left: 50%;
+      transform: translate(-50%, -20%);
+    }
+
+    [data-balloon-length="xlarge"]::before {
+      top: -8px;
+      transform: translate(-50%, -70%);
+      border-top: 8px solid black;
+    }
+
+    [data-balloon-blunt]::after,
+    [data-balloon-blunt]::before {
+      opacity: 1;
+      transition: none;
+    }
+
+    [data-balloon-visible]::after,
+    [data-balloon-visible]::before {
+      visibility: visible;
+      transition: none;
+      opacity: 1;
+    }
+
+    [data-balloon-visible]::before {
+      top: -8px;
+      transform: translate(-50%, -75%);
+      border-top: 8px solid black;
+    }
+
+    .tooltip-red::after {
+      background: red;
+      bottom: 100%;
+      left: 50%;
+      transform: translate(-50%, -40%);
+    }
+
+    .tooltip-red::before {
+      top: -6px;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border-top: 8px solid red;
+    }
+
+    .tooltip-slide::after {
+      background: black;
+      bottom: -100%;
+      left: 50%;
+      transform: translate(-50%, 100%);
+    }
+
+    .tooltip-slide::before {
+      top: 98px;
+      left: 50%;
+      transform: translate(-50%, 100%);
+      border-top: 8px solid black;
+    }
+
+    .tooltip-slide:hover::after {
+      bottom: 100%;
+      left: 50%;
+      transform: translate(-50%, -40%);
+      transition: .2s;
+    }
+
+    .tooltip-slide:hover::before {
+      top: -6px;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border-top: 8px solid black;
+      transition: .2s;
+    }
+  </style>
+</head>
+
+<body>
+  <section>
+    <img src="http://kazzkiq.github.io/balloon.css/assets/img/logo.svg" alt="">
+    <button aria-label="Whats up!" data-balloon-pos="up">Hover me!</button>
+    <button aria-label="Whats up!" data-balloon-pos="left">Hover me!</button>
+    <button aria-label="Whats up!" data-balloon-pos="right">Hover me!</button>
+    <button aria-label="Whats up!" data-balloon-pos="down">Hover me!</button>
+    <button aria-label="Whats up!" data-balloon-pos="up-left">Hover me!</button>
+    <button aria-label="Whats up!" data-balloon-pos="up-right">Hover me!</button>
+    <button aria-label="Whats up!" data-balloon-pos="down-left">Hover me!</button>
+    <button aria-label="Whats up!" data-balloon-pos="down-right">Hover me!</button>
+    <button data-balloon-length="small" aria-label="Hi." data-balloon-pos="up">Hover me!</button>
+    <button data-balloon-length="medium"
+      aria-label="Now that's a super big text we have over here right? Lorem ipsum dolor sit I'm done."
+      data-balloon-pos="up">I'm a medium tooltip.</button>
+    <button data-balloon-length="xlarge"
+      aria-label="What about something really big? This may surpass your window dimensions. Imagine you're on that boring class with that boring teacher and you didn't slept so well last night. Suddenly you're sleeping in class. Can you believe it?!"
+      data-balloon-pos="up">I'm a Xlarge tooltip</button>
+    <button data-balloon-blunt aria-label="No animation!" data-balloon-pos="up">No animation!</button>
+    <button data-balloon-visible aria-label="I am always visible!" data-balloon-pos="up">Always visible!</button>
+    <button aria-label="I am red!" class="tooltip-red">I am red!</button>
+    <button aria-label="I move a lot!" class="tooltip-slide">I move a lot!</button>
+
+  </section>
+</body>
+
+</html>

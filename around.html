@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<style>
+  section {
+    width: 350px;
+    height: 350px;
+    animation: around 5s infinite linear;
+    transform-origin: center center;
+    margin: 100px auto;
+    border-radius: 50%;
+    border: 1px gray solid;
+  }
+
+  @keyframes around {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  img {
+    display: block;
+    width: 100px;
+    height: 100px;
+    animation: naka 5s infinite linear;
+    transform-origin: center center;
+  }
+
+  @keyframes naka {
+    to {
+      transform: rotate(-360deg);
+    }
+  }
+</style>
+
+<body>
+  <section>
+    <img src="https://pic1.zhimg.com/cf1e6824ab00c2e4e0fb9db29bbf42f4_b.jpg" alt="" class="yinxian">
+    <img src="./images/timg.png" alt="" class="huaji">
+    <img src="http://www.17qq.com/img_biaoqing/76950196.jpeg" alt="">
+  </section>
+</body>
+
+</html>

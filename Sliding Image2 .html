@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      /* background: rgba(0, 0, 0, .1); */
+    }
+
+    html {
+      width: 100%;
+      font-size: 16px;
+      font-family: 'BebasNeueRegular', 'Arial Narrow', Arial, sans-serif;
+
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img {
+      display: block;
+    }
+
+    ul,
+    ol {
+      list-style: none;
+    }
+
+    html {
+      background: url("../miao/images/slides/bg.jpg");
+    }
+
+    div.top {
+      padding-top: 50px;
+      height: 170px;
+      width: 360px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    div.top a {
+      display: inline-block;
+      margin: 20px 5px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: #ADD1DF;
+      box-shadow: 0 0 4px 0px rgba(0, 0, 0, .3);
+      line-height: 60px;
+      color: white;
+    }
+
+    div.top a:nth-of-type(2) {
+      background: white;
+      color: #4FA2C4;
+    }
+
+    div.top a:not(.demo2-html):hover {
+      background: #4FA2C4;
+    }
+
+    div.top h2 {
+      font-size: 28px;
+      color: #2E6784;
+      text-transform: uppercase;
+    }
+
+    div.top h2 span {
+      color: #7CBCD6;
+    }
+
+    .banner {
+      width: 1000px;
+      height: 500px;
+      background: white;
+      margin: 60px auto;
+      padding: 20px 25px;
+      position: relative;
+    }
+
+    .banner div {
+      position: absolute;
+    }
+
+    .banner>div[class^="slides"] {
+      width: 960px;
+      height: 450px;
+      display: flex;
+      left: 20px;
+      overflow: hidden;
+    }
+
+    .banner .slides1-bg {
+      background: url("../miao/images/slides/banner3.jpg") no-repeat;
+    }
+
+    .banner .slides2-bg {
+      background: url("../miao/images/slides/banner2.jpg") no-repeat;
+    }
+
+    .banner .slides3-bg {
+      background: url("../miao/images/slides/banner.jpg") no-repeat;
+    }
+
+    .banner .slides4-bg {
+      background: url("../miao/images/slides/benner1.jpg") no-repeat;
+    }
+
+    .banner div span {
+      width: 0;
+      height: 450px;
+      position: absolute;
+      overflow: hidden;
+    }
+
+    .banner input {
+      display: none;
+    }
+
+    .banner input+label {
+      position: absolute;
+      display: block;
+      bottom: 40px;
+      left: 20%;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 4px solid rgba(255, 255, 255, .4);
+      background: #7BB7CD;
+      background-clip: content-box;
+      font-size: 24px;
+      text-align: center;
+      line-height: 40px;
+      color: white;
+      z-index: 99;
+      box-sizing: content-box;
+    }
+
+    .banner input#demo2+label {
+      left: 40%;
+    }
+
+    .banner input#demo3+label {
+      left: 60%;
+    }
+
+    .banner input+label:hover {
+      cursor: pointer;
+    }
+
+    .banner input#demo4+label {
+      left: 80%;
+    }
+
+    input:checked+label {
+      background: white;
+      color: #7BB7CD;
+      border: 4px solid rgba(123, 183, 205, .6);
+    }
+
+    div[class^="slides"] span:nth-child(1) {
+      background-position: 0 0;
+    }
+
+    div[class^="slides"] span:nth-of-type(2) {
+      background-position: -240px 0;
+      left: 25%;
+    }
+
+    div[class^="slides"] span:nth-of-type(3) {
+      background-position: -480px 0;
+      left: 50%;
+    }
+
+    div[class^="slides"] span:nth-of-type(4) {
+      background-position: -720px 0;
+      left: 75%;
+    }
+
+
+    input#demo1:checked~div.slides1,
+    input#demo2:checked~div.slides2,
+    input#demo3:checked~div.slides3,
+    input#demo4:checked~div.slides4 {
+      z-index: 9;
+    }
+
+    /* input#demo1:checked~div.slides1 span:nth-child(1),
+    input#demo2:checked~div.slides2 span:nth-child(1),
+    input#demo3:checked~div.slides3 span:nth-child(1),
+    input#demo4:checked~div.slides4 span:nth-child(1) {
+      background-position: 0 0;
+    } */
+
+
+    input#demo1:checked~div:not(.slides1) span,
+    input#demo2:checked~div:not(.slides2) span,
+    input#demo3:checked~div:not(.slides3) span,
+    input#demo4:checked~div:not(.slides4) span {
+      /* transform: translatex(240px); */
+      /* left: -720px; */
+      z-index: 11;
+      animation: tui .4s linear;
+    }
+
+    @keyframes tui {
+      0% {
+        transform: translatex(00px);
+      }
+
+      100% {
+        transform: translatex(240px);
+      }
+    }
+
+
+    input#demo1:checked~div.slides1 span,
+    input#demo2:checked~div.slides2 span,
+    input#demo3:checked~div.slides3 span,
+    input#demo4:checked~div.slides4 span {
+      /* transform: translatex(-240px); */
+      width: 25%;
+      z-index: 12;
+      transition: .4s .2s linear;
+    }
+
+    .banner h2 {
+      position: absolute;
+      font-size: 56px;
+      font-weight: 600;
+      color: white;
+      top: 40%;
+      left: 50%;
+      padding-bottom: 25px;
+      border-bottom: 0px solid white;
+      transform: translate(-50%, -50%);
+      opacity: 0;
+      transition: .6s;
+      z-index: 99;
+    }
+
+    input#demo1:checked~h2:nth-of-type(1),
+    input#demo2:checked~h2:nth-of-type(2),
+    input#demo3:checked~h2:nth-of-type(3),
+    input#demo4:checked~h2:nth-of-type(4) {
+      opacity: 1;
+      transition: .8s;
+      border-bottom: 5px solid white;
+    }
+
+    .banner p {
+      font-size: 5px;
+      position: absolute;
+      text-transform: uppercase;
+      left: 50%;
+      bottom: 30%;
+      transform: translate(-50%, -50%);
+      color: rgba(255, 255, 255, .8);
+      text-align: center;
+      z-index: 99;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="top">
+      <h2>Sliding Image Panels <span>with CSS3</span></h2>
+      <a href="Sliding Image .html">demo1</a>
+      <a href="#" class="demo2-html">demo2</a>
+      <a href="#">demo3</a>
+      <a href="#">demo4</a>
+    </div>
+    <div class="main">
+      <div class="banner">
+        <input type="radio" id="demo1" name="demo" checked>
+        <label for="demo1">1</label>
+        <input type="radio" id="demo2" name="demo">
+        <label for="demo2">2</label>
+        <input type="radio" id="demo3" name="demo">
+        <label for="demo3">3</label>
+        <input type="radio" id="demo4" name="demo">
+        <label for="demo4">4</label>
+        <div class="slides1 slides1-bg">
+          <span class="slides1-bg"></span>
+          <span class="slides1-bg"></span>
+          <span class="slides1-bg"></span>
+          <span class="slides1-bg"></span>
+        </div>
+        <div class="slides2 slides2-bg">
+          <span class="slides2-bg"></span>
+          <span class="slides2-bg"></span>
+          <span class="slides2-bg"></span>
+          <span class="slides2-bg"></span>
+        </div>
+        <div class="slides3 slides3-bg">
+          <span class="slides3-bg"></span>
+          <span class="slides3-bg"></span>
+          <span class="slides3-bg"></span>
+          <span class="slides3-bg"></span>
+        </div>
+        <div class="slides4 slides4-bg">
+          <span class="slides4-bg"></span>
+          <span class="slides4-bg"></span>
+          <span class="slides4-bg"></span>
+          <span class="slides4-bg"></span>
+        </div>
+        <!-- <div class="title"> -->
+        <h2>SERENDIPITY</h2>
+        <h2>ADVENTURE</h2>
+        <h2>NATURE</h2>
+        <h2>SERENITY</h2>
+        <span></span>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit soluta, in beatae, laboriosam nemo,
+          totam commodi atque reiciendis tenetur laborum excepturi optio quam qui? Qui natus sapiente ex eaque ad.</p>
+        <!-- </div> -->
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
