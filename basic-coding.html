@@ -55,7 +55,7 @@
 
 <script type="o" id="ch0103/09">
   var r = +prompt("半径")
-  console.log((2 * r).toFixed(4), (2 * r * Math.PI).toFixed(4), (Math.PI * r * r).toFixed(4));
+  console.log((2 * r).toFixed(4), (2 * r * 3.14159).toFixed(4), (3.14159 * r * r).toFixed(4));
 </script>
 
 <script type="o" id="ch0103/10">
@@ -72,12 +72,15 @@
 
 <script type="o" id="ch0103/12">
   var r = +prompt("半径")
-  console.log((4 / 3 * Math.PI * r * r * r).toFixed(2))
+  console.log((4 / 3 * 3.14 * r * r * r).toFixed(2))
 </script>
 
 <script type="o" id="ch0103/13">
   var n = +prompt("输入一个三位数")
-  console.log(Math.trunc((n % 100) % 10), Math.trunc((n % 100) / 10), Math.trunc(n / 100))
+  var a = Math.trunc((n % 100) % 10)
+  var b = Math.trunc((n % 100) / 10)
+  var c = Math.trunc(n / 100)
+  console.log("" + a + b + c)
 </script>
 
 <script type="o" id="ch0103/14">
@@ -124,4 +127,283 @@
   var n = +prompt("输入幂")
   var a = 2
   console.log(Math.pow(a, n))
+</script>
+
+<script type="o" id="ch0104/01">
+  var n = +prompt("输入整数")
+  if (n > 0) {
+    console.log("positive")
+  } else if (n == 0) {
+    console.log("zero")
+  } else if (n < 0) {
+    console.log("negative")
+  }
+</script>
+
+<script type="o" id="ch0104/02">
+  var n = +prompt("输入浮点数")
+  if (n >= 0) {
+    console.log(n)
+  } else if (n < 0) {
+    console.log(-n)
+  }
+</script>
+
+<script type="o" id="ch0104/03">
+  var n = +prompt("输入正整数")
+  if (n % 2 == 0) {
+    console.log("even")
+  } else if (n % 2 != 0) {
+    console.log("odd")
+  }
+</script>
+
+<script type="o" id="ch0104/04">
+  var n = prompt("输入字符")
+  if (n.charCodeAt(0) % 2 == 0) {
+    console.log("NO")
+  } else {
+    console.log("YES")
+  }
+</script>
+
+<script type="o" id="ch0104/05">
+  var x = +prompt("输入整数x")
+  var y = +prompt("输入整数y")
+  if (x > y) {
+    console.log(">")
+  } else if (x == y) {
+    console.log("=")
+  } else {
+    console.log("<")
+  }
+</script>
+
+<script type="o" id="ch0104/06">
+  var a = +prompt("输入正整数")
+  if (a > 9 & a < 100) {
+    console.log("1")
+  } else {
+    console.log("0")
+  }
+</script>
+
+<script type="o" id="ch0104/07">
+  var a = +prompt("输入整数A")
+  var b = +prompt("输入整数B")
+  if (a >= 10 || b >= 20) {
+    console.log("1")
+  } else {
+    console.log("0")
+  }
+</script>
+
+<script type="o" id="ch0104/08">
+  var n = +prompt("输入整数N")
+
+  if (n % 3 == 0 & n % 5 == 0) {
+    console.log("YES")
+  } else {
+    console.log("NO")
+  }
+</script>
+
+<script type="o" id="ch0104/09">
+  var n = +prompt("输入整数N")
+  var ifAny = false
+
+  if (n % 3 == 0 && n % 5 == 0 && n % 7 == 0) {
+    ifAny = true
+    console.log("3", "5", "7")
+  } else {
+    if (n % 3 == 0 && n % 5 == 0) {
+      console.log("3", "5")
+      ifAny = true
+    }
+    if (n % 7 == 0 && n % 3 == 0) {
+      console.log("3", "7")
+      ifAny = true
+    }
+    if (n % 5 == 0 && n % 7 == 0) {
+      console.log("5", "7")
+      ifAny = true
+    }
+  }
+
+  if (n % 3 == 0 && ifAny == false) {
+    console.log("3")
+  }
+  if (n % 5 == 0 && ifAny == false) {
+    console.log("5")
+  }
+  if (n % 7 == 0 && ifAny == false) {
+    console.log("7")
+  }
+  if ((n % 3 != 0 && n % 5 != 0 & n % 7 != 0) && ifAny == false) {
+    console.log("n")
+  }
+</script>
+
+<script type="o" id="ch0104/10">
+  var a = +prompt("输入整数A")
+  var b = +prompt("输入整数B")
+
+  if ((a >= 60 && b < 60) || (a < 60 && b >= 60)) {
+    console.log("1")
+  } else {
+    console.log("0")
+  }
+</script>
+
+<script type="o" id="ch0104/11">
+  var a = +prompt("输入日期")
+
+  if (a == 1 || a == 3 || a == 5) {
+    console.log("NO")
+  } else {
+    console.log("YES")
+  }
+</script>
+
+<script type="o" id="ch0104/12">
+  var m = +prompt("输入距离")
+  var bt = m / 3 + 50
+  var wt = m / 1.2
+  if (bt > wt) {
+    console.log("Walk")
+  } else if (bt == wt) {
+    console.log("All")
+  } else if (bt < wt) {
+    console.log("Bike")
+  }
+</script>
+
+<script type="o" id="ch0104/13">
+  var x = +prompt("输入浮点数")
+
+  if (0 <= x && x < 5) {
+    console.log((-x + 2.5).toFixed(3))
+  } else if (5 <= x && x < 10) {
+    console.log((2 - 1.5 * (x - 3) * (x - 3)).toFixed(3))
+  } else if (10 <= x && x < 20) {
+    console.log((x / 2 - 1.5).toFixed(3))
+  }
+</script>
+
+<script type="o" id="ch0104/14">
+  var k = +prompt("输入重量")
+  var t = prompt("是否加急")
+  var p = 8
+  if (k > 1000) {
+    p = p + Math.ceil((k - 1000) / 500) * 4
+  }
+  if (t == "y") {
+    p = p + 5
+  }
+  console.log(p)
+</script>
+
+<script type="o" id="ch0104/15">
+  var a = +prompt("输入整数A")
+  var b = +prompt("输入整数B")
+  var c = +prompt("输入整数C")
+
+  if (a > b) {
+    if (a > c) {
+      console.log(a)
+    } else {
+      console.log(c)
+    }
+  } else if (b > c) {
+    conlose.log(b)
+  } else {
+    console.log(c)
+  }
+</script>
+
+<script type="o" id="ch0104/16">
+  var a = +prompt("输入正整数a")
+  var b = +prompt("输入正整数b")
+  var c = +prompt("输入正整数c")
+
+  if (a + b > c && a - b < c) {
+    console.log("yes")
+  } else {
+    console.log("no")
+  }
+</script>
+
+<script type="o" id="ch0104/17">
+  var a = +prompt("输入年份")
+
+  if ((a % 4 == 0 && a % 100 != 0) || a % 400 == 0) {
+    console.log("Y")
+  } else {
+    console.log("N")
+  }
+
+</script>
+
+<script type="o" id="ch0104/18">
+  var x = +prompt("输入X轴")
+  var y = +prompt("输入y轴")
+
+  if (-1 <= x && -1 <= y) {
+    if (x < 1 && y < 1) {
+      console.log("yes")
+    } else {
+      console.log("no")
+    }
+  } else {
+    console.log("no")
+  }
+</script>
+
+<script type="o" id="ch0104/19">
+  var a = +prompt("输入整数a")
+  var b = +prompt("输入整数b")
+  var c = prompt("输入符号")
+
+  if (c == "+") {
+    console.log(a + b)
+  } else if (c == "-") {
+    console.log(a - b)
+  } else if (c == "*") {
+    console.log(a * b)
+  } else if (c == "/") {
+    if (b == 0) {
+      console.log("Divided by zero!")
+    } else {
+      console.log(a / b)
+    }
+  } else {
+    console.log("Invalid operator!")
+  }
+</script>
+
+<script type="o" id="ch0104/20">
+  var a = +prompt("输入浮点数a")
+  var b = +prompt("输入浮点数b")
+  var c = +prompt("输入浮点数c")
+
+  var x1 = (-b + Math.sqrt(b * b - 4 * a * c)) / (2 * a)
+  var x2 = (-b - Math.sqrt(b * b - 4 * a * c)) / (2 * a)
+
+  if (b * b == 4 * a * c) {
+    console.log("x1=x2=" + x1)
+  } else if (b * b > 4 * a * c) {
+    console.log("x1=" + x1, "x2=" + x2)
+  } else if (b * b < 4 * a * c) {
+    console.log("x1=" + (-b / (2 * a)).toFixed(5) + "+" + (Math.sqrt(4 * a * c - b * b) / (2 * a)).toFixed(5) + "i" + ";" +
+      "x2=" + (-b / (2 * a)).toFixed(5) + "-" + (Math.sqrt(4 * a * c - b * b) / (2 * a)).toFixed(5) + "i"
+    )
+  }
+</script>
+
+<script type="o" id="ch0104/21">
+  var n = +prompt("苹果数")
+  var x = +prompt("吃的时间")
+  var y = +prompt("总时间")
+
+  console.log(Math.floor(n - y / x))
 </script>
