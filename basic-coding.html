@@ -349,7 +349,7 @@
   var y = +prompt("输入y轴")
 
   if (-1 <= x && -1 <= y) {
-    if (x < 1 && y < 1) {
+    if (x <= 1 && y <= 1) {
       console.log("yes")
     } else {
       console.log("no")
@@ -407,3 +407,134 @@
 
   console.log(Math.floor(n - y / x))
 </script>
+
+<script type="o" id="ch0105/01">
+  var n = +prompt("学生人数")
+  var allAge = 0
+  for (var i = 0; i < n; i++) {
+    var age = +prompt("年龄")
+    allAge += age
+  }
+  console.log((allAge / n).toFixed(2))
+</script>
+
+<script type="o" id="ch0105/02">
+  var sum = 0
+  for (var month = 1; month <= 12; month++) {
+    var y = +prompt("请输入第" + month + "月的结余")
+    sum += y
+  }
+  console.log("$" + (sum / 12).toFixed(2))
+</script>
+
+<script type="o" id="ch0105/03">
+  var n = +prompt("样本容量")
+  var f = 0
+  for (var i = 0; i < n; i++) {
+    var m = +prompt("输入第" + (i + 1) + "个浮点数")
+    f += m
+  }
+  console.log((f / n).toFixed(4))
+</script>
+
+<script type="o" id="ch0105/04">
+  var n = +prompt("输入整数N")
+  var f = 0
+  for (var i = 0; i < n; i++) {
+    var m = +prompt("输入第" + (i + 1) + "位整数")
+    f += m
+  }
+  console.log(f + "", (f / n).toFixed(5))
+</script>
+
+<script type="o" id="ch0105/05">
+  var n = +prompt("输入整数N")
+  var f = 0
+  for (var i = 0; i < n; i++) {
+    var m = +prompt("输入第" + (i + 1) + "位成绩")
+    if (m > f) {
+      f = m
+    }
+  }
+  console.log(f)
+</script>
+
+<script type="o" id="ch0105/06">
+  var n = +prompt("输入整数N")
+  var max = 0
+  var min = Infinity
+  for (var i = 0; i < n; i++) {
+    var m = +prompt("输入第" + (i + 1) + "数列")
+    if (m > max) {
+      max = m
+    } else if (m < min) {
+      min = m
+    }
+  }
+  console.log(max - min)
+</script>
+
+<script type="o" id="ch0105/07">
+  var n = +prompt("输入天数N")
+  var allAu = 0
+  var allAg = 0
+  var allCu = 0
+  for (var i = 0; i < n; i++) {
+    var Au = +prompt("输入第" + (i + 1) + "天金牌")
+    var Ag = +prompt("输入第" + (i + 1) + "天银牌")
+    var Cu = +prompt("输入第" + (i + 1) + "天铜牌")
+
+    allAu += Au
+    allAg += Ag
+    allCu += Cu
+  }
+  var all = allAu + allAg + allCu
+  console.log(allAu, allAg, allCu, all)
+</script>
+
+<script type="o" id="ch0105/08">
+  var n = +prompt("多边形边数")
+  var m = 0
+  for (var i = 0; i < n - 1; i++) {
+    var a = +prompt("输入度数")
+    m += a
+  }
+  console.log((n - 2) * 180 - m)
+</script>
+
+<script type="o" id="ch0105/09">
+  var m = +prompt("输入非负整数m")
+  var n = +prompt("输入非负整数n")
+  var q = 0
+  for (var i = m; i <= n; i++) {
+    if (i % 2 != 0) {
+      q += i
+    }
+  }
+  console.log(q)
+</script>
+
+<script type="o" id="ch0105/10">
+  var m = +prompt("输入非负整数m")
+  var n = +prompt("输入非负整数n")
+  var q = 0
+  for (var i = m; i <= n; i++) {
+    if (i % 17 == 0) {
+      q += i
+    }
+  }
+  console.log(q)
+</script>
+
+<script xtype="o" id="ch0105/06"></script>
+<script xtype="o" id="ch0105/06"></script>
+<script xtype="o" id="ch0105/06"></script>
+<script xtype="o" id="ch0105/06"></script>
+<script xtype="o" id="ch0105/06"></script>
+<script xtype="o" id="ch0105/06"></script>
+<script xtype="o" id="ch0105/06"></script>
+<script xtype="o" id="ch0105/06"></script>
+<script xtype="o" id="ch0105/06"></script>
+<script xtype="o" id="ch0105/06"></script>
+<script xtype="o" id="ch0105/06"></script>
+<script xtype="o" id="ch0105/06"></script>
