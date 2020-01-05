@@ -526,15 +526,154 @@
   console.log(q)
 </script>
 
-<script xtype="o" id="ch0105/06"></script>
-<script xtype="o" id="ch0105/06"></script>
-<script xtype="o" id="ch0105/06"></script>
-<script xtype="o" id="ch0105/06"></script>
-<script xtype="o" id="ch0105/06"></script>
-<script xtype="o" id="ch0105/06"></script>
-<script xtype="o" id="ch0105/06"></script>
-<script xtype="o" id="ch0105/06"></script>
-<script xtype="o" id="ch0105/06"></script>
-<script xtype="o" id="ch0105/06"></script>
-<script xtype="o" id="ch0105/06"></script>
-<script xtype="o" id="ch0105/06"></script>
+<script type="o" id="ch0105/11">
+  var k = +prompt("输入总数k")
+  var q = 0
+  var p = 0
+  var g = 0
+  for (var i = 0; i < k; i++) {
+    var m = +prompt("输入数字")
+    if (m == 1) {
+      q += 1
+    } else if (m == 5) {
+      p += 1
+    } else if (m == 10) {
+      g += 1
+    }
+  }
+  console.log(q, p, g)
+</script>
+
+<script type="o" id="ch0105/12">
+  var N = +prompt("输入总数N")
+  var m = +prompt("输入参考数m")
+  var g = 0
+  for (var i = 0; i < N; i++) {
+    var p = +prompt("输入第" + (i + 1) + "个整数")
+    if (p == m) {
+      g += 1
+    }
+  }
+  console.log(g)
+</script>
+
+<script type="o" id="ch0105/13">
+  var a = +prompt("输入整数a")
+  var n = +prompt("输入幂n")
+  var g = 1
+  for (var i = 0; i < n; i++) {
+    g = g * a
+  }
+  console.log(g)
+</script>
+
+<script type="o" id="ch0105/14">
+  var x = +prompt("输入人口基数x")
+  var n = +prompt("输入年数")
+  for (var i = 0; i < n; i++) {
+    x = x + x * 0.001
+  }
+  console.log(x.toFixed(4))
+</script>
+
+<script type="o" id="ch0105/15">
+  var R = +prompt("复合年利率R")
+  var M = +prompt("总值金钱M")
+  var Y = +prompt("投资Y")
+
+  for (var i = 0; i < Y; i++) {
+    M = M + M * (R / 100)
+  }
+  console.log(Math.trunc(M))
+</script>
+
+<script type="o" id="ch0105/16">
+  var N = +prompt("年薪N")
+  var K = +prompt("增长比K")
+  var p = 200
+  var sum = N
+  for (var i = 2; ; i++) {
+    p = p + p * (K / 100)
+    sum += N
+    if (sum >= p) {
+      console.log(i)
+      break;
+    }
+
+    if (i > 20) {
+      console.log("Impossible")
+      break;
+    }
+  }
+
+</script>
+<script type="o" id="ch0105/17">
+  var k = +prompt("输入正整数")
+  var a = 1
+  var b = 1
+  var c = a + b
+  for (var i = 1; i < k; i++) {
+    a = b
+    b = c
+    c = a + b
+  }
+  console.log(a)
+</script>
+
+<script type="o" id="ch0105/18">
+  var n = +prompt("对照组")
+  var c = +prompt("鸡尾酒总病例")
+  var d = +prompt("鸡尾酒有效病例")
+  var x = d / c
+  for (var i = 0; i < n - 1; i++) {
+    var e = +prompt("改进疗法总病例")
+    var f = +prompt("改进疗法有效病例")
+    var y = f / e
+    if (y - x > 0.05) {
+      console.log("better")
+    } else if (x - y > 0.05) {
+      console.log("worse")
+    } else {
+      console.log("same")
+    }
+  }
+</script>
+
+<script type="o" id="ch0105/19">
+  var n = +prompt("屋顶数")
+  var t
+  var g = 0
+  for (var i = 0; i < n; i++) {
+    var m = +prompt("屋顶")
+    var p = +prompt("大本营")
+    var sum = +prompt("人数")
+    var t = Math.sqrt(m * m + p * p)
+    g += (t / 50) * 2 + sum * (1.5)
+
+  }
+  console.log(Math.ceil(g))
+</script>
+
+<script xtype="o" id="ch0105/20">
+
+</script>
+<script xtype="o" id="ch0105/"></script>
+<script xtype="o" id="ch0105/"></script>
+<script xtype="o" id="ch0105/"></script>
+<script xtype="o" id="ch0105/"></script>
+<script xtype="o" id="ch0105/"></script>
+<script xtype="o" id="ch0105/"></script>
+<script xtype="o" id="ch0105/"></script>
+<script xtype="o" id="ch0105/"></script>
+<script xtype="o" id="ch0105/"></script>
+<script xtype="o" id="ch0105/"></script>
+<script xtype="o" id="ch0105/"></script>
+<script xtype="o" id="ch0105/"></script>
+<script xtype="o" id="ch0105/"></script>
+<script xtype="o" id="ch0105/"></script>
+<script xtype="o" id="ch0105/"></script>
+<script xtype="o" id="ch0105/"></script>
+<script xtype="o" id="ch0105/"></script>
+<script xtype="o" id="ch0105/"></script>
+<script xtype="o" id="ch0105/"></script>
+<script xtype="o" id="ch0105/"></script>
