@@ -654,13 +654,89 @@
   console.log(Math.ceil(g))
 </script>
 
-<script xtype="o" id="ch0105/20">
+<script type="o" id="ch0105/20">
+  var h = +prompt("初始高度")
+  var sum = 0
+  for (var i = 1; i <= 10; i++) {
+    sum += h / 2 + h
+    h = h / 2
+  }
+  console.log(sum - h)
+  console.log(h)
+</script>
+
+<script type="o" id="ch0105/21">
+  var n = +prompt("输入整数n")
+
+  for (var i = 0; ; i++) {
+    if (n == 1) {
+      break
+    }
+    if (n % 2 == 0) {
+      console.log(n + "" + "/2" + "=" + n / 2)
+      n = n / 2
+    } else if (n % 2 != 0) {
+      console.log(n + "" + "*3" + "" + "+1" + "=" + (3 * n + 1))
+      n = 3 * n + 1
+    }
+  }
+  console.log("End")
+</script>
+
+<script type="o" id="ch0105/22">
+  var base = 300
+  var n = 0
+
+  for (var i = 1; i <= 12; i++) {
+    var m = +prompt("请输入第" + i + "月预算")
+    var t = base - m
+    n += t - (t % 100)
+
+    if (base < m) {
+      console.log(-i)
+      break;
+    } else if (i == 12) {
+      console.log(n * 1.2 + t % 100)
+    }
+
+    base = 300 + (base - m) % 100
+  } 
+</script>
+
+<script type="o" id="ch0105/23">
+  var m = +prompt("输入库存总量")
+  var n = +prompt("取药人数")
+  var sum = m
+  var a = 0
+  for (var i = 1; i <= n; i++) {
+    var g = +prompt("希望取出药品")
+    if (sum < g) {
+      sum = sum
+      a += 1
+    } else {
+      sum -= g
+    }
+  }
+  console.log(a)
+</script>
+
+<script type="o" id="ch0105/24">
+  var n = +prompt("输入次数")
+  var d = 0
+  var max = d
+
+  for (var i = 1; i <= n; i++) {
+    var b = +prompt("收缩压")
+    var c = +prompt("舒张压")
+    if (90 <= b && b <= 140 && 60 <= c && c <= 90) {
+      d += 1
+      max < d ? max = d : max = max
+    } else {
+      d = 0
+    }
+  } console.log(max)
 
 </script>
-<script xtype="o" id="ch0105/"></script>
-<script xtype="o" id="ch0105/"></script>
-<script xtype="o" id="ch0105/"></script>
-<script xtype="o" id="ch0105/"></script>
 <script xtype="o" id="ch0105/"></script>
 <script xtype="o" id="ch0105/"></script>
 <script xtype="o" id="ch0105/"></script>
