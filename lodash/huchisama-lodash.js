@@ -142,5 +142,40 @@ var huchisama = {
     return -1
   },
 
+  /**
+   * 返回 除最后一位 的数组切片
+   * @param {*} array 
+   */
+  initial: function (array) {
+    return array.slice(0, array.length - 1)
+  },
+
+  /**
+   * 找出输入的所有数组的交集 
+   * @param  {...any} arrays 待检查的数据
+   */
+  intersection: function (...arrays) {
+    let map = {}
+    let j = 0
+    let org = []
+    while (j < arguments.length) {
+      for (let i of arguments[j]) {
+        if (i in map) {
+          map[i] += 1
+        } else {
+          map[i] = 1
+        }
+      }
+      j++
+    }
+    let len = arguments.length
+    for (let k in map) {
+      if (map[k] == len) {
+        org.push(+k)
+      }
+    }
+    return org
+  },
+
 
 }
