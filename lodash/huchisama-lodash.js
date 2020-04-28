@@ -99,4 +99,43 @@ var huchisama = {
     }
     return array
   },
+  /**
+   * 获取数组第一位
+   * @param {*} array 
+   */
+  head: function (array) {
+    return array[0]
+  },
+
+  /**
+   * 减少一级array数组的嵌套层级
+   * @param {*} array 输入多维数组
+   */
+  flatten: function (array) {
+    let org = []
+    for (let i = 0; i < array.length; i++) {
+      org = org.concat(array[i])
+    }
+    return org
+  },
+
+  /**
+   * 获取数组中第一次出现值时所在的索引，如果formIndex为负数 则表示结尾往开始的偏移
+   * @param {*} array 需要检索的数组
+   * @param {*} value 需要检索到的值
+   * @param {*} fromIndex 检索开始的位置
+   */
+  indexOf: function (array, value, fromIndex = 0) {
+    if (fromIndex < 0) {
+      fromIndex = array.length - fromIndex
+    }
+    for (let i = fromIndex; i < array.length; i++) {
+      if (array[i] == value) {
+        return i
+      }
+    }
+    return -1
+  },
+
+
 }
