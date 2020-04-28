@@ -19,11 +19,10 @@ var huchisama = {
   },
 
   compact: function (array) {
-    let arr = array.slice(0)
     let count = []
-    for (let i = 0; i < arr.length; i++) {
-      if (arr[i]) {
-        count.push(arr[i])
+    for (let i = 0; i < array.length; i++) {
+      if (array[i]) {
+        count.push(array[i])
       }
     }
     return count
