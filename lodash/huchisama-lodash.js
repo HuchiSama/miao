@@ -83,5 +83,17 @@ var huchisama = {
     return array.slice(0, -n)
   },
 
-
+  /**
+   * 使用value值来填充（替换）array，从start开始到end（不包含），返回数组（不是创建新数组）
+   * @param {*} array 要填充改变的数组
+   * @param {*} value 要填充给array的值
+   * @param {*} start 填充开始位置
+   * @param {*} end 填充结束位置（不包含）
+   */
+  fill: function (array, value, start = 0, end = array.length) {
+    for (let i = start; i < end; i++) {
+      array[i] = value
+    }
+    return array
+  },
 }
