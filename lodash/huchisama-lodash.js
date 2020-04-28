@@ -47,7 +47,7 @@ var huchisama = {
   difference: function (array, ...values) {
     let map = {}
     let count = []
-    let index = 0
+    let index = 1
     while (index < arguments.length) {
       for (let i = 0; i < arguments[index].length; i++) {
         if (!(arguments[index][i] in map)) {
@@ -63,8 +63,25 @@ var huchisama = {
     }
     return count
   },
+  /**
+   * 从数组 前面 切下N长度，并返回剩余切片
+   * 
+   * @param {*} array 需要切片的数组
+   * @param {*} n 需要切下的长度
+   */
+  drop: function (array, n = 1) {
+    return array.slice(n)
+  },
 
-
+  /**
+   * 从数组 尾部 切下N长度，并返回剩余切片
+   * 
+   * @param {*} array 需要切片的数组
+   * @param {*} n 需要切下的长度
+   */
+  dropRight: function (array, n = 1) {
+    return array.slice(0, -n)
+  },
 
 
 }
