@@ -120,7 +120,7 @@ var huchisama = {
   },
 
   /**
-   * 获取数组中第一次出现值时所在的索引，如果formIndex为负数 则表示结尾往开始的偏移
+   * 获取数组中从fromIndex开始 第一次出现值时所在的索引，如果formIndex为负数 则表示结尾往开始的偏移
    * @param {*} array 需要检索的数组
    * @param {*} value 需要检索到的值
    * @param {*} fromIndex 检索开始的位置
@@ -177,5 +177,48 @@ var huchisama = {
     return org
   },
 
+  /**
+   * 把数组以separator连接成字符串并返回
+   * @param {*} array 数组
+   * @param {*} separator 中间连接符
+   */
+  join: function (array, separator = ",") {
+    let str = ""
+    for (let i of array) {
+      str += i + separator
+    }
+    return str.slice(0, str.length - 1)
+  },
+
+  /**
+   * 返回数组最后一位
+   * @param {*} array 数组
+   */
+  last: function (array) {
+    return array[array.length - 1]
+  },
+
+  /**
+   * 获取数组中从fromIndex开始 往左遍历 第一次出现值时所在的索引，如果formIndex为负数 则表示结尾往开始的偏移
+   * @param {*} array 需遍历的数组
+   * @param {*} value 需查找的值
+   * @param {*} fromIndex 开始查找的下标
+   */
+  lastIndexOf: function (array, value, fromIndex = length - 1) {
+    let len = array.length
+    if (fromIndex < 0 && -fromIndex <= len) {
+      fromIndex = len - fromIndex
+    } else if (-fromIndex > len) {
+      return -1
+    }
+    for (let i = fromIndex; i >= 0; i--) {
+      if (array[i] == value) {
+        return i
+      } else if (array[i] !== array[i] && value !== value) {
+        return i
+      }
+    }
+    return -1
+  }
 
 }
