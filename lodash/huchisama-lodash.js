@@ -80,6 +80,9 @@ var huchisama = {
    * @param {*} n 需要切下的长度
    */
   dropRight: function (array, n = 1) {
+    if (n == 0) {
+      return array
+    }
     return array.slice(0, -n)
   },
 
