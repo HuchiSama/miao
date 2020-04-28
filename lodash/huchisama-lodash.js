@@ -5,7 +5,9 @@ var huchisama = {
     for (let i = size; i <= array.length; i = size) {
       arr.push(array.splice(0, i))
     }
-    arr.push(array)
+    if (array.length !== 0) {
+      arr.push(array)
+    }
     return arr
   }
 }
