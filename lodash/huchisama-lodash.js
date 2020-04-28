@@ -12,7 +12,7 @@ var huchisama = {
     for (let i = size; i <= arr.length; i = size) {
       count.push(arr.splice(0, i))
     }
-    if (array.length !== 0) {
+    if (arr.length !== 0) {
       count.push(arr)
     }
     return count
