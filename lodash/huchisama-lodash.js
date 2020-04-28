@@ -126,11 +126,16 @@ var huchisama = {
    * @param {*} fromIndex 检索开始的位置
    */
   indexOf: function (array, value, fromIndex = 0) {
-    if (fromIndex < 0) {
-      fromIndex = array.length - fromIndex
+    let len = array.length
+    if (fromIndex < 0 && -fromIndex <= len) {
+      fromIndex = len - fromIndex
+    } else if (-fromIndex > len) {
+      fromIndex = 0
     }
-    for (let i = fromIndex; i < array.length; i++) {
+    for (let i = fromIndex; i < len; i++) {
       if (array[i] == value) {
+        return i
+      } else if (array[i] !== array[i] && value !== value) {
         return i
       }
     }
