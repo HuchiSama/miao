@@ -255,7 +255,7 @@ var huchisama = {
   /**
   * 移除数组中的values的值，并返回 修改后 的数组
   * @param {*} array 需要修改的数组
-  * @param  {array} value 需要从数组删去的值
+  * @param  {array} value 需要从数组删去的值组成的数组
   */
   pullAll: function (array, value) {
     let map = {}
@@ -269,6 +269,78 @@ var huchisama = {
       }
     }
     return array
+  },
+
+  /**
+   * 根据索引，移除数组中对应的值，并返回被移除数组组成的新数组
+   * 原数组也会被改变
+   * @param {*} array 要修改的数组
+   * @param  {...any} indexes 要移除值的索引
+   */
+  pullAt: function (array, ...indexes) {
+    let org = []
+    for (let j of indexes) {
+      org.push(array[j])
+    }
+    this.pullAll(array, org)
+    return org
+  },
+
+  /**
+   * 反转数组，会修改原数组
+   * @param {*} array 要反转的数组
+   */
+  reverse: function (array) {
+    let start = 0
+    let end = array.length - 1
+    while (start <= end) {
+      let tem
+      tem = array[end]
+      array[end] = array[start]
+      array[start] = tem
+      start++
+      end--
+    }
+    return array
+  },
+
+  /**
+   * 剪切数组，从start位置到end位置（不包含），返回剪裁的部分
+   * @param {*} array 需要剪切的数组
+   * @param {*} start 开始位置的检索
+   * @param {*} end 结束位置检索
+   */
+  slice: function (array, start = 0, end = array.length) {
+    return array.splice(start, end - start)
+  },
+
+  /**
+   * 通过二分法，将value插入已排序的数组中，并返回其索引，改变了原数组
+   * @param {*} array 已排序数组
+   * @param {*} value 需要插入的值
+   */
+  sortedIndex: function (array, value) {
+    let start = 0
+    let end = array.length
+    if (value > array[end]) {
+      array.push(value)
+      return end
+    } else if (value < array[start]) {
+      array.unshift(value)
+      return 0
+    }
+    while (end - start >= 0) {
+      let mid = Math.floor((end + start) / 2)
+      if (array[mid] > value) {
+        end = mid
+      } else {
+        start = mid
+      }
+      if (end - start == 1 && value > array[start] && array[end] > value) {
+        array.splice(end, 0, value)
+        return end
+      }
+    }
   },
 
 }
