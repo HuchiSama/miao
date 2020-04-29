@@ -185,7 +185,7 @@ var huchisama = {
   join: function (array, separator = ",") {
     let str = ""
     for (let i of array) {
-      str += i + separator
+      str = str + i + separator
     }
     return str.slice(0, str.length - 1)
   },
