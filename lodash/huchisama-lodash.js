@@ -219,6 +219,37 @@ var huchisama = {
       }
     }
     return -1
-  }
+  },
+
+  /**
+   * 返回数组第N位，如果 n < 0 则从结尾开始往左第N位
+   * @param {*} array 数组
+   * @param {*} n 索引
+   */
+  nth: function (array, n = 0) {
+    if (n < 0) {
+      return array[array.length + n]
+    } else {
+      return array[n]
+    }
+  },
+
+  /**
+   * 移除数组中的values的值，并返回 修改后 的数组
+   * @param {*} array 需要修改的数组
+   * @param  {...any} values 需要从数组删去的值
+   */
+  pull: function (array, ...values) {
+    let j = 1
+    while (j < arguments.length) {
+      for (let i = 0; i < array.length; i++) {
+        if (array[i] == arguments[j]) {
+          array.splice(i, 1)
+        }
+      }
+      j++
+    }
+    return array
+  },
 
 }
