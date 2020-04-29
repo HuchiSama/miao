@@ -321,22 +321,22 @@ var huchisama = {
    */
   sortedIndex: function (array, value) {
     let start = 0
-    let end = array.length
+    let end = array.length - 1
     if (value > array[end]) {
       array.push(value)
-      return end
+      return array.length
     } else if (value < array[start]) {
       array.unshift(value)
       return 0
     }
     while (end - start >= 0) {
       let mid = Math.floor((end + start) / 2)
-      if (array[mid] > value) {
+      if (array[mid] >= value) {
         end = mid
       } else {
         start = mid
       }
-      if (end - start == 1 && value > array[start] && array[end] > value) {
+      if (end - start == 1 && value > array[start] && array[end] >= value) {
         array.splice(end, 0, value)
         return end
       }
