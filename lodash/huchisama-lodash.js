@@ -252,4 +252,23 @@ var huchisama = {
     return array
   },
 
+  /**
+  * 移除数组中的values的值，并返回 修改后 的数组
+  * @param {*} array 需要修改的数组
+  * @param  {array} value 需要从数组删去的值
+  */
+  pullAll: function (array, value) {
+    let map = {}
+    for (let j of value) {
+      map[j] = 1
+    }
+    for (let i = 0; i < array.length; i++) {
+      if (array[i] in map) {
+        array.splice(i, 1)
+        i--
+      }
+    }
+    return array
+  },
+
 }
