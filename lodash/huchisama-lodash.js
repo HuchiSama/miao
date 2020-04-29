@@ -315,7 +315,7 @@ var huchisama = {
   },
 
   /**
-   * 通过二分法，将value插入已排序的数组中，并返回其索引，改变了原数组
+   * 通过二分法，将value插入已排序的数组中，并返回其最小索引
    * @param {*} array 已排序数组
    * @param {*} value 需要插入的值
    */
@@ -323,24 +323,138 @@ var huchisama = {
     let start = 0
     let end = array.length - 1
     if (value > array[end]) {
-      array.push(value)
       return array.length
-    } else if (value < array[start]) {
-      array.unshift(value)
+    } else if (value <= array[start]) {
       return 0
     }
-    while (end - start >= 0) {
+    while (end - start > 0) {
       let mid = Math.floor((end + start) / 2)
       if (array[mid] >= value) {
         end = mid
       } else {
-        start = mid
+        start = mid + 1
       }
-      if (end - start == 1 && value > array[start] && array[end] >= value) {
-        array.splice(end, 0, value)
+      if (end - start <= 1 && value >= array[start] && array[end] >= value) {
         return end
       }
     }
   },
+
+  /**
+   * 用二分法找到value在array的最小的索引，如没有返回-1
+   * @param {*} array 要搜索的数组
+   * @param {*} value 要搜索的值
+   */
+  sortedIndexOf: function (array, value) {
+    let start = 0
+    let end = array.length - 1
+    while (end - start > 0) {
+      let mid = Math.floor((end + start) / 2)
+      if (array[mid] >= value) {
+        end = mid
+      } else {
+        start = mid + 1
+      }
+      if (array[start] == value) {
+        return start
+      }
+    }
+    return -1
+  },
+
+  /**
+   * 使用二分法，找到在已排序的数组中可插入value的最大索引，并返回
+   * @param {*} array 已排序数组
+   * @param {*} value 需要插入的值
+   */
+  sortedLastIndex: function (array, value) {
+    let start = 0
+    let end = array.length - 1
+    if (value >= array[end]) {
+      return end + 1
+    }
+    if (value < array[0]) {
+      return 0
+    }
+    while (end - start > 0) {
+      let mid = Math.floor((end + start) / 2)
+      if (array[mid] > value) {
+        end = mid
+      } else {
+        start = mid + 1
+      }
+      if (array[start] <= value && array[end] > value && end - start <= 1) {
+        return end
+      }
+    }
+  },
+
+  /**
+   * 使用二分法，找到在已排序的数组中可查找value的最大索引，并返回，若无，返回-1
+   * @param {*} array 已排序数组
+   * @param {*} value 需要查找的值
+   */
+  sortedLastIndexOf: function (array, value) {
+    let start = 0
+    let end = array.length - 1
+    while (end - start > 0) {
+      let mid = Math.floor((end + start) / 2)
+      if (array[mid] > value) {
+        end = mid
+      } else {
+        start = mid + 1
+      }
+      if (array[start] == value && end - start <= 1) {
+        return start
+      }
+    }
+    return -1
+  },
+
+  /**
+   * 遍历原数组，返回没有重复值的新数组
+   * @param {*} array 要检查的数组
+   */
+  sortedUniq: function (array) {
+    let map = {}
+    let org = []
+    for (let i of array) {
+      if (!(i in map)) {
+        org.push(i)
+        map[i] = 1
+      }
+    }
+    return org
+  },
+
+  /**
+   * 返回数组除第一位外的全部元素，切片
+   * @param {*} array 要检索的数组
+   */
+  tail: function (array) {
+    return array.slice(1)
+  },
+
+  /**
+   * 返回数组从0位开始的N个元素
+   * @param {*} array 要检索的数组
+   * @param {*} n 要提取的元素个数
+   */
+  take: function (array, n = 1) {
+    return array.slice(0, n)
+  },
+
+  /**
+   * 从尾部开始提取元素的个数
+   * @param {*} array 要检索的数组
+   * @param {*} n 要提取的个数
+   */
+  takeRight: function (array, n = 1) {
+    if (n == 0) {
+      return []
+    }
+    return array.slice(-n)
+  },
+
 
 }
