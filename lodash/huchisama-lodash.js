@@ -754,7 +754,7 @@ var huchisama = {
     if (value == NaN && other == NaN) {
       return true
     }
-    return (value == other) ? ture : false
+    return (value == other) ? true : false
   },
 
   /**
@@ -763,7 +763,7 @@ var huchisama = {
    * @param {*} other 
    */
   gt: function (value, other) {
-    return (value > other) ? ture : false
+    return (value > other) ? true : false
   },
 
   /**
@@ -772,7 +772,7 @@ var huchisama = {
    * @param {*} other 
    */
   gte: function (value, other) {
-    return (value >= other) ? ture : false
+    return (value >= other) ? true : false
   },
 
   /**
