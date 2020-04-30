@@ -744,4 +744,106 @@ var huchisama = {
       return sum
     }
   },
+
+  /**
+   * 比较两者值，看是否相等
+   * @param {*} value 
+   * @param {*} other 
+   */
+  eq: function (value, other) {
+    if (value == NaN && other == NaN) {
+      return true
+    }
+    return (value == other) ? ture : false
+  },
+
+  /**
+   * 检查value是否大于other
+   * @param {*} value 
+   * @param {*} other 
+   */
+  gt: function (value, other) {
+    return (value > other) ? ture : false
+  },
+
+  /**
+   * 检查value是否大于或等于other
+   * @param {*} value 
+   * @param {*} other 
+   */
+  gte: function (value, other) {
+    return (value >= other) ? ture : false
+  },
+
+  /**
+   * 判断value是否是一个arguments对象
+   * @param {*} value 
+   */
+  isArguments: function (value) {
+    let tsr = Object.prototype.toString
+    if (tsr.call(value) == "[object Arguments]") {
+      return true
+    } else {
+      return false
+    }
+  },
+
+  /**
+   * 判断value是否是一个Array类对象
+   * @param {*} value 
+   */
+  isArray: function (value) {
+    let tsr = Object.prototype.toString
+    if (tsr.call(value) == "[object Array]") {
+      return true
+    } else {
+      return false
+    }
+  },
+
+
+  /**
+   * 判断value是否是Boolean类型
+   * @param {*} value 
+   */
+  isBoolean: function (value) {
+    let tsr = Object.prototype.toString
+    if (tsr.call(value) == "[object Boolean]") {
+      return true
+    } else {
+      return false
+    }
+  },
+
+  /**
+   * 将value转成字符串，null 和 undefined 将返回空字符串。-0 将被转换为字符串"-0"。
+   * @param {*} value 
+   */
+  toString: function (value) {
+    if (value == null || value == undefined) {
+      return ""
+    }
+    if (value == -0) {
+      return "-0"
+    }
+    let str = ""
+    if (this.isArray(value)) {
+      for (let i = 0; i < value.length; i++) {
+        str += value[i] + ","
+      }
+      return str.slice(0, -1)
+    } else {
+      return str + value
+    }
+  },
+
+  /**
+   * 返回两数之和
+   * @param {*} augend 
+   * @param {*} addend 
+   */
+  add: function (augend, addend) {
+    return augend + addend
+  },
+
 }
