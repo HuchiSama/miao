@@ -554,9 +554,15 @@ var huchisama = {
    * @param  {...any} arrays 待处理数组
    */
   zip: function (...arrays) {
+    let max = 0
+    for (let i of arrays) {
+      if (i.length >= max) {
+        max = i.length
+      }
+    }
     let org = []
     let j = 0
-    while (j < arguments[0].length) {
+    while (j < max) {
       let tem = []
       for (let i = 0; i < arguments.length; i++) {
         tem.push(arguments[i][j])
@@ -576,7 +582,7 @@ var huchisama = {
     let map = {}
     let j = 0
     let i = 1
-    while (i < arguments[j].length) {
+    while (i < arguments[0].length) {
       for (let k = 0; k < arguments[i].length; k++) {
         map[arguments[j][k]] = map[arguments[i][k]]
         j++
@@ -627,7 +633,7 @@ var huchisama = {
    */
   includes: function (collection, value, fromIndex = 0) {
     if (typeof (collection) == "string") {
-      let reg = new RegExp(value, g)
+      let reg = new RegExp(value, "g")
       indexOf = fromIndex
       if (reg.test(collection)) {
         return true
@@ -665,26 +671,50 @@ var huchisama = {
     } else {
       tem = collection
     }
-    if (tem.length < 10) {
-      let r = Math.floor(Math.random(1) * 10)
-      if (bl) {
-        return collection[r]
-      } else {
-        return collection[tem[r]]
-      }
-    } else {
-      let len = (tem.length + "").length
-      for (let j = 0; ; j++) {
-        let r = Math.floor(Math.random(1) * 10) * len
-        if (r <= tem.length) {
-          if (bl) {
-            return collection[r]
-          } else {
-            return collection[tem[r]]
-          }
+    let len = (tem.length + "").length
+    for (let j = 0; ; j++) {
+      let r = Math.floor(Math.random(1) * 10) * len
+      if (r <= tem.length) {
+        if (bl) {
+          return collection[r]
+        } else {
+          return collection[tem[r]]
         }
       }
     }
   },
 
+  /**
+   * 从集合中取N个随机数
+   * @param {*} collection 集合
+   * @param {*} n 取样的个数
+   */
+  sampleSize: function (collection, n = 1) {
+    let tem
+    let sum = 0
+    let org = []
+    let bl = Array.isArray(collection)
+    if (!bl) {
+      tem = Object.keys(collection)
+    } else {
+      tem = collection
+    }
+    if (n > tem.length) {
+      n = tem.length
+    }
+    let len = (tem.length + "").length
+    for (let j = 0; j < n; j++) {
+      let r = Math.floor(Math.random(1) * 10) * len
+      if (r <= tem.length && org.indexOf(r) == false) {
+        org.push(r)
+      }
+    }
+    for (let i = 0; i < org.length; i++) {
+      if (bl) {
+        return collection[org[i]]
+      } else {
+        return collection[tem[org[i]]]
+      }
+    }
+  },
 }
