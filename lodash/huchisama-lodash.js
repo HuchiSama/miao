@@ -582,12 +582,8 @@ var huchisama = {
     let map = {}
     let j = 0
     let i = 1
-    while (i < arguments[0].length) {
-      for (let k = 0; k < arguments[i].length; k++) {
-        map[arguments[j][k]] = map[arguments[i][k]]
-        j++
-        i++
-      }
+    for (let k = 0; k < arguments[i].length; k++) {
+      map[arguments[j][k]] = map[arguments[i][k]]
     }
     return map
   },
@@ -709,12 +705,41 @@ var huchisama = {
         org.push(r)
       }
     }
+    let count = []
     for (let i = 0; i < org.length; i++) {
       if (bl) {
-        return collection[org[i]]
+        count.push(collection[org[i]])
       } else {
-        return collection[tem[org[i]]]
+        count.push(collection[tem[org[i]]])
       }
+    }
+    return count
+  },
+
+  /**
+   * 返回被打乱的新数组
+   * @param {*} collection 需要打乱的数组
+   */
+  shuffle: function (collection) {
+    let org = collection.slice(0)
+    return org.sort(function () {
+      return 0.5 - Math.random(1)
+    })
+  },
+
+  /**
+   * 返回集合长度，如果集合是对象，返回其可枚举属性的个数。
+   * @param {*} collection 集合
+   */
+  size: function (collection) {
+    if (typeOf(collection) == "string" || Array.isArray(collection) == true) {
+      return collection.length
+    } else {
+      let sum = 0
+      for (let i in collection) {
+        sum += 1
+      }
+      return sum
     }
   },
 }
