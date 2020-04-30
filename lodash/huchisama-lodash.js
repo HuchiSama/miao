@@ -334,7 +334,7 @@ var huchisama = {
       } else {
         start = mid + 1
       }
-      if (end - start <= 1 && value >= array[start] && array[end] >= value) {
+      if (end - start <= 1 && array[end] >= value) {
         return end
       }
     }
@@ -456,5 +456,143 @@ var huchisama = {
     return array.slice(-n)
   },
 
+  /**
+   * 给所有输入的数组做比较，去除与之前数组的相同的值，并按输入顺序返回唯一值的新数组
+   * @param  {...any} arrays 要检查的数组
+   */
+  union: function (...arrays) {
+    let map = {}
+    let i = 0
+    let org = []
+    while (i < arguments.length) {
+      for (let j of arguments[i]) {
+        if (!(j in map)) {
+          org.push(j)
+          map[j] = 1
+        }
+      }
+      i++
+    }
+    return org
+  },
 
+  /**
+   * 返回新的去重后的数组，保留第一次出现的值
+   * @param {*} array 要检查的数组
+   */
+  uniq: function (array) {
+    let map = {}
+    let org = []
+    for (let i of array) {
+      if (!(i in map)) {
+        org.push(i)
+        map[i] = 1
+      }
+    }
+    return org
+  },
+
+  /**
+   * 过滤掉数组array中所有value的值，返回过滤后的新数组
+   * @param {*} array 待检查数组
+   * @param  {...any} values 需要过滤的值
+   */
+  without: function (array, ...values) {
+    let map = {}
+    let org = []
+    for (let i of values) {
+      map[i] = 1
+    }
+    for (let j of array) {
+      if (!(j in map)) {
+        org.push(j)
+      }
+    }
+    return org
+  },
+
+  /**
+   * 返回去除给定数组交集的新数组，顺序取决于他们数组的出现顺序。
+   * @param  {...any} arrays 要检查的数组
+   */
+  xor: function (...arrays) {
+    let map = {}
+    let j = 0
+    let org = []
+    while (j < arguments.length) {
+      for (let i of arguments[j]) {
+        if (!(i in map)) {
+          map[i] = 1
+        } else {
+          map[i]++
+        }
+      }
+      j++
+    }
+    j = 0
+    while (j < arguments.length) {
+      for (let i of arguments[j]) {
+        if (map[i] == 1) {
+          org.push(i)
+        }
+      }
+      j++
+    }
+    return org
+  },
+
+  /**
+   * 创建一个分组元素的数组，数组的第一个元素包含所有给定数组的第一个元素，数组的第二个元素包含所有给定数组的第二个元素，以此类推。
+   * @param  {...any} arrays 待处理数组
+   */
+  zip: function (...arrays) {
+    let org = []
+    let j = 0
+    while (j < arguments[0].length) {
+      let tem = []
+      for (let i = 0; i < arguments.length; i++) {
+        tem.push(arguments[i][j])
+      }
+      org.push(tem)
+      j++
+    }
+    return org
+  },
+
+  /**
+   * 第一个数组中的值作为属性标识符（属性名），第二个数组中的值作为相应的属性值
+   * @param {*} props 待输入的key组成的数组
+   * @param {*} values 待输入的值的数组
+   */
+  zipObject: function (props = [], values = []) {
+    let map = {}
+    let j = 0
+    let i = 1
+    while (i < arguments[j].length) {
+      for (let k = 0; k < arguments[i].length; k++) {
+        map[arguments[j][k]] = map[arguments[i][k]]
+        j++
+        i++
+      }
+    }
+    return map
+  },
+
+  /**
+   * 拆分数组，和zip的方法相反
+   * @param {*} array 待拆分的数组
+   */
+  unzip: function (array) {
+    let org = []
+    let j = 0
+    while (j < array[0].length) {
+      let tem = []
+      for (let i = 0; i < array.length; i++) {
+        tem.push(array[i][j])
+      }
+      org.push(tem)
+      j++
+    }
+    return org
+  },
 }
