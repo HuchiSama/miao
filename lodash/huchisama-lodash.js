@@ -583,7 +583,7 @@ var huchisama = {
     let j = 0
     let i = 1
     for (let k = 0; k < arguments[i].length; k++) {
-      map[arguments[j][k]] = map[arguments[i][k]]
+      map[arguments[j][k]] = arguments[i][k]
     }
     return map
   },
@@ -701,9 +701,11 @@ var huchisama = {
     let len = (tem.length + "").length
     for (let j = 0; j < n; j++) {
       let r = Math.floor(Math.random(1) * 10) * len
-      if (r <= tem.length && org.indexOf(r) == false) {
+      if (r < tem.length && org.indexOf(r) == -1) {
         org.push(r)
+        continue
       }
+      j--
     }
     let count = []
     for (let i = 0; i < org.length; i++) {
@@ -732,7 +734,7 @@ var huchisama = {
    * @param {*} collection 集合
    */
   size: function (collection) {
-    if (typeOf(collection) == "string" || Array.isArray(collection) == true) {
+    if (typeof (collection) == "string" || Array.isArray(collection) == true) {
       return collection.length
     } else {
       let sum = 0
