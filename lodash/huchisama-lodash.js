@@ -2,6 +2,14 @@
 var huchisama = {
 
   /**
+   * 这个方法返回它接收到的第一个参数
+   * @param {*} value 任意值
+   */
+  identity: function (value) {
+    return arguments[0]
+  },
+
+  /**
    * 将数组（array）拆分成多个 size 长度的区块，并将这些区块组成一个新数组
    * @param {*} array 传入数组
    * @param {*} size  指定数组截取长度
@@ -595,4 +603,88 @@ var huchisama = {
     }
     return org
   },
+
+  // find: function (collection, predicate = this.identity, fromIndex = 0) {
+  //   let i = fromIndex
+  //   while (i < collection.length) {
+  //     for (let j in predicate) {
+  //       for (let k in collection[i]) {
+  //         let sum = 0
+  //         if (j) {
+  //           sum++
+  //         }
+  //       }
+  //     }
+  //     i++
+  //   }
+  // }
+
+  /**
+   * 检索value是否存在于集合collection中
+   * @param {*} collection 需要检索的集合
+   * @param {*} value 需要检索的值
+   * @param {*} fromIndex 检索的起始位置
+   */
+  includes: function (collection, value, fromIndex = 0) {
+    if (typeof (collection) == "string") {
+      let reg = new RegExp(value, g)
+      indexOf = fromIndex
+      if (reg.test(collection)) {
+        return true
+      } else {
+        return false
+      }
+    }
+    if (Array.isArray(collection)) {
+      for (let i = fromIndex; i < collection.length; i++) {
+        if (i == value) {
+          return true
+        }
+      }
+      return false
+    } else if (typeof (collection) == "object") {
+      for (let i in collection) {
+        if (i == value || collection[i] == value) {
+          return true
+        }
+      }
+      return false
+    }
+  },
+
+  /**
+   * 取出集合一个随机元素
+   * @param {*} collection 集合
+   */
+  sample: function (collection) {
+    let tem
+    let sum = 0
+    let bl = Array.isArray(collection)
+    if (!bl) {
+      tem = Object.keys(collection)
+    } else {
+      tem = collection
+    }
+    if (tem.length < 10) {
+      let r = Math.floor(Math.random(1) * 10)
+      if (bl) {
+        return collection[r]
+      } else {
+        return collection[tem[r]]
+      }
+    } else {
+      let len = (tem.length + "").length
+      for (let j = 0; ; j++) {
+        let r = Math.floor(Math.random(1) * 10) * len
+        if (r <= tem.length) {
+          if (bl) {
+            return collection[r]
+          } else {
+            return collection[tem[r]]
+          }
+        }
+      }
+    }
+  },
+
 }
