@@ -2,6 +2,20 @@
 var huchisama = {
 
   /**
+   * 判断是否是Null
+   * @param {*} value 
+   */
+  isNull: function (value) {
+    (value === Null) ? true : false
+  },
+  /**
+   * 判断是否是NaN
+   * @param {*} value 
+   */
+  isNaN: function (value) {
+    (value !== value) ? true : false
+  },
+  /**
    * 这个方法返回它接收到的第一个参数
    * @param {*} value 任意值
    */
@@ -751,10 +765,10 @@ var huchisama = {
    * @param {*} other 
    */
   eq: function (value, other) {
-    if (value == NaN && other == NaN) {
+    if (value !== value && other !== other) {
       return true
     }
-    return (value == other) ? true : false
+    return (value === other) ? true : false
   },
 
   /**
@@ -846,4 +860,109 @@ var huchisama = {
     return augend + addend
   },
 
+  ceil: function (number, precision = 0) {
+
+
+  },
+
+  /**
+   * 两数相除
+   * @param {*} dividend 
+   * @param {*} divisor 
+   */
+  divide: function (dividend, divisor) {
+    return dividend / divisor
+  },
+
+  /**
+   * 找出数组中最大的值
+   * @param {*} array 
+   */
+  max: function (array) {
+    let max = -Infinity
+    if (array.length == 0) {
+      return undefined
+    }
+    for (let i of array) {
+      if (i > max) {
+        max = i
+      }
+    }
+    return max
+  },
+
+  /**
+   * 取数组平均值
+   * @param {*} array 
+   */
+  mean: function (array) {
+    let sum = 0
+    for (let i of array) {
+      sum += i
+    }
+    return sum / array.length
+  },
+
+  /**
+   * 找数组最小的值
+   * @param {*} array 
+   */
+  min: function (array) {
+    let min = Infinity
+    if (array.length == 0) {
+      return undefined
+    }
+    for (let i of array) {
+      if (i < max) {
+        min = i
+      }
+    }
+    return min
+  },
+
+  /**
+   * 两数相乘
+   * @param {*} multiplier 
+   * @param {*} multiplicand 
+   */
+  multiply(multiplier, multiplicand) {
+    return multiplier * multiplicand
+  },
+
+  /**
+   * 两数相减
+   * @param {*} minuend 
+   * @param {*} subtrahend 
+   */
+  subtract: function (minuend, subtrahend) {
+    return minuend - subtrahend
+  },
+
+  /**
+   * 得出数组之和
+   * @param {*} array 
+   */
+  sum: function (array) {
+    let sum = 0
+    for (let i of array) {
+      sum += i
+    }
+    return sum
+  },
+
+  /**
+   * 将来源对象的可枚举属性复制到目标对象，如一旦设置了相同属性的值，后续的将被忽略掉。
+   * @param {*} object 目标对象
+   * @param  {...any} sources 来源对象
+   */
+  defaults: function (object, ...sources) {
+    for (let j = 0; j < sources.length; j++) {
+      for (let i in sources[j]) {
+        if (!(i in object)) {
+          object[i] = sources[j][i]
+        }
+      }
+    }
+    return object
+  },
 }
