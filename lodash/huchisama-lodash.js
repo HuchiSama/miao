@@ -6,7 +6,7 @@ var huchisama = {
    * @param {*} value 
    */
   isNull: function (value) {
-    (value === null) ? true : false
+    return (value === null) ? true : false
   },
   /**
    * 判断是否是NaN
@@ -14,13 +14,9 @@ var huchisama = {
    */
   isNaN: function (value) {
     if (typeof (value) == "object") {
-      value = String(value)
+      value = + String(value)
     }
-    if (value !== value) {
-      return true
-    } else {
-      return false
-    }
+    return (value !== value) ? true : false
   },
   /**
    * 这个方法返回它接收到的第一个参数
