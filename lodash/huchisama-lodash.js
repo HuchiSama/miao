@@ -6,14 +6,21 @@ var huchisama = {
    * @param {*} value 
    */
   isNull: function (value) {
-    (value === Null) ? true : false
+    (value === null) ? true : false
   },
   /**
    * 判断是否是NaN
    * @param {*} value 
    */
   isNaN: function (value) {
-    (value !== value) ? true : false
+    if (typeof (value) == "object") {
+      value = String(value)
+    }
+    if (value !== value) {
+      return true
+    } else {
+      return false
+    }
   },
   /**
    * 这个方法返回它接收到的第一个参数
@@ -913,7 +920,7 @@ var huchisama = {
       return undefined
     }
     for (let i of array) {
-      if (i < max) {
+      if (i < min) {
         min = i
       }
     }
