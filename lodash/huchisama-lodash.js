@@ -782,7 +782,22 @@ var huchisama = {
   gt: function (value, other) {
     return (value > other) ? true : false
   },
-
+  /**
+   * 判断value是否小于other
+   * @param {*} value 
+   * @param {*} other 
+   */
+  lt: function (value, other) {
+    return (value < other) ? true : false
+  },
+  /**
+ * 判断value是否小于等于other
+ * @param {*} value 
+ * @param {*} other 
+ */
+  lt: function (value, other) {
+    return (value <= other) ? true : false
+  },
   /**
    * 检查value是否大于或等于other
    * @param {*} value 
@@ -833,6 +848,31 @@ var huchisama = {
   },
 
   /**
+   * 判断value是否是Number类型
+   * @param {*} value 
+   */
+  isNumber: function (value) {
+    let tsr = Object.prototype.toString
+    if (tsr.call(value) == "[object Number]") {
+      return true
+    } else {
+      return false
+    }
+  },
+
+  /**
+   * 判断value是否是Object类型
+   * @param {*} value 
+   */
+  isObject(value) {
+    let tsr = Object.prototype.toString
+    if (tsr.call(value) == "[object Object]") {
+      return true
+    } else {
+      return false
+    }
+  },
+  /**
    * 将value转成字符串，null 和 undefined 将返回空字符串。-0 将被转换为字符串"-0"。
    * @param {*} value 
    */
@@ -863,9 +903,45 @@ var huchisama = {
     return augend + addend
   },
 
+  /**
+   * 根据precision，向上取整
+   * @param {*} number 
+   * @param {*} precision 
+   */
   ceil: function (number, precision = 0) {
+    if (precision = 0) {
+      return Math.ceil(number)
+    } else {
+      let mul = number * Math.pow(10, precision)
+      return Math.ceil(mul) / Math.pow(10, precision)
+    }
+  },
 
-
+  /**
+   * 根据precision，向下取整
+   * @param {*} value 
+   * @param {*} precision 
+   */
+  floor: function (value, precision = 0) {
+    if (precision = 0) {
+      return Math.floor(number)
+    } else {
+      let mul = number * Math.pow(10, precision)
+      return Math.floor(mul) / Math.pow(10, precision)
+    }
+  },
+  /**
+   * 根据precision，四舍五入
+   * @param {*} value 
+   * @param {*} precision 
+   */
+  round: function (value, precision = 0) {
+    if (precision = 0) {
+      return Math.round(number)
+    } else {
+      let mul = number * Math.pow(10, precision)
+      return Math.round(mul) / Math.pow(10, precision)
+    }
   },
 
   /**
@@ -968,4 +1044,77 @@ var huchisama = {
     }
     return object
   },
-}
+
+  /**
+   * 创建一个object键值倒置后的对象。 如果 object 有重复的值，后面的值会覆盖前面的值。
+   * @param {*} object 要倒置的对象
+   */
+  invert: function (object) {
+    let map = {}
+    for (let i in object) {
+      map[object[i]] = i
+    }
+    return map
+  },
+
+  /**
+   * 取对象上的keys，传进数组并返回，非对象转换为对象
+   * @param {*} object 
+   */
+  keys: function (object) {
+    let org = []
+    for (let i in object) {
+      if (object.hasOwProperty(i)) {
+        org.push(i)
+      }
+    }
+    return org
+  },
+
+  omit: function (object, ...props) {
+    for (let j of props) {
+      if (this.Array(j)) {
+        for (let k of j) {
+          delete object[k]
+        }
+      } else {
+        delete object[j]
+      }
+    }
+    return object
+  },
+
+  /**
+   * 创建一个从 object 中选中的属性的对象。
+   * @param {*} object 
+   * @param  {...any} props 
+   */
+  pick: function (object, ...props) {
+    let map = {}
+    for (let j of props) {
+      if (this.Array(j)) {
+        for (let k of j) {
+          map[k] = object[k]
+        }
+      } else {
+        map[j] = object[j]
+      }
+    }
+    return map
+  },
+
+  /**
+   * 创建 object 自身可枚举属性的值为数组。非对象的值会强制转换为对象。
+   * @param {*} object 
+   */
+  values: function (object) {
+    let obj = Object(object)
+    let org = []
+    for (let i in obj) {
+      if (object.hasOwProperty(i)) {
+        org.push(obj[i])
+      }
+    }
+    return org
+  },
+},
