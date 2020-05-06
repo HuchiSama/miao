@@ -305,10 +305,15 @@ var huchisama = {
   pullAt: function (array, ...indexes) {
     let org = []
     for (let j of indexes) {
+      if (this.isArray(j)) {
+        for (let k of j) {
+          org.push(array[k])
+        }
+      }
       org.push(array[j])
     }
     this.pullAll(array, org)
-    return org
+    return array
   },
 
   /**
@@ -926,7 +931,7 @@ var huchisama = {
     if (precision == 0) {
       return Math.floor(value)
     } else {
-      let mul = number * Math.pow(10, precision)
+      let mul = value * Math.pow(10, precision)
       return Math.floor(mul) / Math.pow(10, precision)
     }
   },
@@ -939,7 +944,7 @@ var huchisama = {
     if (precision == 0) {
       return Math.round(value)
     } else {
-      let mul = number * Math.pow(10, precision)
+      let mul = value * Math.pow(10, precision)
       return Math.round(mul) / Math.pow(10, precision)
     }
   },
@@ -1064,7 +1069,7 @@ var huchisama = {
   keys: function (object) {
     let org = []
     for (let i in object) {
-      if (object.hasOwProperty(i)) {
+      if (object.hasOwnProperty(i)) {
         org.push(i)
       }
     }
@@ -1073,7 +1078,7 @@ var huchisama = {
 
   omit: function (object, ...props) {
     for (let j of props) {
-      if (this.Array(j)) {
+      if (this.isArray(j)) {
         for (let k of j) {
           delete object[k]
         }
@@ -1092,7 +1097,7 @@ var huchisama = {
   pick: function (object, ...props) {
     let map = {}
     for (let j of props) {
-      if (this.Array(j)) {
+      if (this.isArray(j)) {
         for (let k of j) {
           map[k] = object[k]
         }
@@ -1111,7 +1116,7 @@ var huchisama = {
     let obj = Object(object)
     let org = []
     for (let i in obj) {
-      if (object.hasOwProperty(i)) {
+      if (object.hasOwnProperty(i)) {
         org.push(obj[i])
       }
     }
