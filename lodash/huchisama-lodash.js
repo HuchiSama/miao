@@ -909,7 +909,7 @@ var huchisama = {
    * @param {*} precision 
    */
   ceil: function (number, precision = 0) {
-    if (precision = 0) {
+    if (precision == 0) {
       return Math.ceil(number)
     } else {
       let mul = number * Math.pow(10, precision)
@@ -923,8 +923,8 @@ var huchisama = {
    * @param {*} precision 
    */
   floor: function (value, precision = 0) {
-    if (precision = 0) {
-      return Math.floor(number)
+    if (precision == 0) {
+      return Math.floor(value)
     } else {
       let mul = number * Math.pow(10, precision)
       return Math.floor(mul) / Math.pow(10, precision)
@@ -936,8 +936,8 @@ var huchisama = {
    * @param {*} precision 
    */
   round: function (value, precision = 0) {
-    if (precision = 0) {
-      return Math.round(number)
+    if (precision == 0) {
+      return Math.round(value)
     } else {
       let mul = number * Math.pow(10, precision)
       return Math.round(mul) / Math.pow(10, precision)
