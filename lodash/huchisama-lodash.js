@@ -795,7 +795,7 @@ var huchisama = {
  * @param {*} value 
  * @param {*} other 
  */
-  lt: function (value, other) {
+  lte: function (value, other) {
     return (value <= other) ? true : false
   },
   /**
@@ -1117,4 +1117,5 @@ var huchisama = {
     }
     return org
   },
-},
+
+}
