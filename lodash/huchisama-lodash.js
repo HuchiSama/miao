@@ -312,8 +312,7 @@ var huchisama = {
       }
       org.push(array[j])
     }
-    this.pullAll(array, org)
-    return array
+    return this.pullAll(array, org)
   },
 
   /**
@@ -1123,4 +1122,107 @@ var huchisama = {
     return org
   },
 
+  /**
+   * 字符串的第一位大写，其他小写
+   * @param {*} string 
+   */
+  capitalize: function (string = "") {
+    let str = ""
+    if (string.length == 0) {
+      return string
+    } else {
+      str += string[0].toUpperCase()
+      for (let i = 1; i < string.length; i++) {
+        str += string[i].toLowerCase()
+      }
+    }
+    return str
+  },
+
+  /**
+   * 将输入字符串改成小驼峰写法
+   * @param {*} string 
+   */
+  camelCase: function (string = "") {
+    let reg = /(?<=\w)*([A-Za-z]+)(?=\w)*/
+    let ary = string.match(reg)
+    let str = ""
+    for (let i of ary) {
+      if (i == ary[0]) {
+        str += i.toLowerCase()
+      } else {
+        str += i[0].toUpperCase()
+        str += i.slice(1).toLowerCase()
+      }
+    }
+    return str
+  },
+
+  /**
+   * 判断字符串是否是以给定的字母结尾
+   * @param {*} string 
+   * @param {*} target 
+   * @param {*} position 
+   */
+  endsWith: function (string = "", target, position = string.length) {
+    string = string.slice(0, position)
+    let i = string.length - 1
+    if (string[i] == target) {
+      return true
+    } else {
+      return false
+    }
+  },
+
+  /**
+   * 转义字符串中特殊字符
+   * @param {*} string 
+   */
+  escape: function (string = "") {
+    let str = ""
+    for (let i = 0; i < string.length; i++) {
+      switch (string[i]) {
+        case "&":
+          str += "&amp;";
+          break;
+        case "<":
+          str += "&lt;";
+          break;
+        case ">":
+          str += "&gt;";
+          break;
+        case '"':
+          str += "&quot;";
+          break;
+        case "'":
+          str += "&apos;";
+          break;
+        default:
+          str += string[i];
+      }
+    }
+    return str
+  },
+
+  /**
+   * 将字符串转成串串写法
+   * @param {*} string 
+   */
+  kebabCase: function (string = "") {
+    let reg = /(?<=\w)*([A-Za-z]+)(?=\w)*/
+    let ary = string.match(reg)
+    if (ary.length == 1) {
+      let str = ""
+      for (let i of ary[0]) {
+        if (i == i.toUpperCase) {
+          str = str + "-" + i
+        } else {
+          str += i
+        }
+      }
+      return str.toLowerCase()
+    } else {
+      return ary.join("-")
+    }
+  },
 }
