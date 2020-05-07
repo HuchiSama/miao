@@ -1144,7 +1144,7 @@ var huchisama = {
    * @param {*} string 
    */
   camelCase: function (string = "") {
-    let reg = /(?<=\w)*([A-Za-z]+)(?=\w)*/
+    let reg = /[(?<=\w)]*([A-Za-z]+)[(?=\w)]*/g
     let ary = string.match(reg)
     let str = ""
     for (let i of ary) {
@@ -1209,7 +1209,7 @@ var huchisama = {
    * @param {*} string 
    */
   kebabCase: function (string = "") {
-    let reg = /(?<=\w)*([A-Za-z]+)(?=\w)*/
+    let reg = /[(?<=\w)]*([A-Za-z]+)[(?=\w)]*/g
     let ary = string.match(reg)
     if (ary.length == 1) {
       let str = ""
