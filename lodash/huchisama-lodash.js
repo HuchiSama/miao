@@ -1302,7 +1302,10 @@ var huchisama = {
    * @param {*} length 填充至的长度
    * @param {*} chars 填充物
    */
-  padStart: function (string = "", length = 0, chars = "") {
+  padStart: function (string = "", length = 0, chars = " ") {
+    if (string.length == length) {
+      return string
+    }
     while (string.length + chars.length < length) {
       chars += chars
       if (string.length + chars.length > length) {
