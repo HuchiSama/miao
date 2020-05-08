@@ -1303,13 +1303,13 @@ var huchisama = {
    * @param {*} chars 填充物
    */
   padStart: function (string = "", length = 0, chars = " ") {
-    while (string.length < length) {
-      string = chars + string
-      if (string.length > length) {
-        string = string.slice(string.length - length)
+    while (string.length + chars.length < length) {
+      chars += chars
+      if (string.length + chars.length > length) {
+        chars = chars.slice(0, length - string.length)
       }
     }
-    return string
+    return chars + string
   },
 
   /**
@@ -1318,7 +1318,7 @@ var huchisama = {
    * @param {*} radix 
    */
   parseInt: function (string, radix = 10) {
-    return Number(string).toString(radix)
+    return + Number(string).toString(radix)
   },
 
   /**
@@ -1375,7 +1375,7 @@ var huchisama = {
    * @param {*} limit 
    */
   split: function (string = "", separator, limit) {
-    let reg = new RegExp("separator", "g")
+    let reg = new RegExp('[^' + separator + "]", "g")
     let ary = string.match(reg)
     ary.length = limit
     return ary
@@ -1426,7 +1426,7 @@ var huchisama = {
    * @param {*} string 
    */
   toLower: function (string = "") {
-    return string.toLower()
+    return string.toLowerCase()
   },
 
   /**
@@ -1604,7 +1604,7 @@ var huchisama = {
    * @param {*} string 
    * @param {*} pattern 
    */
-  words: function (string, pattern = /\w+/) {
+  words: function (string, pattern = /\w+/g) {
     return string.match(pattern)
   },
 
