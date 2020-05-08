@@ -1215,7 +1215,7 @@ var huchisama = {
     if (ary.length == 1) {
       let str = ""
       for (let i of ary[0]) {
-        if (i == i.toUpperCase) {
+        if (i == i.toUpperCase()) {
           str = str + "-" + i
         } else {
           str += i
@@ -1225,5 +1225,419 @@ var huchisama = {
     } else {
       return ary.join("-").toLowerCase()
     }
+  },
+
+  /**
+   * 将字符串,转换为小写形式,并以空格隔开
+   * @param {*} string 
+   */
+  lowerCase: function (string = "") {
+    let reg = /(?<=[\w]*)([A-Za-z]+)(?=[\w]*)/g
+    let ary = string.match(reg)
+    if (ary.length == 1) {
+      let str = ""
+      for (let i of ary[0]) {
+        if (i == i.toUpperCase()) {
+          str = str + " " + i
+        } else {
+          str += i
+        }
+      }
+      return str.toLowerCase()
+    } else {
+      return ary.join(" ").toLowerCase()
+    }
+  },
+
+  /**
+   * 将字符串的第一位小写并返回
+   * @param {*} string 
+   */
+  lowerFirst: function (string = "") {
+    let str = ""
+    return str + string[0].toLowerCase() + string.slice(1)
+  },
+
+  /**
+   * 将字符串填充至给定的长度，从两边以chars填充，若无法对称，优先从左
+   * @param {*} string 
+   * @param {*} length 填充至的长度
+   * @param {*} chars 填充物
+   */
+  pad: function (string = "", length = 0, chars = " ") {
+    let count = 0
+    while (string.length < length) {
+      count++
+      if (count % 2) {
+        string += chars
+      } else {
+        string = chars + string
+      }
+      while (string.length > length) {
+        string = string.slice(0, -1)
+      }
+    }
+    return string
+  },
+
+  /**
+   * 将字符串填充至给定的长度，以chars从最后填充
+   * @param {*} string 
+   * @param {*} length 填充至的长度
+   * @param {*} chars 填充物
+   */
+  padEen: function (string = "", length = 0, chars = " ") {
+    while (string.length < length) {
+      string += chars
+      if (string.length > length) {
+        string = string.slice(0, length - string.length)
+      }
+    }
+    return string
+  },
+
+  /**
+   * 将字符串填充至给定的长度，以chars从起始填充
+   * @param {*} string 
+   * @param {*} length 填充至的长度
+   * @param {*} chars 填充物
+   */
+  padStart: function (string = "", length = 0, chars = " ") {
+    while (string.length < length) {
+      string = chars + string
+      if (string.length > length) {
+        string = string.slice(string.length - length)
+      }
+    }
+    return string
+  },
+
+  /**
+   * 
+   * @param {*} string 
+   * @param {*} radix 
+   */
+  parseInt: function (string, radix = 10) {
+    return Number(string).toString(radix)
+  },
+
+  /**
+   * 将string重复N次
+   * @param {*} string 
+   * @param {*} n 
+   */
+  repeat: function (string = "", n = 1) {
+    let str = ""
+    while (n > 0) {
+      str += string
+      n--
+    }
+    return str
+  },
+
+  /**
+   * 用 reolacement 替换原字符串中的 pattern
+   * @param {*} string 
+   * @param {*} pattern 
+   * @param {*} reolacement 
+   */
+  replace: function (string = "", pattern, reolacement) {
+    let reg = new RegExp(pattern)
+    return string.replace(reg, reolacement)
+  },
+
+  /**
+   * 将字符串转换为蛇形写法
+   * @param {*} string 
+   */
+  snakeCase: function (string = "") {
+    let reg = /(?<=[\w]*)([A-Za-z]+)(?=[\w]*)/g
+    let ary = string.match(reg)
+    if (ary.length == 1) {
+      let str = ""
+      for (let i of ary[0]) {
+        if (i == i.toUpperCase()) {
+          str = str + "_" + i
+        } else {
+          str += i
+        }
+      }
+      return str.toLowerCase()
+    } else {
+      return ary.join("_").toLowerCase()
+    }
+  },
+
+  /**
+   * 通过分隔符 separator 分隔字符串,返回成 limit 长度的数组
+   * @param {*} string 
+   * @param {*} separator 
+   * @param {*} limit 
+   */
+  split: function (string = "", separator, limit) {
+    let reg = new RegExp("separator", "g")
+    let ary = string.match(reg)
+    ary.length = limit
+    return ary
+  },
+
+  /**
+   * 将字符串转换为以大写开头的
+   * @param {*} string 
+   */
+  startCase: function (string = "") {
+    let reg = /(?<=[\w]*)([A-Za-z]+)(?=[\w]*)/g
+    let ary = string.match(reg)
+    if (ary.length == 1) {
+      let str = ary[0][0].toUpperCase()
+      for (let i of ary[0].slice(1)) {
+        if (i == i.toUpperCase()) {
+          str = str + " " + i
+        } else {
+          str += i
+        }
+      }
+      return str
+    } else {
+      let str = ""
+      for (let i of ary) {
+        str += i[0].toUpperCase() + i.slice(1)
+        if (i == ary[ary.length - 1]) {
+          return str
+        }
+        str += " "
+      }
+    }
+  },
+
+  /**
+   * 检查字符串是否是以 target 开始的， 开始位置以 position 索引为基准
+   * @param {*} string 
+   * @param {*} target 
+   * @param {*} position 
+   */
+  startsWith: function (string = "", target, position = 0) {
+    let str = string.slice(position)
+    return (str[0] == target) ? true : false
+  },
+
+  /**
+   * 将字符串转换成全小写
+   * @param {*} string 
+   */
+  toLower: function (string = "") {
+    return string.toLower()
+  },
+
+  /**
+   * 将字符串转换成全大写
+   * @param {*} string 
+   */
+  toUpper: function (string = "") {
+    return string.toUpperCase()
+  },
+
+  /**
+   * 从字符串中删除前导和尾随空格或指定的字符chars
+   * @param {*} string 
+   * @param {*} chars 
+   */
+  trim: function (string = "", chars = " ") {
+    let map = {}
+    for (let i of chars) {
+      map[i] = 1
+    }
+    let j = string.length - 1
+    while (j > 0) {
+      if (string[0] in map) {
+        string = string.slice(1)
+        j--
+      }
+      if (string[j] in map) {
+        string = string.slice(0, -1)
+        j--
+      }
+      if (!(string[0] in map && string[j] in map)) {
+        return string
+      }
+    }
+    return string
+  },
+
+  /**
+   * 从字符串中删除尾随空格或指定的字符chars。
+   * @param {*} string 
+   * @param {*} chars 
+   */
+  trimEnd: function (string = "", chars = " ") {
+    let map = {}
+    for (let i of chars) {
+      map[i] = 1
+    }
+    let j = string.length - 1
+    while (j > 0) {
+      if (string[j] in map) {
+        string = string.slice(0, -1)
+        j--
+      } else {
+        return string
+      }
+    }
+  },
+
+  /**
+   * 从字符串中删除前导空格或指定的字符chars。
+   * @param {*} string 
+   * @param {*} chars 
+   */
+  trimStart: function (string = "", chars = " ") {
+    let map = {}
+    for (let i of chars) {
+      map[i] = 1
+    }
+    while (1) {
+      if (string[0] in map) {
+        string = string.slice(1)
+      } else {
+        return string
+      }
+    }
+  },
+
+  /**
+   * 如果字符串比给定的最大字符串长度长，则截断该字符串。截断字符串的最后几个字符被省略字符串替换，省略字符串的默认值是“…”。
+   * @param {*} string 
+   * @param {*} options 
+   */
+  truncate: function (string = "", options = {}) {
+    if (!("length" in options)) {
+      options.length = 30
+    }
+    if (!("separator" in options)) {
+      options.separator = ""
+    }
+    if (!("omission" in options)) {
+      options.omission = "..."
+    }
+    let str = string.slice(0, options.length - options.omission.length)
+    let len = options.separator.length
+    if (options.separator instanceof RegExp) {
+      if (options.separator.test(str)) {
+        let reg = new RegExp(options.separator, "g")
+        let e
+        while (1) {
+          let n = reg.exec(str)
+          if (n == null) {
+            break
+          } else {
+            e = n.index
+          }
+        }
+        str = str.slice(0, e)
+      }
+    } else if (options.separator !== "") {
+      let k = str.length - 1
+      while (1) {
+        if (str[k] !== options.separator) {
+          k--
+        } else {
+          str = str.slice(0, k)
+          break
+        }
+      }
+
+    }
+    return str + options.omission
+  },
+
+  /**
+   * 将字符串中的转义模式替换成普通符
+   * @param {*} string 
+   */
+  unescape: function (string = "") {
+    let map = {
+      "&amp;": "&",
+      "&lt;": "<",
+      "&gt;": ">",
+      "&quot;": '"',
+      "&apos;": "'",
+    }
+    for (let i in map) {
+      let reg = new RegExp(i, "g")
+      string = string.replace(reg, map[i])
+    }
+    return string
+  },
+
+  /**
+   * 将字符串(如空格分隔的单词)转换为大写。
+   * @param {*} string 
+   */
+  upperCase: function (string = "") {
+    let reg = /(?<=[\w]*)([A-Za-z]+)(?=[\w]*)/g
+    let ary = string.match(reg)
+    if (ary.length == 1) {
+      let str = ""
+      for (let i of ary[0]) {
+        if (i == i.toUpperCase()) {
+          str = str + " " + i
+        } else {
+          str += i
+        }
+      }
+      return str.toUpperCase()
+    } else {
+      return ary.join(" ").toUpperCase()
+    }
+  },
+
+  /**
+   * 将字符串的第一个字符转换为大写
+   * @param {*} string 
+   */
+  upperFirst: function (string = "") {
+    return string[0].toUpperCase() + string.slice(1)
+  },
+
+  /**
+   * 将字符串分割为一个单词数组。
+   * @param {*} string 
+   * @param {*} pattern 
+   */
+  words: function (string, pattern = /\w+/) {
+    return string.match(pattern)
+  },
+
+  /**
+   * 建立数组，范围值为start-end，每相邻值的差为step
+   * @param {*} start 
+   * @param {*} end 
+   * @param {*} step 
+   */
+  range: function (start = 0, end, step = 1) {
+    if (arguments.length == 1) {
+      end = arguments[0]
+      start = 0
+      if (end < 0) {
+        step = -1
+      }
+    }
+    let ary = []
+    let i = start
+    if ((end > 0 && step > 0) || (end < 0 && step < 0)) {
+      while (1) {
+        ary.push(i)
+        i += step
+        if (i == end) {
+          break
+        }
+      }
+    }
+    if (step == 0) {
+      while (ary.length < end - start) {
+        ary.push(start)
+      }
+    }
+    return ary
   },
 }
