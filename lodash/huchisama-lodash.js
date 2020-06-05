@@ -1680,5 +1680,22 @@ var huchisama = {
     }, ans)
   },
 
+  /**
+   * toPairs的逆;此方法返回由键-值对组成的对象
+   * @param {*} pairs 集合
+   */
+  fromPairs: function (pairs) {
+    let obj = {}
+    pairs.forEach(ar => obj[ar[0]] = ar[1])
+    return obj
+  },
+
+  // every: function (collection, predicate = _.identity) {
+  //   return collection.forEach(n => {
+  //     if (typeof (n) !== "object") {
+
+  //     }
+  //   })
+  // }
 
 }
