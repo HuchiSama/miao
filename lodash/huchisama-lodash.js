@@ -1643,4 +1643,42 @@ var huchisama = {
     }
     return ary
   },
+
+  /**
+   * 多维数组转化为一维
+   * @param {*} array 多维数组
+   * @param {*} ans 待输出的结果数组
+   */
+  flattenDeep: function (array, ans = []) {
+    return array.reduce((ans, item) => {
+      if (typeof (item) == "number") {
+        ans.push(item)
+      } else {
+        this.flattenDeep(item, ans)
+      }
+      return ans
+    }, ans)
+  },
+
+  /**
+   * 数组降指定维度
+   * @param {*} array 多维数组
+   * @param {*} depth 所需要将的维度
+   * @param {*} ans 返回数组
+   */
+  flattenDepth: function (array, depth = 1, ans = []) {
+    if (depth < 0) {
+      return ans.push(array)
+    }
+    return array.reduce((ans, item) => {
+      if (typeof (item) !== "object") {
+        ans.push(item)
+      } else {
+        this.flattenDepth(item, depth - 1, ans)
+      }
+      return ans
+    }, ans)
+  },
+
+
 }
