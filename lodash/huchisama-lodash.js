@@ -1690,6 +1690,46 @@ var huchisama = {
     return obj
   },
 
+  /**
+   * 通过迭代来运行集合中的每个元素并扁平映射结果，从而创建一个扁平的值数组
+   * @param {*} collection 输入集合
+   * @param {*} iteratee 对集合进行处理的函数
+   */
+  flatMap: function (collection, iteratee = this.identity) {
+    let arr = []
+    collection.forEach(item => {
+      arr = arr.concat(iteratee(item))
+    })
+    return arr
+  },
+
+  /**
+   * 这个方法类似于flatMap。除了递归地扁平化映射的结果之外，它是扁平化的
+   * @param {*} collection 
+   * @param {*} iteratee 
+   */
+  flatMapDeep: function (collection, iteratee = this.identity) {
+    let arr = []
+    collection.forEach(item => {
+      arr = arr.concat(iteratee(item))
+    })
+    arr = this.flattenDeep(arr)
+    return arr
+  },
+  /**
+   * 这个方法类似于flatMap。根据递归的深度，进行扁平化处理
+   * @param {*} collection 
+   * @param {*} iteratee 
+   * @param {*} depth 递归深度
+   */
+  flatMapDepth: function (collection, iteratee = this.identity, depth = 1) {
+    let arr = []
+    collection.forEach(item => {
+      arr = arr.concat(iteratee(item))
+    })
+    arr = this.flattenDepth(arr, depth - 1)
+    return arr
+  },
   // every: function (collection, predicate = _.identity) {
   //   return collection.forEach(n => {
   //     if (typeof (n) !== "object") {
