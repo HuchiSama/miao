@@ -1730,6 +1730,27 @@ var huchisama = {
     arr = this.flattenDepth(arr, depth - 1)
     return arr
   },
+
+  /**
+   * 实现迭代
+   * @param {*} collection 
+   * @param {*} iteratee 
+   */
+  forEach: function (collection, iteratee = this.identity) {
+    for (let i of collection) {
+      iteratee(i)
+    }
+  },
+  /**
+   * 倒序迭代
+   * @param {*} collection 
+   * @param {*} iteratee 
+   */
+  forEach: function (collection, iteratee = this.identity) {
+    for (let i = collection.length - 1; i >= 0; i--) {
+      iteratee(collection[i])
+    }
+  },
   // every: function (collection, predicate = _.identity) {
   //   return collection.forEach(n => {
   //     if (typeof (n) !== "object") {
