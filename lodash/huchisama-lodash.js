@@ -1740,23 +1740,134 @@ var huchisama = {
     for (let i of collection) {
       iteratee(i)
     }
+    return collection
   },
   /**
    * 倒序迭代
    * @param {*} collection 
    * @param {*} iteratee 
    */
-  forEach: function (collection, iteratee = this.identity) {
+  forEachRight: function (collection, iteratee = this.identity) {
     for (let i = collection.length - 1; i >= 0; i--) {
       iteratee(collection[i])
     }
+    return collection
   },
-  // every: function (collection, predicate = _.identity) {
-  //   return collection.forEach(n => {
-  //     if (typeof (n) !== "object") {
 
-  //     }
-  //   })
-  // }
+  /**
+   * 创建一个调用func的函数。调用func时最多接受 n个参数，忽略多出的参数。
+   * @param {*} func 
+   * @param {*} n 最多接受参数
+   */
+  ary: function (func, n = func.length) {
+    return function (...args) {
+      return func(...args.slice(0, n))
+    }
+  },
+
+  /**
+   * 创建一个针对断言函数 func 结果取反的函数。 func 断言函数被调用的时候，this 绑定到创建的函数，并传入对应参数。
+   * @param {*} func 
+   */
+  negate: function (func) {
+    return function (...args) {
+      return !func(...args)
+    }
+  },
+
+  /**
+   * 创建一个函数，调用func时，this绑定到创建的新函数，把参数作为数组传入
+   * @param {*} func 
+   * @param {*} start 
+   */
+  spread: function (func, start = 0) {
+    return function (ary) {
+      return func(...ary)
+    }
+  },
+
+  /**
+   * 遍历 collection（集合）元素，返回 predicate（断言函数）返回真值 的所有元素的数组。 
+   * @param {*} collection 需要迭代的集合
+   * @param {*} predicate 过滤器 （函数，数组，字符串，对象的形式）
+   */
+  filter: function (collection, predicate = _.identity) {
+    let result = []
+    if (typeof predicate == "function") {
+      for (let i of collection) {
+        if (predicate(i)) {
+          result.push(i)
+        }
+      }
+    }
+    if (typeof predicate == "string") {
+      for (let i of collection) {
+        if (i[predicate]) {
+          result.push(i)
+        }
+      }
+    }
+    if (Array.isArray(predicate)) {
+      for (let i of collection) {
+        if (i[predicate[0]] == predicate[1]) {
+          result.push(i)
+        }
+      }
+    }
+    if (Object.prototype.toString.call(predicate) == "[object Object]") {
+      for (let j of collection) {
+        let bl = true
+        for (let i in predicate) {
+          if (predicate[i] !== j[i]) {
+            bl = false
+            break
+          }
+        }
+        if (bl) {
+          result.push(j)
+        }
+      }
+    }
+    return result
+  },
+
+  /**
+   * 通过 predicate（断言函数） 检查 collection（集合）中的 所有 元素是否都返回真值。一旦 predicate（断言函数） 返回假值，迭代就马上停止
+   * @param {*} collection 
+   * @param {*} predicate 
+   */
+  every: function (collection, predicate = _.identity) {
+    if (typeof predicate == "function") {
+      for (let i of collection) {
+        if (!predicate(i)) {
+          return false
+        }
+      }
+    }
+    if (typeof predicate == "string") {
+      for (let i of collection) {
+        if (!i[predicate]) {
+          return false
+        }
+      }
+    }
+    if (Array.isArray(predicate)) {
+      for (let i of collection) {
+        if (i[predicate[0]] !== predicate[1]) {
+          return false
+        }
+      }
+    }
+    if (Object.prototype.toString.call(predicate) == "[object Object]") {
+      for (let j of collection) {
+        for (let i in predicate) {
+          if (predicate[i] !== j[i]) {
+            return false
+          }
+        }
+      }
+    }
+    return true
+  },
 
 }
