@@ -1795,26 +1795,17 @@ var huchisama = {
     let result = []
     if (typeof predicate == "function") {
       for (let i of collection) {
-        if (predicate(i)) {
-          result.push(i)
-        }
+        if (predicate(i)) result.push(i)
       }
-    }
-    if (typeof predicate == "string") {
+    } else if (typeof predicate == "string") {
       for (let i of collection) {
-        if (i[predicate]) {
-          result.push(i)
-        }
+        if (i[predicate]) result.push(i)
       }
-    }
-    if (Array.isArray(predicate)) {
+    } else if (Array.isArray(predicate)) {
       for (let i of collection) {
-        if (i[predicate[0]] == predicate[1]) {
-          result.push(i)
-        }
+        if (i[predicate[0]] == predicate[1]) result.push(i)
       }
-    }
-    if (Object.prototype.toString.call(predicate) == "[object Object]") {
+    } else if (Object.prototype.toString.call(predicate) == "[object Object]") {
       for (let j of collection) {
         let bl = true
         for (let i in predicate) {
@@ -1823,9 +1814,11 @@ var huchisama = {
             break
           }
         }
-        if (bl) {
-          result.push(j)
-        }
+        if (bl) result.push(j)
+      }
+    } else if (Object.prototype.toString.call(predicate) == "[object RegExp]") {
+      for (let i of collection) {
+        if (predicate.test(i)) result.push(i)
       }
     }
     return result
