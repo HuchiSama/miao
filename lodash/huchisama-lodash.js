@@ -70,20 +70,11 @@ var huchisama = {
    * @param  {...any} values 对照需要排除的值
    */
   difference: function (array, ...values) {
-    let map = {}
+    let map = this.concat([], values)
     let count = []
-    let index = 1
-    while (index < arguments.length) {
-      for (let i = 0; i < arguments[index].length; i++) {
-        if (!(arguments[index][i] in map)) {
-          map[arguments[index][i]] = 1
-        }
-      }
-      index++
-    }
-    for (let j = 0; j < array.length; j++) {
-      if (!(array[j] in map)) {
-        count.push(array[j])
+    for (let i in array) {
+      if (!(i in map)) {
+        count.push(i)
       }
     }
     return count
@@ -870,12 +861,10 @@ var huchisama = {
    * @param {*} value 
    */
   isObject(value) {
-    let tsr = Object.prototype.toString
-    if (tsr.call(value) == "[object Object]") {
-      return true
-    } else {
-      return false
-    }
+    if (value == null) return false
+    if (typeof value === "object") return true
+    else return false
+
   },
   /**
    * 将value转成字符串，null 和 undefined 将返回空字符串。-0 将被转换为字符串"-0"。
@@ -1791,30 +1780,21 @@ var huchisama = {
    * @param {*} collection 需要迭代的集合
    * @param {*} predicate 过滤器 （函数，数组，字符串，对象的形式）
    */
-  filter: function (collection, predicate = _.identity) {
+  filter: function (collection, predicate = this.identity) {
     let result = []
     if (typeof predicate == "function") {
       for (let i of collection) {
-        if (predicate(i)) {
-          result.push(i)
-        }
+        if (predicate(i)) result.push(i)
       }
-    }
-    if (typeof predicate == "string") {
+    } else if (typeof predicate == "string") {
       for (let i of collection) {
-        if (i[predicate]) {
-          result.push(i)
-        }
+        if (i[predicate]) result.push(i)
       }
-    }
-    if (Array.isArray(predicate)) {
+    } else if (Array.isArray(predicate)) {
       for (let i of collection) {
-        if (i[predicate[0]] == predicate[1]) {
-          result.push(i)
-        }
+        if (i[predicate[0]] == predicate[1]) result.push(i)
       }
-    }
-    if (Object.prototype.toString.call(predicate) == "[object Object]") {
+    } else if (Object.prototype.toString.call(predicate) == "[object Object]") {
       for (let j of collection) {
         let bl = true
         for (let i in predicate) {
@@ -1823,9 +1803,11 @@ var huchisama = {
             break
           }
         }
-        if (bl) {
-          result.push(j)
-        }
+        if (bl) result.push(j)
+      }
+    } else if (Object.prototype.toString.call(predicate) == "[object RegExp]") {
+      for (let i of collection) {
+        if (predicate.test(i)) result.push(i)
       }
     }
     return result
@@ -1836,7 +1818,7 @@ var huchisama = {
    * @param {*} collection 
    * @param {*} predicate 
    */
-  every: function (collection, predicate = _.identity) {
+  every: function (collection, predicate = this.identity) {
     if (typeof predicate == "function") {
       for (let i of collection) {
         if (!predicate(i)) {
@@ -1870,4 +1852,140 @@ var huchisama = {
     return true
   },
 
+  /**
+   * 除了它接受一个 iteratee ， 调用array 和 values 中的每个元素以产生比较的标准。 结果值是从第一数组中选择。（注：首先使用迭代器分别迭代array 和 values中的每个元素，返回的值作为比较值）
+   * @param {*} array 
+   * @param  {...any} value 
+   */
+  differenceBy: function (array, ...value) {
+    let ans = []
+    let iteratee = value[value.length - 1]
+    let com = []
+
+    if (typeof iteratee == "function") {
+      for (let i of value.slice(0, -1)) com = com.concat(i)
+      let res = array.map(iteratee)
+      let idx = this.difference(res, com.map(iteratee)).map(it => res.indexOf(it))
+      idx.forEach(it => ans.push(array[it]))
+      return ans
+    } else {
+      if (Array.isArray(iteratee)) return this.difference(array, ...value)
+      else {
+        for (let i of value.slice(0, -1)) {
+          for (let j in i) array.forEach(it => it[j] !== i[j] ? ans.push(it) : it)
+        }
+        return ans
+      }
+    }
+  },
+
+  /**
+   * 对比两位输入的值是否相同
+   * @param {*} value 
+   * @param  {...any} other 
+   */
+  isEqual: function (value, other) {
+    if (value === other) return true
+    if (typeof value == "object") {
+      let valkey = Object.keys(value)
+      let othkey = Object.keys(other)
+      if (valkey.length !== othkey.length) return false
+      for (let i of valkey) {
+        if (typeof value[i] == "object") {
+          let bl = this.isEqual(value[i], other[i])
+          if (!bl) return false
+          continue
+        }
+        if (value[i] !== other[i]) return false
+      }
+      return true
+    }
+  },
+
+  /**
+   * 类似 difference ，它接受一个 comparator （比较器），它调用比较array，values中的元素。值是从array中选择。comparator 调用参数有两个：(arrVal, othVal)。
+   * @param {*} value 
+   * @param  {...any} other 
+   */
+  differenceWith: function (array, values, comparator) {
+    let res = []
+    array.forEach(it => {
+      let bl = comparator(it, ...values)
+      bl ? bl : res.push(it)
+    })
+    return res
+  },
+
+  /**
+   * 创建一个切片数组，去除array中从 predicate 返回假值开始到尾部的部分。predicate 会传入3个参数： (value, index, array)
+   * */
+  dropRightWhile: function (array, predicate = this.identity) {
+    let res = [], bl = false, fnc
+    if (typeof predicate == "string") {
+      for (let i of array) {
+        if (predicate in i) res.push(i.user)
+      }
+      return res
+    }
+    if (Array.isArray(predicate)) predicate = this.fromPairs([predicate])
+    if (typeof predicate == "function") fnc = predicate
+    else fnc = this.matches(predicate)
+    for (let i = 0; i < array.length; i++) {
+      bl = fnc(array[i])
+      if (bl) return res
+      res.push(array[i].user)
+    }
+  },
+
+  /**
+   * 创建一个切片数组，去除array中从起点开始到 predicate 返回假值结束部分。predicate 会传入3个参数： (value, index, array)。
+  */
+  dropWhile: function (array, predicate = this.identity) {
+    let res = [], bl = false, fnc
+    if (typeof predicate == "string") {
+      for (let i of array) {
+        if (predicate in i) res.push(i.user)
+      }
+      return res
+    }
+    if (Array.isArray(predicate)) predicate = this.fromPairs([predicate])
+    if (typeof predicate == "function") fnc = predicate
+    else fnc = this.matches(predicate)
+    for (let i = 0; i < array.length; i++) {
+      bl = fnc(array[i])
+      if (!bl) {
+        while (i < array.length) res.push(array[i].user), i++
+        return res
+      }
+    }
+  },
+  /** 
+   * 比较函数
+  */
+  matches: function (source) {
+    return function (obj) {
+      for (let i in source) {
+        if (source[i] !== obj[i]) return false
+      }
+      return true
+    }
+  },
+
+  /**
+   *根据路径取值
+   * */
+  property: function (path) {
+    if (typeof path == "string") path = path.split(".")
+    return function (obj) {
+      let res = []
+      for (let i of obj) {
+        for (let j of path) i = i[j]
+        if (i) res.push(i)
+      }
+      return res
+    }
+  },
+
+
 }
+
