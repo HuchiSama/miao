@@ -73,8 +73,8 @@ var huchisama = {
   difference: function (array, ...values) {
     let map = this.concat([], ...values)
     let count = []
-    for (let i in array) {
-      if (!(i * 1 in map)) {
+    for (let i of array) {
+      if (!(map.includes(i))) {
         count.push(i)
       }
     }
@@ -1977,14 +1977,8 @@ var huchisama = {
    *根据路径取值
    * */
   property: function (path) {
-    if (typeof path == "string") path = path.split(".")
     return function (obj) {
-      let res = []
-      for (let i in obj) {
-        for (let j of path) i = i[j]
-        if (i) res.push(i)
-      }
-      return res
+      return obj[path]
     }
   },
 
