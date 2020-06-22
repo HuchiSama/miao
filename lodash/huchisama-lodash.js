@@ -1975,6 +1975,17 @@ var huchisama = {
   },
 
   /**
+   * 创建一个深比较的方法来比较给定对象的 path 的值是否是 srcValue 。 如果是返回 true ，否则返回 false 。
+   * @param {*} path 
+   * @param {*} srcValue 
+   */
+  matchesProperty: function (path, srcValue) {
+    return function (obj) {
+      if (obj[path] === srcValue) return true
+      else return false
+    }
+  }
+  /**
    *根据路径取值
    * */
   property: function (path) {
@@ -2094,7 +2105,95 @@ var huchisama = {
     return array
   },
 
+  /**
+   * 接受一个 iteratee ，调用每一个数组（array）元素，返回结果和value 值比较来计算排序
+   * @param {*} array 
+   * @param {*} value 
+   * @param {*} iteratee 迭代器
+   */
+  sortedIndexBy: function (array, value, iteratee = _.identity) {
+    let fnc = iteratee
+    if (typeof iteratee == "string") fnc = this.property(value)
+    for (let i = 0; i < array.length; i++) {
+      if (fnc(array[i]) === fnc(value)) return i
+    }
+  },
 
+  /**
+   * 除了 它返回 value值 在 array 中尽可能大的索引位置（index）。
+   * @param {*} array 
+   * @param {*} value 
+   * @param {*} iteratee 
+   */
+  sortedLastIndexBy: function (array, value, iteratee = this.identity) {
+    let fnc = iteratee
+    if (typeof iteratee == "string") fnc = this.property(iteratee)
+    for (let i = 0; i < array.length; i++) {
+      if (fnc(array[i]) === fnc(value) && fnc(array[i + 1]) !== fnc(value)) return i + 1
+    }
+  },
+
+  /**
+   * 类似 _.uniqBy，除了它会调用函数优化排序数组。
+   * @param {*} array 
+   * @param {*} iteratee 调用的函数
+   */
+  sortedUniqBy: function (array, iteratee) {
+    let ans = []
+    let res = array.map(iteratee)
+    this.sortedUniq(res).map(it => res.indexOf(it)).forEach(i => ans.push(array[i]))
+    return ans
+  },
+
+  /**
+   * 从array数组的最后一个元素开始提取元素，直到 predicate 返回假值。predicate 会传入三个参数： (value, index, array)。
+   * @param {*} array 
+   * @param {*} predicate 
+   */
+  takeRightWhile: function (array, predicate = this.identity) {
+    let fnc = null, res = []
+    if (typeof predicate === "string") {
+      for (let i = array.length - 1; i >= 0; i--) {
+        if (!(predicate in array[i])) res.push(array[i])
+      }
+      return res
+    }
+    if (typeof predicate === "function") fnc = predicate
+    if (typeof predicate === "object") {
+      if (Array.isArray(predicate)) fnc = this.matchesProperty(...predicate)
+      else fnc = this.matches(predicate)
+    }
+    for (let i = array.length - 1; i >= 0; i--) {
+      if (fnc(array[i])) res.push(array[i])
+    }
+    return res
+  },
+
+  /**
+   * 从array数组的起始元素开始提取元素，，直到 predicate 返回假值。predicate 会传入三个参数： (value, index, array)。
+   * @param {*} array 
+   * @param {*} predicate 
+   */
+  takeWhile: function (array, predicate = this.identity) {
+    let fnc = null, res = []
+    if (typeof predicate === "string") {
+      for (let i = 0; i < array.length; i++) {
+        if (!(predicate in array[i])) res.push(array[i])
+        else return res
+      }
+      return res
+    }
+    if (typeof predicate === "function") fnc = predicate
+    if (typeof predicate === "object") {
+      if (Array.isArray(predicate)) fnc = this.matchesProperty(...predicate)
+      else fnc = this.matches(predicate)
+    }
+    for (let i = 0; i < array.length; i++) {
+      if (fnc(array[i])) res.push(array[i])
+      else return res
+    }
+    return res
+  },
 
 }
 
