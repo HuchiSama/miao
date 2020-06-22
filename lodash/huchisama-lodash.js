@@ -13,6 +13,7 @@ var huchisama = {
    * @param {*} value 
    */
   isNaN: function (value) {
+    if (typeof value == "string") return false
     if (typeof (value) == "object") {
       value = + String(value)
     }
@@ -70,10 +71,10 @@ var huchisama = {
    * @param  {...any} values 对照需要排除的值
    */
   difference: function (array, ...values) {
-    let map = this.concat([], values)
+    let map = this.concat([], ...values)
     let count = []
     for (let i in array) {
-      if (!(i in map)) {
+      if (!(i * 1 in map)) {
         count.push(i)
       }
     }
@@ -862,7 +863,7 @@ var huchisama = {
    */
   isObject(value) {
     if (value == null) return false
-    if (typeof value === "object") return true
+    if (typeof value === "object" || typeof value === "function") return true
     else return false
 
   },
@@ -1900,6 +1901,7 @@ var huchisama = {
       }
       return true
     }
+    return false
   },
 
   /**
@@ -1923,7 +1925,7 @@ var huchisama = {
     let res = [], bl = false, fnc
     if (typeof predicate == "string") {
       for (let i of array) {
-        if (predicate in i) res.push(i.user)
+        if (predicate in i) res.push(i)
       }
       return res
     }
@@ -1933,7 +1935,7 @@ var huchisama = {
     for (let i = 0; i < array.length; i++) {
       bl = fnc(array[i])
       if (bl) return res
-      res.push(array[i].user)
+      res.push(array[i])
     }
   },
 
@@ -1944,7 +1946,7 @@ var huchisama = {
     let res = [], bl = false, fnc
     if (typeof predicate == "string") {
       for (let i of array) {
-        if (predicate in i) res.push(i.user)
+        if (predicate in i) res.push(i)
       }
       return res
     }
@@ -1954,7 +1956,7 @@ var huchisama = {
     for (let i = 0; i < array.length; i++) {
       bl = fnc(array[i])
       if (!bl) {
-        while (i < array.length) res.push(array[i].user), i++
+        while (i < array.length) res.push(array[i]), i++
         return res
       }
     }
@@ -1978,7 +1980,7 @@ var huchisama = {
     if (typeof path == "string") path = path.split(".")
     return function (obj) {
       let res = []
-      for (let i of obj) {
+      for (let i in obj) {
         for (let j of path) i = i[j]
         if (i) res.push(i)
       }
