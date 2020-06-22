@@ -2064,5 +2064,37 @@ var huchisama = {
     return res
   },
 
+  /**
+   * 接受一个 iteratee 调用 array 和 values的每个值以产生一个值，通过产生的值进行了比较
+   * @param {*} array 要修改的数组。
+   * @param {*} values 要移除值的数组。
+   * @param {*} iteratee iteratee（迭代器）调用每个元素。
+   */
+  pullAllBy: function (array, values, iteratee = this.identity) {
+    if (typeof iteratee == "function") {
+      return this.pullAll(iteratee(array), iteratee(values))
+    }
+    values.forEach(it => array.forEach((val, idx) => {
+      if (it[iteratee] === val[iteratee]) array.splice(idx, 1)
+    }))
+    return array
+  },
+
+  /**
+   * 接受 comparator 调用array中的元素和values比较。comparator 会传入两个参数：(arrVal, othVal)。
+   * @param {*} array 
+   * @param {*} values 
+   * @param {*} comparator 
+   */
+  pullAllWith: function (array, values, comparator) {
+    array.forEach((it, idx) => values.forEach(i => {
+      let bl = comparator(it, i)
+      if (bl) array.splice(idx, 1)
+    }))
+    return array
+  },
+
+
+
 }
 
