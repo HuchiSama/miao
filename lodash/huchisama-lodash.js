@@ -13,8 +13,8 @@ var huchisama = {
    * @param {*} value 
    */
   isNaN: function (value) {
-    if (typeof value == "string") return false
     if (typeof (value) == "object") {
+      if (value.length > 1) return false
       value = + String(value)
     }
     return (value !== value) ? true : false
@@ -1860,11 +1860,11 @@ var huchisama = {
    */
   differenceBy: function (array, ...value) {
     let ans = []
-    let iteratee = value[value.length - 1]
+    let iteratee = value.pop()
     let com = []
 
     if (typeof iteratee == "function") {
-      for (let i of value.slice(0, -1)) com = com.concat(i)
+      for (let i of value) com = com.concat(i)
       let res = array.map(iteratee)
       let idx = this.difference(res, com.map(iteratee)).map(it => res.indexOf(it))
       idx.forEach(it => ans.push(array[it]))
@@ -1872,7 +1872,8 @@ var huchisama = {
     } else {
       if (Array.isArray(iteratee)) return this.difference(array, ...value)
       else {
-        for (let i of value.slice(0, -1)) {
+        value.forEach(it => com = com.concat(it))
+        for (let i of com) {
           for (let j in i) array.forEach(it => it[j] !== i[j] ? ans.push(it) : it)
         }
         return ans
