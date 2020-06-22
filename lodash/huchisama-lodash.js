@@ -1983,6 +1983,86 @@ var huchisama = {
     }
   },
 
+  /**
+   * 该方法返回第一个通过 predicate 判断为  true  值的元素的索引值（index），而不是元素本身。
+   * @param {*} array 要搜索的数组
+   * @param {*} predicate 判断函数/或其他值
+   * @param {*} fromIndex 起始下标
+   */
+  findIndex: function (array, predicate = this.identity, fromIndex = 0) {
+    let bl = false, fnc
+    if (typeof predicate == "string") {
+      for (let i = fromIndex; i < array.length; i++) {
+        if (array[i][predicate]) return i
+      }
+    }
+    if (Array.isArray(predicate)) predicate = this.fromPairs([predicate])
+    if (typeof predicate == "function") fnc = predicate
+    else fnc = this.matches(predicate)
+    for (let i = fromIndex; i < array.length; i++) {
+      bl = fnc(array[i])
+      if (bl) return i
+    }
+    return -1
+  },
+  /**
+   * 这个方式类似 _.findIndex， 区别是它是从右到左的迭代集合array中的元素
+   * @param {*} array 要搜索的数组
+   * @param {*} predicate 判断函数/或其他值
+   * @param {*} fromIndex 起始下标
+   */
+  findLastIndex: function (array, predicate = this.identity, fromIndex = array.length - 1) {
+    let fnc
+    if (typeof predicate == "string") {
+      for (let i = fromIndex; i >= 0; i--) {
+        if (array[i][predicate]) return i
+      }
+    }
+    if (Array.isArray(predicate)) predicate = this.fromPairs([predicate])
+    if (typeof predicate == "function") fnc = predicate
+    else fnc = this.matches(predicate)
+    for (let i = fromIndex; i >= 0; i--) {
+      let bl = fnc(array[i])
+      if (bl) return i
+    }
+    return -1
+  },
+
+  /**
+   * 类似 _.intersection，区别是它接受一个 iteratee 调用每一个arrays的每个值以产生一个值，通过产生的值进行了比较。结果值是从第一数组中选择
+   * @param  {...any} arrays 
+   */
+  intersectionBy: function (...arrays) {
+    if (Array.isArray(arrays[arrays.length - 1])) return this.intersection(...arrays)
+    let iteratee = arrays.pop()
+    let ans = [], com = []
+    arrays.slice(1).forEach(it => com = com.concat(it))
+    if (typeof iteratee == "function") {
+      let arr = arrays[0].map(iteratee)
+      let idx = this.intersection(arr, com.map(iteratee)).map(it => arr.indexOf(it))
+      idx.forEach(it => ans.push(arrays[0][it]))
+      return ans
+    } else {
+      for (let i of com) {
+        arrays[0].forEach(it => it[iteratee] === i[iteratee] ? ans.push(it) : it)
+      }
+      return ans
+    }
+  },
+
+  /**
+   * 类似 _.intersection，区别是它接受一个 comparator 调用比较arrays中的元素。结果值是从第一数组中选择。comparator 会传入两个参数：(arrVal, othVal)。
+   * @param  {...any} arrays 
+   */
+  intersectionWith: function (...arrays) {
+    let comparator = arrays.pop()
+    let res = []
+    arrays[0].forEach(it => arrays[1].forEach(i => {
+      let bl = comparator(it, i)
+      if (bl) res.push(it)
+    }))
+    return res
+  },
 
 }
 
