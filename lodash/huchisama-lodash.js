@@ -1984,7 +1984,7 @@ var huchisama = {
       if (obj[path] === srcValue) return true
       else return false
     }
-  }
+  },
   /**
    *根据路径取值
    * */
@@ -2195,5 +2195,35 @@ var huchisama = {
     return res
   },
 
+  /**
+   * 接受一个 iteratee （迭代函数），去重
+   * @param  {...any} arrays 
+   */
+  unionBy: function (...arrays) {
+    let iteratee = arrays.pop()
+    let ans = [], res = [], part = []
+    if (typeof iteratee === "function") {
+      arrays.forEach(it => part = part.concat(it))
+      res = part.map(iteratee)
+      this.sortedUniq(res).map(it => res.indexOf(it)).forEach(i => ans.push(part[i]))
+      return ans
+    } else {
+      let map = {}
+      arrays.forEach(it => it.forEach(i => {
+        if (!(i[iteratee] in map)) ans.push(i), map[i[iteratee]] = 1
+      }))
+      return ans
+    }
+  },
+
+  unionWith: function (...arrays) {
+    let fnc = arrays.pop()
+    let ans = []
+    arrays.reduce((it, itm) => {
+      if (fnc(arr, oth)) ans.push(arr)
+      else ans.push(arr, oth)
+    })
+    return ans
+  },
 }
 
