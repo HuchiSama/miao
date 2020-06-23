@@ -2111,9 +2111,8 @@ var huchisama = {
    * @param {*} value 
    * @param {*} iteratee 迭代器
    */
-  sortedIndexBy: function (array, value, iteratee = _.identity) {
-    let fnc = iteratee
-    if (typeof iteratee == "string") fnc = this.property(value)
+  sortedIndexBy: function (array, value, iteratee = this.identity) {
+    let fnc = this.iteratee(iteratee)
     for (let i = 0; i < array.length; i++) {
       if (fnc(array[i]) === fnc(value)) return i
     }
@@ -2125,8 +2124,8 @@ var huchisama = {
    * @param {*} value 
    * @param {*} iteratee 
    */
-  sortedLastIndexBy: function (array, value, fnc = this.identity) {
-    let fnc = this.iteratee(fnc)
+  sortedLastIndexBy: function (array, value, iteratee = this.identity) {
+    let fnc = this.iteratee(iteratee)
     for (let i = 0; i < array.length; i++) {
       if (fnc(array[i]) === fnc(value) && fnc(array[i + 1]) !== fnc(value)) return i + 1
     }
