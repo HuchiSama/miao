@@ -2126,7 +2126,7 @@ var huchisama = {
    * @param {*} iteratee 
    */
   sortedLastIndexBy: function (array, value, iteratee = this.identity) {
-    let fnc = iteratee(iteratee)
+    let fnc = iteratee
     for (let i = 0; i < array.length; i++) {
       if (fnc(array[i]) === fnc(value) && fnc(array[i + 1]) !== fnc(value)) return i + 1
     }
@@ -2212,9 +2212,29 @@ var huchisama = {
 
   iteratee: function (func = this.identity) {
     if (typeof func == "function") return func
-    if (typeof func == "object") return this.matches(func)
     if (Array.isArray(func)) return this.matchesProperty(...func)
+    if (typeof func == "object") return this.matches(func)
     if (typeof func == "string") return this.property(func)
   },
+
+  /**
+   * 类似于_.unzip，除了它接受一个iteratee指定重组值应该如何被组合。iteratee 调用时会传入每个分组的值
+   * @param {*} array 
+   * @param {*} iteratee 
+   */
+  unzipWith: function (array, iteratee = this.identity) {
+    let ans = []
+    for (let i = 0; i < array[0].length; i++) {
+      ans[i] = array.reduce((it, itm) => iteratee(it[i], itm[i]))
+    }
+    return ans
+  },
+
+  // xorBy: function (...arrays) {
+  //   let fnc = this.iteratee(arrays.pop())
+  //   let ans = []
+
+
+  // }
 }
 
