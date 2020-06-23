@@ -2126,8 +2126,7 @@ var huchisama = {
    * @param {*} iteratee 
    */
   sortedLastIndexBy: function (array, value, iteratee = this.identity) {
-    let fnc = iteratee
-    if (typeof iteratee == "string") fnc = this.property(iteratee)
+    let fnc = iteratee(iteratee)
     for (let i = 0; i < array.length; i++) {
       if (fnc(array[i]) === fnc(value) && fnc(array[i + 1]) !== fnc(value)) return i + 1
     }
@@ -2151,22 +2150,15 @@ var huchisama = {
    * @param {*} predicate 
    */
   takeRightWhile: function (array, predicate = this.identity) {
-    let fnc = null, res = []
+    let fnc = this.iteratee(predicate)
     if (typeof predicate === "string") {
       for (let i = array.length - 1; i >= 0; i--) {
-        if (!(predicate in array[i])) res.push(array[i])
+        if (predicate in array[i]) return array.slice(i + 1)
       }
-      return res
-    }
-    if (typeof predicate === "function") fnc = predicate
-    if (typeof predicate === "object") {
-      if (Array.isArray(predicate)) fnc = this.matchesProperty(...predicate)
-      else fnc = this.matches(predicate)
     }
     for (let i = array.length - 1; i >= 0; i--) {
-      if (fnc(array[i])) res.push(array[i])
+      if (!fnc(array[i])) return array.slice(i + 1)
     }
-    return res
   },
 
   /**
@@ -2175,24 +2167,15 @@ var huchisama = {
    * @param {*} predicate 
    */
   takeWhile: function (array, predicate = this.identity) {
-    let fnc = null, res = []
+    let fnc = this.iteratee(predicate)
     if (typeof predicate === "string") {
       for (let i = 0; i < array.length; i++) {
-        if (!(predicate in array[i])) res.push(array[i])
-        else return res
+        if (predicate in array[i]) return array.slice(0, i)
       }
-      return res
-    }
-    if (typeof predicate === "function") fnc = predicate
-    if (typeof predicate === "object") {
-      if (Array.isArray(predicate)) fnc = this.matchesProperty(...predicate)
-      else fnc = this.matches(predicate)
     }
     for (let i = 0; i < array.length; i++) {
-      if (fnc(array[i])) res.push(array[i])
-      else return res
+      if (!fnc(array[i])) return array.slice(0, i)
     }
-    return res
   },
 
   /**
@@ -2218,12 +2201,20 @@ var huchisama = {
 
   unionWith: function (...arrays) {
     let fnc = arrays.pop()
-    let ans = []
-    arrays.reduce((it, itm) => {
-      if (fnc(arr, oth)) ans.push(arr)
-      else ans.push(arr, oth)
-    })
+    let ans = [].concat(...arrays)
+    for (let i = 0; i < ans.length; i++) {
+      for (let j = i + 1; j < ans.length; j++) {
+        if (fnc(ans[i], ans[j])) ans.splice(j, 1), j--
+      }
+    }
     return ans
+  },
+
+  iteratee: function (func = this.identity) {
+    if (typeof func == "function") return func
+    if (typeof func == "object") return this.matches(func)
+    if (Array.isArray(func)) return this.matchesProperty(...func)
+    if (typeof func == "string") return this.property(func)
   },
 }
 
