@@ -2229,11 +2229,33 @@ var huchisama = {
     return ans
   },
 
-  // xorBy: function (...arrays) {
-  //   let fnc = this.iteratee(arrays.pop())
-  //   let ans = []
+  /**
+   * 类似 _.uniq ，调用函数迭代去重
+   * @param {*} array 
+   * @param {*} iteratee 
+   */
+  uniqBy: function (array, iteratee = this.identity) {
+    let fnc = this.iteratee(iteratee)
+    let ans = []
+    let res = array.map(fnc)
+    this.sortedUniq(res).map(it => res.indexOf(it)).forEach(i => ans.push(array[i]))
+    return ans
+  },
 
-
-  // }
+  /**
+   * 类似 _.uniq， 除了它接受一个 comparator 调用比较arrays数组的每一个元素
+   * @param {*} array 
+   * @param {*} comparator 
+   */
+  uniqWith: function (array, comparator) {
+    let ans = array.slice(0)
+    let fnc = this.iteratee(comparator)
+    for (let i = 0; i < ans.length; i++) {
+      for (let j = i + 1; j < ans.length; j++) {
+        if (fnc(ans[i], ans[j])) ans.splice(j, 1), j--
+      }
+    }
+    return ans
+  },
 }
 
