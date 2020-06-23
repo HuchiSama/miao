@@ -2126,7 +2126,7 @@ var huchisama = {
    * @param {*} iteratee 
    */
   sortedLastIndexBy: function (array, value, fnc = this.identity) {
-    let fnc = iteratee(fnc)
+    let fnc = this.iteratee(fnc)
     for (let i = 0; i < array.length; i++) {
       if (fnc(array[i]) === fnc(value) && fnc(array[i + 1]) !== fnc(value)) return i + 1
     }
