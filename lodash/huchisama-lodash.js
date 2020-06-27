@@ -539,26 +539,14 @@ var huchisama = {
    */
   xor: function (...arrays) {
     let map = {}
-    let j = 0
-    let org = []
-    while (j < arguments.length) {
-      for (let i of arguments[j]) {
-        if (!(i in map)) {
-          map[i] = 1
-        } else {
-          map[i]++
-        }
-      }
-      j++
-    }
-    j = 0
-    while (j < arguments.length) {
-      for (let i of arguments[j]) {
-        if (map[i] == 1) {
-          org.push(i)
-        }
-      }
-      j++
+    let re = [], org = []
+    arrays.forEach(it => re = re.concat(it))
+    re.forEach(it => {
+      if (map[it]) map[it]++
+      else map[it] = 1
+    })
+    for (let i in map) {
+      if (map[i] < 2) org.push(i * 1)
     }
     return org
   },
@@ -1782,34 +1770,10 @@ var huchisama = {
    * @param {*} predicate 过滤器 （函数，数组，字符串，对象的形式）
    */
   filter: function (collection, predicate = this.identity) {
+    let fnc = this.iteratee(predicate)
     let result = []
-    if (typeof predicate == "function") {
-      for (let i of collection) {
-        if (predicate(i)) result.push(i)
-      }
-    } else if (typeof predicate == "string") {
-      for (let i of collection) {
-        if (i[predicate]) result.push(i)
-      }
-    } else if (Array.isArray(predicate)) {
-      for (let i of collection) {
-        if (i[predicate[0]] == predicate[1]) result.push(i)
-      }
-    } else if (Object.prototype.toString.call(predicate) == "[object Object]") {
-      for (let j of collection) {
-        let bl = true
-        for (let i in predicate) {
-          if (predicate[i] !== j[i]) {
-            bl = false
-            break
-          }
-        }
-        if (bl) result.push(j)
-      }
-    } else if (Object.prototype.toString.call(predicate) == "[object RegExp]") {
-      for (let i of collection) {
-        if (predicate.test(i)) result.push(i)
-      }
+    for (let i of collection) {
+      if (fnc(i)) result.push(i)
     }
     return result
   },
@@ -1820,34 +1784,10 @@ var huchisama = {
    * @param {*} predicate 
    */
   every: function (collection, predicate = this.identity) {
-    if (typeof predicate == "function") {
-      for (let i of collection) {
-        if (!predicate(i)) {
-          return false
-        }
-      }
-    }
-    if (typeof predicate == "string") {
-      for (let i of collection) {
-        if (!i[predicate]) {
-          return false
-        }
-      }
-    }
-    if (Array.isArray(predicate)) {
-      for (let i of collection) {
-        if (i[predicate[0]] !== predicate[1]) {
-          return false
-        }
-      }
-    }
-    if (Object.prototype.toString.call(predicate) == "[object Object]") {
-      for (let j of collection) {
-        for (let i in predicate) {
-          if (predicate[i] !== j[i]) {
-            return false
-          }
-        }
+    let fnc = this.iteratee(predicate)
+    for (let i of collection) {
+      if (!fnc(i)) {
+        return false
       }
     }
     return true
@@ -2256,6 +2196,148 @@ var huchisama = {
       }
     }
     return ans
+  },
+
+  /**
+   * 去重，数组，对象等
+   * 接受 iteratee（迭代器），这个迭代器 调用每一个 arrays（数组）的每一个值，以生成比较的新值。
+   * @param  {...any} arrays 
+   */
+  xorBy: function (...arrays) {
+    let fnc = this.iteratee(arrays.pop())
+    let result = [], ans = []
+    arrays.forEach(it => result = result.concat(it))
+    let res = result.map(fnc)
+    this.xor(res).map(it => res.indexOf(it)).forEach(i => ans.push(result[i]))
+    return ans
+  },
+
+  /**特殊去重，双对象去重
+   * 接受一个 comparator ，以调用比较数组的元素。 comparator 调用2个参数：(arrVal, othVal).
+   * @param  {...any} arrays  要检查的数组。
+   */
+  xorWith: function (...arrays) {
+    let fnc = arrays.pop()
+    let res = [], ans = []
+    arrays.forEach(it => res = res.concat(it))
+    for (let i = 0; i < res.length; i++) {
+      if (!res[i]) continue
+      let count = 0
+      for (let j = i + 1; j < res.length; j++) {
+        if (!res[j]) continue
+        let bl = fnc(res[i], res[j])
+        if (bl) res[j] = null, count++
+      }
+      if (count == 0) ans.push(res[i])
+    }
+    return ans
+  },
+
+  /**
+   * 类似 _.zipObject，除了它支持属性路径。
+   * @param {*} props 
+   * @param {*} values 
+   */
+  zipObjectDeep: function (props = [], values = []) {
+    let obj = {}
+    for (let i = 0; i < props.length; i++) {
+      this.set(obj, props[i], values[i])
+    }
+    return obj
+  },
+
+  /**
+   * 类似于_.zip，不同之处在于它接受一个 iteratee（迭代函数），来 指定分组的值应该如何被组合。 该iteratee调用每个组的元素： (...group).
+   * @param  {...any} arrays 
+   */
+  zipWith: function (...arrays) {
+    let fnc = arrays.pop()
+    let result = []
+    for (let i = 0; i < arrays[0].length; i++) {
+      let arg = []
+      for (let j = 0; j < arrays.length; j++) {
+        arg.push(arrays[j][i])
+      }
+      let val = fnc(...arg)
+      result.push(val)
+    }
+    return result
+  },
+  /**
+   * 设置 object对象中对应 path 属性路径上的值，如果path不存在，则创建。 缺少的索引属性会创建为数组，而缺少的属性会创建为对象。
+   * @param {*} object 
+   * @param {*} path 
+   * @param {*} value 
+   */
+  set: function (object, path, value) {
+    if (typeof path == "string") {
+      let reg = /(\[)/g
+      path = path.replace(reg, ".")
+      reg = /(\])/g
+      path = path.replace(reg, "")
+      path = path.split(".")
+    }
+    let str = "object."
+    let j
+    for (let i = 0; i < path.length; i++) {
+      if (Number(path[i]) === 0 || Number(path[i])) {
+        str = str.slice(0, -1)
+        str += "[" + path[i] + "]."
+      } else {
+        str += path[i] + "."
+      }
+      j = str.slice(0, -1)
+      if (!eval(j)) {
+        if (Number(path[i + 1]) === 0 || Number(path[i + 1])) {
+          eval(j + "=" + "[]")
+        } else {
+          eval(j + "=" + "{}")
+        }
+      }
+    }
+    return eval(j + "=" + value)
+  },
+
+  /**
+   * 创建一个组成对象，每个值 经过 iteratee 处理过的结果 当做 key，每个key对应的值是 iteratee返回该key。 iteratee 调用一个参数：(value)。
+   * @param {*} collection 
+   * @param {*} iteratee 
+   */
+  countBy: function (collection, iteratee = _.identity) {
+    let fnc = this.iteratee(iteratee)
+    let obj = {}
+    let res = collection.map(fnc)
+    for (let i of res) {
+      if (obj[i]) obj[i]++
+      else obj[i] = 1
+    }
+    return obj
+  },
+
+  /**
+   * 返回 predicate（断言函数）第一个返回真值的第一个元素。predicate（断言函数）调用3个参数： (value, index|key, collection)。
+   * @param {*} collection 
+   * @param {*} predicate 
+   * @param {*} fromIndex 
+   */
+  find: function (collection, predicate = _.identity, fromIndex = 0) {
+    let fnc = this.iteratee(predicate)
+    let result = []
+    for (let i = fromIndex; i < collection.length; i++) {
+      if (fnc(collection[i])) {
+        result.push(collection[i])
+        return result
+      }
+    }
+  },
+
+  findLast: function (collection, predicate = _.identity, fromIndex = collection.length - 1) {
+    let fnc = this.iteratee(predicate)
+    for (let i = fromIndex; i >= 0; i--) {
+      if (fnc(collection[i])) {
+        return collection[i]
+      }
+    }
   },
 }
 
