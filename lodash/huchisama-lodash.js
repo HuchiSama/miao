@@ -1715,8 +1715,8 @@ var huchisama = {
    * @param {*} iteratee 
    */
   forEach: function (collection, iteratee = this.identity) {
-    for (let i of collection) {
-      iteratee(i)
+    for (let i in collection) {
+      iteratee(collection[i], i)
     }
     return collection
   },
@@ -2295,7 +2295,8 @@ var huchisama = {
         }
       }
     }
-    return eval(j + "=" + value)
+    eval(j + "=" + value)
+    return object
   },
 
   /**
@@ -2322,15 +2323,19 @@ var huchisama = {
    */
   find: function (collection, predicate = _.identity, fromIndex = 0) {
     let fnc = this.iteratee(predicate)
-    let result = []
     for (let i = fromIndex; i < collection.length; i++) {
       if (fnc(collection[i])) {
-        result.push(collection[i])
-        return result
+        return collection[i]
       }
     }
   },
 
+  /**
+   * 类似_.find ，不同之处在于，_.findLast是从右至左遍历collection （集合）元素的。
+   * @param {*} collection 
+   * @param {*} predicate 
+   * @param {*} fromIndex 
+   */
   findLast: function (collection, predicate = _.identity, fromIndex = collection.length - 1) {
     let fnc = this.iteratee(predicate)
     for (let i = fromIndex; i >= 0; i--) {
@@ -2339,5 +2344,28 @@ var huchisama = {
       }
     }
   },
+
+  /**
+   * 类似  countBy  
+   * 每个键对应的值负责生成 key 的元素组成的数组。
+   * @param {*} collection 
+   * @param {*} iteratee 
+   */
+  groupBy: function (collection, iteratee = _.identity) {
+    let fnc = this.iteratee(iteratee)
+    let obj = {}
+    let res = collection.map(fnc)
+    for (let i of res) {
+      if (!obj[i]) {
+        obj[i] = []
+      }
+      let idx = res.indexOf(i)
+      res[idx] = null
+      obj[i].push(collection[idx])
+    }
+    return obj
+  },
+
+
 }
 
