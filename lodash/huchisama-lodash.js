@@ -2399,7 +2399,7 @@ var huchisama = {
     let fnc = this.iteratee(iteratee)
     let obj = {}
     for (let i in collection) {
-      obj[fnc(collection[i])] = i
+      obj[fnc(collection[i])] = collection[i]
     }
     return obj
   },
@@ -2513,8 +2513,8 @@ var huchisama = {
     if (orders.length == 0) {
       return this.sortBy(collection, iteratees)
     }
-    for (let i = 0; i < iteratees.length; i++) {
-      if (orders[i] == "asc") {
+    for (let i = iteratees.length - 1; i >= 0; i--) {
+      if (orders[i] === "asc") {
         collection = this.mergeSort(collection, "up", iteratees[i])
       } else {
         collection = this.mergeSort(collection, "down", iteratees[i])
