@@ -2576,5 +2576,119 @@ var huchisama = {
     }
     return accumulator
   },
+
+  /**
+   * filter 的反向方法 ，返回假值的集合
+   * @param {*} collection 
+   * @param {*} predicate 
+   */
+  reject: function (collection, predicate = this.identity) {
+    let fnc = this.iteratee(predicate)
+    let result = []
+    for (let i in collection) {
+      if (!fnc(collection[i])) result.push(collection[i])
+    }
+    return result
+  },
+
+  /**
+   * 集合中任意元素 经过函数处理，只要存在真值，就返回true 否则返回false
+   * @param {*} collection 
+   * @param {*} predicate 
+   */
+  some: function (collection, predicate = this.identity) {
+    let fnc = this.iteratee(predicate)
+    for (let i in collection) {
+      if (fnc(collection[i])) return true
+    }
+    return false
+  },
+
+  /**
+   * 如果 value 不是数组, 那么强制转为数组。
+   * @param {*} value 
+   */
+  castArray: function (value) {
+    if (Array.isArray(value)) return value
+    if (arguments.length == 0) return []
+    let res = []
+    return res.concat(value)
+  },
+
+  /**
+   * 通过调用断言source的属性与 object 的 相应 属性值，检查 object是否符合 source
+   * 检查相应的属性值是否符合 source 
+   * @param {*} object 
+   * @param {*} source 
+   */
+  conformsTo: function (object, source) {
+    let fnc = this.iteratee(source)
+    let bl = true
+    for (let i in source) {
+      if (typeof source[i] == "function") {
+        bl = source[i](object[i])
+      } else {
+        bl = fnc(object)
+      }
+      if (!bl) return bl
+    }
+    return bl
+  },
+
+  /**
+   * 检查 value 是否是 ArrayBuffer 对象。
+   * @param {*} value 
+   */
+  isArrayBuffer: function (value) {
+    return value instanceof ArrayBuffer
+  },
+
+  /**
+   * 判断是否是类数组，（数组也包含）
+   * @param {*} value 
+   */
+  isArrayLike: function (value) {
+    return value.length >= 0
+  },
+
+  /**
+   * 检查是否是类数组对象
+   * @param {*} value 
+   */
+  isArrayLikeObject: function (value) {
+    return typeof value == "object"
+  },
+
+  /**
+   * 检查 value 是否是 Date 对象。
+   * @param {*} value 
+   */
+  isDate: function (value) {
+    return Object.prototype.toString.call(value) === "[object Date]"
+  },
+
+  /**
+   * 检查 value 是否是可能是 DOM 元素。
+   * @param {*} value 
+   */
+  isElement: function (value) {
+    return Object.prototype.toString.call(value) === "[object HTMLElement]"
+  },
+
+  /**
+   * 判断是否是空对象
+   * @param {*} value 
+   */
+  isEmpty: function (value) {
+    if (typeof value !== "object") return true
+    else {
+      for (let i in value) {
+        if (value.hasOwnProperty(i)) {
+          return false
+        }
+      }
+      return true
+    }
+  },
 }
 
