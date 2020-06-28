@@ -2732,12 +2732,12 @@ var huchisama = {
     if (typeof value !== "number") return false
     else {
       try {
-        var bl = new Array(value)
-      } catch{
+        new Array(value)
+      } catch (e) {
         return false
       }
-      return true
     }
+    return true
   },
 
   isMap: function (value) {
