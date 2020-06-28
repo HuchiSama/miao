@@ -2690,5 +2690,85 @@ var huchisama = {
       return true
     }
   },
+
+  isEqualWith: function (value, other, customizer) {
+    if (!customizer) return this.isEqual(value, other)
+    for (let i in other) {
+      var bl = customizer(value[i], other[i])
+      if (!bl) bl = this.isEqual(value[i], other[i])
+    }
+    return bl
+  },
+
+  isError: function (value) {
+    return Object.prototype.toString.call(value) === "[object Error]"
+  },
+  /**
+   * 检查 value 是否是原始有限数值。
+   * @param {*} value 
+   */
+  isFinite: function (value) {
+    if (typeof value == "number") {
+      if (value == Infinity || value == -Infinity) return false
+      else return true
+    }
+    return false
+  },
+
+  isFunction: function (value) {
+    return Object.prototype.toString.call(value) === "[object Function]"
+  },
+
+  /**
+   * 判断是否为整数
+   * @param {*} value 
+   */
+  isInteger: function (value) {
+    if (typeof value !== "number") return false
+    else return value - Math.floor(value) === 0
+  },
+
+  isLength: function (value) {
+    if (typeof value !== "number") return false
+    else {
+      try {
+        var bl = new Array(value)
+      } catch{
+        return false
+      }
+      return true
+    }
+  },
+
+  isMap: function (value) {
+    return Object.prototype.toString.call(value) === "[object Map]"
+  },
+
+  /**
+   * 执行一个深度比较，来确定 object 是否含有和 source 完全相等的属性值。
+
+   * @param {*} object 
+   * @param {*} source 
+   */
+  isMatch: function (object, source) {
+    for (let i in source) {
+      if (typeof source[i] == "object") {
+        return this.isMatch(object[i], source[i])
+      } else {
+        let fnc = this.matches(source)
+        return fnc(object)
+      }
+    }
+  },
+
+  isMatchWith: function (object, source, customizer) {
+    for (let i in source) {
+      if (typeof source[i] == "object") {
+        return this.isMatch(object[i], source[i])
+      } else {
+        return customizer(object[i], source[i])
+      }
+    }
+  },
 }
 
