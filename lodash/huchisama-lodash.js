@@ -1802,7 +1802,6 @@ var huchisama = {
     let ans = []
     let iteratee = value[value.length - 1]
     let com = []
-
     if (typeof iteratee == "function") {
       for (let i of value.slice(0, -1)) com = com.concat(i)
       let res = array.map(iteratee)
@@ -2304,7 +2303,7 @@ var huchisama = {
    * @param {*} collection 
    * @param {*} iteratee 
    */
-  countBy: function (collection, iteratee = _.identity) {
+  countBy: function (collection, iteratee = this.identity) {
     let fnc = this.iteratee(iteratee)
     let obj = {}
     let res = collection.map(fnc)
@@ -2321,7 +2320,7 @@ var huchisama = {
    * @param {*} predicate 
    * @param {*} fromIndex 
    */
-  find: function (collection, predicate = _.identity, fromIndex = 0) {
+  find: function (collection, predicate = this.identity, fromIndex = 0) {
     let fnc = this.iteratee(predicate)
     for (let i = fromIndex; i < collection.length; i++) {
       if (fnc(collection[i])) {
@@ -2336,7 +2335,7 @@ var huchisama = {
    * @param {*} predicate 
    * @param {*} fromIndex 
    */
-  findLast: function (collection, predicate = _.identity, fromIndex = collection.length - 1) {
+  findLast: function (collection, predicate = this.identity, fromIndex = collection.length - 1) {
     let fnc = this.iteratee(predicate)
     for (let i = fromIndex; i >= 0; i--) {
       if (fnc(collection[i])) {
@@ -2351,7 +2350,7 @@ var huchisama = {
    * @param {*} collection 
    * @param {*} iteratee 
    */
-  groupBy: function (collection, iteratee = _.identity) {
+  groupBy: function (collection, iteratee = this.identity) {
     let fnc = this.iteratee(iteratee)
     let obj = {}
     let res = collection.map(fnc)
@@ -2366,6 +2365,216 @@ var huchisama = {
     return obj
   },
 
+  /**
+   * 调用path（路径）上的方法处理 collection(集合)中的每个元素，返回一个数组，包含每次调用方法得到的结果。任何附加的参数提供给每个被调用的方法。
+   * @param {*} collection 
+   * @param {*} path 
+   * @param  {...any} args 
+   */
+  invokeMap: function (collection, path, ...args) {
+    let api = null, t
+    let ans = []
+    for (let i in collection) {
+      if (Array.isArray(collection[i])) {
+        api = Array.prototype
+      } else {
+        api = String.prototype
+      }
+      if (typeof path == "function") {
+        t = path.call(collection[i], ...args)
+      } else {
+        t = api[path].call(collection[i], ...args)
+      }
+      ans.push(t)
+    }
+    return ans
+  },
 
+  /**
+   * 以处理过的值作为键 key ，原数据作为值 组成的对象
+   * @param {*} collection 
+   * @param {*} iteratee 
+   */
+  keyBy: function (collection, iteratee = this.identity) {
+    let fnc = this.iteratee(iteratee)
+    let obj = {}
+    for (let i in collection) {
+      obj[fnc(collection[i])] = i
+    }
+    return obj
+  },
+
+  /**
+   * 实现 map 函数
+   * @param {*} collection 
+   * @param {*} iteratee 
+   */
+  map: function (collection, iteratee = this.identity) {
+    let fnc = this.iteratee(iteratee)
+    let res = []
+    for (let i in collection) {
+      let f = fnc(collection[i])
+      res.push(f)
+    }
+    return res
+  },
+
+  /**
+   * 创建一个元素数组。 以 iteratee 处理的结果升序排序。 这个方法执行稳定排序，也就是说相同元素会保持原始排序。 iteratees 调用1个参数： (value)
+   * @param {*} collection 
+   * @param  {...any} args 
+   */
+  sortBy: function (collection, ...args) {
+    let ary = collection.slice()
+    let res = [], fnc
+    args.forEach(it => res = res.concat(it))
+    for (let i = 0; i < res.length; i++) {
+      if (typeof res[i] == "function") {
+        fnc = res[i]
+        ary = forFnc()
+      } else {
+        ary = forAry()
+      }
+    }
+    return ary
+    function forAry() {
+      for (let i = 0; i < res.length; i++) {
+        ary = huchisama.mergeSort(ary, "up", res[i], fnc)
+      }
+      return ary
+    }
+    function forFnc() {
+      let ans = []
+      var arr = ary.map(fnc).sort()
+      for (let i = 0; i < arr.length; i++) {
+        ary.forEach((it, j) => {
+          if (fnc(it) == arr[i]) {
+            ans.push(it)
+            delete ary[j]
+          }
+        })
+      }
+      return ans
+    }
+  },
+
+  mergeSort: function (ary, order = "up", key, fnc = this.property(key)) {
+    // fnc = this.property()
+    let res = ary.slice()
+    if (res.length <= 1) {
+      return res
+    }
+    let priv = res.shift()
+    let left = []
+    let right = []
+    if (Object.prototype.toString.call(ary[0]) !== "[object Object]") {
+      for (let i = 0; i < res.length; i++) {
+        if (order == "down") {
+          if (res[i] > priv) {
+            left.push(res[i])
+          } else {
+            right.push(res[i])
+          }
+        } else {
+          if (res[i] < priv) {
+            left.push(res[i])
+          } else {
+            right.push(res[i])
+          }
+        }
+      }
+    } else {
+      for (let i = 0; i < res.length; i++) {
+        if (order == "down") {
+          if (fnc(res[i]) > fnc(priv)) {
+            left.push(res[i])
+          } else {
+            right.push(res[i])
+          }
+        } else {
+          if (fnc(res[i]) < fnc(priv)) {
+            left.push(res[i])
+          } else {
+            right.push(res[i])
+          }
+        }
+      }
+    }
+    return this.mergeSort(left, order, key, fnc).concat([priv], this.mergeSort(right, order, key, fnc))
+  },
+
+  /**
+   * 类似于_.sortBy，除了它允许指定 iteratee（迭代函数）结果如何排序。 如果没指定 orders（排序），所有值以升序排序。 否则，指定为"desc" 降序，或者指定为 "asc" 升序，排序对应值。
+   * @param {*} collection 
+   * @param {*} iteratees 
+   * @param {*} orders 
+   */
+  orderBy: function (collection, iteratees = this.identity, orders) {
+    if (orders.length == 0) {
+      return this.sortBy(collection, iteratees)
+    }
+    for (let i = 0; i < iteratees.length; i++) {
+      if (orders[i] == "asc") {
+        collection = this.mergeSort(collection, "up", iteratees[i])
+      } else {
+        collection = this.mergeSort(collection, "down", iteratees[i])
+      }
+    }
+    return collection
+  },
+
+  /**
+   * 创建一个分成两组的元素数组，第一组包含predicate返回为 true 的元素，第二组包含predicate（断言函数）返回为 false的元素
+   * @param {*} collection 
+   * @param {*} predicate 
+   */
+  partition: function (collection, predicate = this.identity) {
+    let result = [[], []]
+    let fnc = this.iteratee(predicate)
+    collection.forEach(it => {
+      if (fnc(it)) result[0].push(it)
+      else result[1].push(it)
+    })
+    return result
+  },
+
+  /**
+   * 实现 reduce
+   * @param {*} collection 
+   * @param {*} iteratee 
+   * @param {*} accumulator 
+   */
+  reduce: function (collection, iteratee = this.identity, accumulator) {
+    let fnc = this.iteratee(iteratee)
+    for (let i in collection) {
+      if (accumulator == undefined) {
+        accumulator = collection[i]
+      } else {
+        accumulator = fnc(accumulator, collection[i], i)
+      }
+    }
+    return accumulator
+  },
+
+  reduceRight: function (collection, iteratee = this.identity, accumulator) {
+    var res = collection.slice()
+    let trs = Object.prototype.toString.call(collection)
+    if (trs == "[object Object]") {
+      res = Object.keys(collection)
+    }
+    let fnc = this.iteratee(iteratee)
+    for (let i = res.length - 1; i >= 0; i--) {
+      if (accumulator == undefined) {
+        accumulator = res[i]
+      } else {
+        if (trs == "[object Object]") {
+          accumulator = fnc(accumulator, collection[res[i]], res[i])
+        } else {
+          accumulator = fnc(accumulator, res[i], i)
+        }
+      }
+    }
+    return accumulator
+  },
 }
 
