@@ -2888,7 +2888,7 @@ var huchisama = {
     if (value === Number.MIN_VALUE || !parseInt(value)) {
       return 0
     }
-    return parseInt(value)
+    return Math.floor(value)
   },
 
   /**
@@ -2902,7 +2902,7 @@ var huchisama = {
     } else if (value === Number.MIN_VALUE || !parseInt(value)) {
       return 0
     }
-    return parseInt(value)
+    return Math.floor(value)
   },
 
   toNumber: function (value) {
@@ -2917,6 +2917,7 @@ var huchisama = {
     if (this.isSafeInteger(value)) return value
     value = this.toInteger(value)
     if (value >= 2 ** 53) return 2 ** 53 - 1
+    return Math.floor(value)
   },
 
   /**
