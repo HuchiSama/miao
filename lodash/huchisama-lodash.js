@@ -2934,6 +2934,13 @@ var huchisama = {
     return object
   },
 
+
+  assignIn: function (object, ...sources) {
+    for (let i of sources) {
+      for (let it in i) object[it] = i[it]
+    }
+    return object
+  },
   /**
    * 使用 iteratee 遍历自身的可枚举属性。 iteratee 会传入3个参数：(value, key, object)。 如果返回 false，iteratee 会提前退出遍历。
    * @param {*} object 
@@ -2947,6 +2954,111 @@ var huchisama = {
       }
     }
     return object
+  },
+
+  /**
+   * 接受 iteratee 来调用 array中的每一个元素，来生成其值排序的标准。 iteratee 会调用1个参数: (value) 。
+   * @param {*} array 
+   * @param {*} iteratee 
+   */
+  maxBy: function (array, iteratee = this.identity) {
+    let fnc = this.iteratee(iteratee)
+    let res = array.map(fnc)
+    return array[res.indexOf(this.max(res))]
+  },
+
+  /**
+   * 迭代处理过的平均值
+   * @param {*} array 
+   * @param {*} iteratee 
+   */
+  meanBy: function (array, iteratee = this.identity) {
+    let fnc = this.iteratee(iteratee)
+    return this.mean(array.map(fnc))
+  },
+
+  /**
+   * 迭代处理过的最小
+   * @param {*} array 
+   * @param {*} iteratee 
+   */
+  minBy: function (array, iteratee = this.identity) {
+    let fnc = this.iteratee(iteratee)
+    let res = array.map(fnc)
+    return array[res.indexOf(this.min(res))]
+  },
+
+  /**
+   * 迭代处理过的和
+   * @param {*} array 
+   * @param {*} iteratee 
+   */
+  sumBy: function (array, iteratee = this.identity) {
+    let fnc = this.iteratee(iteratee)
+    return this.sum(array.map(fnc))
+  },
+
+  /**
+   * 返回限制在 lower 和 upper 之间的值。
+   * @param {*} number 
+   * @param {*} lower 
+   * @param {*} upper 
+   */
+  clamp: function (number, lower, upper) {
+    let min = Math.min(number, lower, upper)
+    let max = Math.max(number, lower, upper)
+    if (number == min) return lower
+    if (number == max) return upper
+    return number
+  },
+
+  /**
+   * 检查 n 是否在 start 与 end 之间，但不包括 end。 如果 end 没有指定，那么 start 设置为0。 如果 start 大于 end，那么参数会交换以便支持负范围。
+   * @param {*} number 
+   * @param {*} start 
+   * @param {*} end 
+   */
+  inRange: function (number, start = 0, end) {
+    if (!end) end = start, start = 0
+    if (end && start > end) {
+      let t = start
+      start = end, end = t
+    }
+    return number >= start && number < end
+  },
+
+  /**
+   * 产生一个包括 lower 与 upper 之间的数。 如果只提供一个参数返回一个0到提供数之间的数。 如果 floating 设为 true，或者 lower 或 upper 是浮点数，结果返回浮点数。
+   * @param  {...any} args 
+   */
+  random: function (...args) {
+    if (!args.length) return Math.round(Math.random())
+    if (args.length == 1 && args[0] !== true) {
+      var lower = 0
+      var upper = args[0]
+    } else if (args.length >= 2 && args[1] !== true) {
+      var lower = args[0]
+      var upper = args[1]
+    } else {
+      var lower = args[0]
+      var upper = args[1]
+      var floating = args[2]
+    }
+    if (!this.isInteger(lower) || !this.isInteger(upper) || floating) {
+      return (upper - lower) * Math.random() + lower
+    } else {
+      return Math.round((upper - lower) * Math.random()) + lower
+    }
+  },
+
+  at: function (object, ...paths) {
+    let res = [], path = []
+    paths.forEach(it => path = path.concat(it))
+    path.forEach(it => {
+      let str = "object." + it
+      res.push(eval(str))
+    })
+    return res
   },
 }
 
