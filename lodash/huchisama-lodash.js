@@ -2859,6 +2859,93 @@ var huchisama = {
     return Object.prototype.toString.call(value) === "[object WeakSet]"
   },
 
+  /**
+   * 转换成数组
+   * @param {*} value 
+   */
+  toArray: function (value) {
+    let res = []
+    for (let i in value) {
+      res.push(value[i])
+    }
+    return res
+  },
 
+  toFinite: function (value) {
+    let val = value * 1
+    if (this.isNaN(val)) return 0
+    if (val == Infinity) return 1.7976931348623157e+308
+    if (val == -Infinity) return -1.7976931348623157e+308
+    return val
+  },
+
+  /**
+   * 转换 value 为一个整数。
+   * @param {*} value 
+   */
+  toInteger: function (value) {
+    value = this.toFinite(value)
+    if (value === Number.MIN_VALUE || !parseInt(value)) {
+      return 0
+    }
+    return parseInt(value)
+  },
+
+  /**
+   * 转换 value 为用作类数组对象的长度整数。
+   * @param {*} value 
+   */
+  toLength: function (value) {
+    if (value <= 0) return 0
+    if (value === Infinity || value === Number.MAX_VALUE) {
+      return 4294967295
+    } else if (value === Number.MIN_VALUE || !parseInt(value)) {
+      return 0
+    }
+    return parseInt(value)
+  },
+
+  toNumber: function (value) {
+    return value * 1
+  },
+
+  /**
+   * 转换 value 为安全整数。 安全整数可以用于比较和准确的表示。
+   * @param {*} value 
+   */
+  toSafeInteger: function (value) {
+    if (this.isSafeInteger(value)) return value
+    value = this.toInteger(value)
+    if (value >= 2 ** 53) return 2 ** 53 - 1
+  },
+
+  /**
+   * 分配来源对象的可枚举属性到目标对象上。 来源对象的应用规则是从左到右，随后的下一个对象的属性会覆盖上一个对象的属性。
+   * @param {*} object 
+   * @param  {...any} sources 
+   */
+  assign: function (object, ...sources) {
+    for (let i of sources) {
+      for (let it in i) {
+        if (i.hasOwnProperty(it)) object[it] = i[it]
+      }
+    }
+    return object
+  },
+
+  /**
+   * 使用 iteratee 遍历自身的可枚举属性。 iteratee 会传入3个参数：(value, key, object)。 如果返回 false，iteratee 会提前退出遍历。
+   * @param {*} object 
+   * @param {*} iteratee 
+   */
+  forOwn: function (object, iteratee = this.identity) {
+    for (let i in object) {
+      if (object.hasOwnProperty(i)) {
+        let bl = iteratee(object[i], i, object)
+        if (!bl) break
+      }
+    }
+    return object
+  },
 }
 
