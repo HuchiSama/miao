@@ -2770,5 +2770,95 @@ var huchisama = {
       }
     }
   },
+
+  /**
+   * 判断是否是原生函数
+   * @param {*} value 
+   */
+  isNative: function (value) {
+    return /{\s\[native code\]\s}$/g.test(value.toString())
+  },
+
+  /**
+   * 判断是否是null 或 undefined
+   * @param {*} value 
+   */
+  isNil: function (value) {
+    if (value === null || value === undefined) {
+      return true
+    } else {
+      return false
+    }
+  },
+
+  /**
+   * 判断是否是类对象，typeof == object
+   * @param {*} value 
+   */
+  isObjectLike: function (value) {
+    if (this.isNull(value)) return false
+    if (typeof value === "object") return true
+    else return false
+  },
+
+  /**
+   * 判断是否是普通函数（直接由Object构造出来的
+   * @param {*} value 
+   */
+  isPlainObject: function (value) {
+    let pro = Object.getPrototypeOf(value)
+    if (pro === Object.prototype || pro === null) return true
+    else return false
+  },
+
+  /**
+   * 判断是否是正则
+   * @param {*} value 
+   */
+  isRegExp: function (value) {
+    return Object.prototype.toString.call(value) === "[object RegExp]"
+  },
+
+  /**
+   * 判断是否为安全整数
+   * @param {*} value 
+   */
+  isSafeInteger: function (value) {
+    return Number.isSafeInteger(value)
+  },
+
+  /**
+   * 判断是否是Set
+   * @param {*} value 
+   */
+  isSet: function (value) {
+    return Object.prototype.toString.call(value) === "[object Set]"
+  },
+
+  isString: function (value) {
+    return Object.prototype.toString.call(value) === "[object String]"
+  },
+
+  isSymbol: function (value) {
+    return Object.prototype.toString.call(value) === "[object  Symbol]"
+  },
+
+  isTypeArray: function (value) {
+    return Object.prototype.toString.call(value) === "[object Uint8Array]"
+  },
+
+  isUndefined: function (value) {
+    return value === undefined
+  },
+
+  isWeakMap: function (value) {
+    return Object.prototype.toString.call(value) === "[object WeakMap]"
+  },
+
+  isWeakSet: function (value) {
+    return Object.prototype.toString.call(value) === "[object WeakSet]"
+  },
+
+
 }
 
