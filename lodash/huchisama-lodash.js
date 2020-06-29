@@ -3051,6 +3051,11 @@ var huchisama = {
     }
   },
 
+  /**
+   * 创建一个数组，值来自 object 的paths路径相应的值。
+   * @param {*} object 
+   * @param  {...any} paths 
+   */
   at: function (object, ...paths) {
     let res = [], path = []
     paths.forEach(it => path = path.concat(it))
@@ -3059,6 +3064,24 @@ var huchisama = {
       res.push(eval(str))
     })
     return res
+  },
+
+  /**
+   * 类似 _.defaults，除了它会递归分配默认属性。
+   * @param {*} object 
+   * @param {*} sources 
+   */
+  defaultsDeep: function (object, sources) {
+    for (let i in object) {
+      for (let j in sources) {
+        if (i == j && typeof object[i] == "object") {
+          this.defaultsDeep(object[i], sources[j])
+        } else {
+          this.defaults(object, sources)
+        }
+      }
+    }
+    return object
   },
 }
 
