@@ -2840,10 +2840,10 @@ var huchisama = {
   },
 
   isSymbol: function (value) {
-    return Object.prototype.toString.call(value) === "[object  Symbol]"
+    return Object.prototype.toString.call(value) === "[object Symbol]"
   },
 
-  isTypeArray: function (value) {
+  isTypedArray: function (value) {
     return Object.prototype.toString.call(value) === "[object Uint8Array]"
   },
 
