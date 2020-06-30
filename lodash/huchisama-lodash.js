@@ -3083,5 +3083,111 @@ var huchisama = {
     }
     return object
   },
+
+  /**
+   * 类似 _.find 。 除了它返回最先被 predicate 判断为真值的元素 key，而不是元素本身。
+   * @param {*} object 
+   * @param {*} predicate 
+   */
+  findKey: function (object, predicate = this.identity) {
+    let fnc = this.iteratee(predicate)
+    for (let i in object) {
+      if (fnc(object[i])) return i
+    }
+  },
+
+  /**
+   * 类似_.findKey。 不过它是反方向开始遍历的。
+   * @param {*} object 
+   * @param {*} predicate 
+   */
+  findLastKey: function (object, predicate = this.identity) {
+    let fnc = this.iteratee(predicate)
+    let key = Object.keys(object)
+    for (let i = key.length - 1; i >= 0; i--) {
+      if (fnc(object[key[i]])) return key[i]
+    }
+  },
+
+  /**
+   * 遍历对象（包括继承属性），每次用函数iteratee调用它
+   * @param {*} object 
+   * @param {*} iteratee 
+   */
+  forIn: function (object, iteratee = this.identity) {
+    for (let i in object) {
+      iteratee(object[i], i, object)
+    }
+    return object
+  },
+
+  /**
+   * 这个方法类似 _.forIn。 除了它是反方向开始遍历object的。
+   * @param {*} object 
+   * @param {*} iteratee 
+   */
+  forInRight: function (object, iteratee = this.identity) {
+    let key = []
+    for (let i in object) key.push(i)
+    for (let i = key.length - 1; i >= 0; i--) {
+      iteratee(object[key[i]], key[i], object)
+    }
+    return object
+  },
+
+  /**
+   * 类似 _.forOwn。 除了它是反方向开始遍历object的。
+   * @param {*} object 
+   * @param {*} iteratee 
+   */
+  forOwnRight: function (object, iteratee = this.identity) {
+    let key = Object.keys(object)
+    for (let i = key.length - 1; i >= 0; i--) {
+      iteratee(object[key[i]], key[i], object)
+    }
+    return object
+  },
+
+  /**
+   * 创建一个函数属性名称的数组，函数属性名称来自object对象自身可枚举属性。
+   * @param {*} object 
+   */
+  functions: function (object) {
+    let res = []
+    this.forOwn(object, (_, key) => res.push(key))
+    return res
+  },
+
+  /**
+   *   创建一个函数属性名称的数组，函数属性名称来自object对象自身和继承的可枚举属性。
+
+   * @param {*} object 
+   */
+  functionsIn: function (object) {
+    let res = []
+    this.forIn(object, (_, key) => res.push(key))
+    return res
+  },
+
+  /**
+   * object对象的path路径获取值。 如果解析 value 是 undefined 会以 defaultValue 取代。
+   * @param {*} object 
+   * @param {*} path 
+   * @param {*} defaultValue 
+   */
+  get: function (object, path, defaultValue) {
+    let p = path
+    let ans = object
+    if (typeof path == "string") {
+      let reg = /[\[||\]]/g
+      path = path.replace(reg, ".")
+      p = path.split(".")
+    }
+    for (let i of p) {
+      if (i) ans = ans[i]
+      if (!ans) return defaultValue
+    }
+    return ans
+  },
 }
 
